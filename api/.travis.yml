@@ -1,0 +1,28 @@
+sudo: required
+services:
+  - docker
+
+env:
+  COMPOSE_VERSION: 1.17.1
+  DOCKER_REPO_SLUG: rkeplin/bible-go-api
+
+before_install:
+ - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+ - chmod +x docker-compose
+ - sudo mv docker-compose /usr/local/bin
+
+script:
+  - make images
+  - make up
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t $DOCKER_REPO_SLUG:$TRAVIS_BUILD_NUMBER -t $DOCKER_REPO_SLUG:latest .
+  - docker push $DOCKER_REPO_SLUG:$TRAVIS_BUILD_NUMBER
+  - docker push $DOCKER_REPO_SLUG:latest
+
+deploy:
+  provider: script
+  script: bash $(pwd)/.deploy/deploy.sh
+  on:
+    branch: master

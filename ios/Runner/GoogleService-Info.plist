@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>304606692724-mlumvpstt4vpl3napj4krku13svbnudh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.304606692724-mlumvpstt4vpl3napj4krku13svbnudh</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>304606692724-pivath4gfe96e0gnh08q252c2bfjvdrg.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBqQux_CWTDW0WE-kR3jznuXStzfhNToFE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>304606692724</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.elisha.app</string>
+	<key>PROJECT_ID</key>
+	<string>elisha-17e64</string>
+	<key>STORAGE_BUCKET</key>
+	<string>elisha-17e64.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:304606692724:ios:2d39799e1f9131836c5821</string>
+</dict>
+</plist>

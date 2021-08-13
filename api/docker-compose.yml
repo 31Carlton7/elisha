@@ -1,0 +1,37 @@
+version: '3'
+services:
+  go-api:
+    build: .
+    ports:
+      - 8084:3000
+    volumes:
+      - .:/go/src/github.com/rkeplin/bible-go-api
+    environment:
+      - ES_URL=${ES_URL}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    depends_on:
+      - bible-db
+    networks:
+      - net1
+
+  bible-db:
+    image: bible-mariadb:latest
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+    volumes:
+      - bible-db:/var/lib/mysql
+    networks:
+      - net1
+
+volumes:
+  bible-db:
+
+networks:
+  net1:

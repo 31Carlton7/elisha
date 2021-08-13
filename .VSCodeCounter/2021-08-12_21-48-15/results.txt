@@ -1,0 +1,210 @@
+Date : 2021-08-12 21:48:15
+Directory : /Users/carltonaikins/Desktop/Home/Programming/projects/elisha
+Total : 122 files,  6065 codes, 253 comments, 1024 blanks, all 7342 lines
+
+Languages
++--------------+------------+------------+------------+------------+------------+
+| language     | files      | code       | comment    | blank      | total      |
++--------------+------------+------------+------------+------------+------------+
+| Dart         |         51 |      3,854 |          7 |        456 |      4,317 |
+| Go           |         32 |      1,098 |          1 |        400 |      1,499 |
+| SQL          |          1 |        327 |         90 |         60 |        477 |
+| XML          |         15 |        283 |         37 |         10 |        330 |
+| JSON         |          5 |        226 |          0 |          4 |        230 |
+| YAML         |          5 |        104 |        113 |         40 |        257 |
+| Groovy       |          3 |         89 |          3 |         20 |        112 |
+| Makefile     |          1 |         30 |          0 |          8 |         38 |
+| Swift        |          1 |         14 |          0 |          2 |         16 |
+| Markdown     |          2 |         13 |          0 |          9 |         22 |
+| Docker       |          2 |         13 |          0 |          8 |         21 |
+| Properties   |          2 |          8 |          1 |          2 |         11 |
+| Shell Script |          1 |          5 |          1 |          4 |         10 |
+| C++          |          1 |          1 |          0 |          1 |          2 |
++--------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                                   |        122 |      6,065 |        253 |      1,024 |      7,342 |
+| android                                                                                                                                             |         13 |        214 |         39 |         25 |        278 |
+| android/app                                                                                                                                         |          9 |        169 |         38 |         14 |        221 |
+| android/app/src                                                                                                                                     |          7 |         70 |         35 |          3 |        108 |
+| android/app/src/debug                                                                                                                               |          1 |          4 |          3 |          1 |          8 |
+| android/app/src/main                                                                                                                                |          5 |         62 |         29 |          1 |         92 |
+| android/app/src/main/res                                                                                                                            |          4 |         32 |         18 |          0 |         50 |
+| android/app/src/main/res/drawable                                                                                                                   |          1 |          6 |          0 |          0 |          6 |
+| android/app/src/main/res/drawable-v21                                                                                                               |          1 |          6 |          0 |          0 |          6 |
+| android/app/src/main/res/values                                                                                                                     |          1 |         10 |          9 |          0 |         19 |
+| android/app/src/main/res/values-night                                                                                                               |          1 |         10 |          9 |          0 |         19 |
+| android/app/src/profile                                                                                                                             |          1 |          4 |          3 |          1 |          8 |
+| android/gradle                                                                                                                                      |          1 |          5 |          1 |          1 |          7 |
+| android/gradle/wrapper                                                                                                                              |          1 |          5 |          1 |          1 |          7 |
+| api                                                                                                                                                 |         40 |      1,537 |         92 |        493 |      2,122 |
+| api/.deploy                                                                                                                                         |          1 |          5 |          1 |          4 |         10 |
+| api/bible-mariadb                                                                                                                                   |          2 |        329 |         90 |         62 |        481 |
+| api/bible-mariadb/initdb.d                                                                                                                          |          1 |        327 |         90 |         60 |        477 |
+| api/book                                                                                                                                            |          4 |        153 |          0 |         66 |        219 |
+| api/common                                                                                                                                          |          1 |         81 |          0 |          9 |         90 |
+| api/core                                                                                                                                            |          6 |        122 |          0 |         43 |        165 |
+| api/genre                                                                                                                                           |          4 |         94 |          0 |         41 |        135 |
+| api/relations                                                                                                                                       |          4 |        137 |          0 |         58 |        195 |
+| api/search                                                                                                                                          |          4 |        267 |          0 |         84 |        351 |
+| api/text                                                                                                                                            |          4 |        121 |          0 |         51 |        172 |
+| api/translation                                                                                                                                     |          4 |        101 |          1 |         42 |        144 |
+| ios                                                                                                                                                 |         13 |        390 |          2 |         12 |        404 |
+| ios/Flutter                                                                                                                                         |          1 |         26 |          0 |          1 |         27 |
+| ios/Runner                                                                                                                                          |         10 |        348 |          2 |          9 |        359 |
+| ios/Runner.xcodeproj                                                                                                                                |          1 |          8 |          0 |          1 |          9 |
+| ios/Runner.xcodeproj/project.xcworkspace                                                                                                            |          1 |          8 |          0 |          1 |          9 |
+| ios/Runner.xcodeproj/project.xcworkspace/xcshareddata                                                                                               |          1 |          8 |          0 |          1 |          9 |
+| ios/Runner.xcworkspace                                                                                                                              |          1 |          8 |          0 |          1 |          9 |
+| ios/Runner.xcworkspace/xcshareddata                                                                                                                 |          1 |          8 |          0 |          1 |          9 |
+| ios/Runner/Assets.xcassets                                                                                                                          |          4 |        169 |          0 |          5 |        174 |
+| ios/Runner/Assets.xcassets/AppIcon.appiconset                                                                                                       |          1 |        122 |          0 |          1 |        123 |
+| ios/Runner/Assets.xcassets/LaunchBackground.imageset                                                                                                |          1 |         21 |          0 |          1 |         22 |
+| ios/Runner/Assets.xcassets/LaunchImage.imageset                                                                                                     |          2 |         26 |          0 |          3 |         29 |
+| ios/Runner/Base.lproj                                                                                                                               |          2 |         68 |          2 |          1 |         71 |
+| lib                                                                                                                                                 |         51 |      3,854 |          7 |        456 |      4,317 |
+| lib/src                                                                                                                                             |         50 |      3,823 |          7 |        449 |      4,279 |
+| lib/src/config                                                                                                                                      |          4 |        220 |          0 |         14 |        234 |
+| lib/src/models                                                                                                                                      |          8 |        618 |          0 |        116 |        734 |
+| lib/src/services                                                                                                                                    |          9 |        689 |          5 |        132 |        826 |
+| lib/src/services/authentication                                                                                                                     |          2 |        147 |          0 |         29 |        176 |
+| lib/src/services/repositories                                                                                                                       |          5 |        349 |          5 |         53 |        407 |
+| lib/src/ui                                                                                                                                          |         29 |      2,296 |          2 |        187 |      2,485 |
+| lib/src/ui/components                                                                                                                               |          3 |         99 |          0 |          8 |        107 |
+| lib/src/ui/providers                                                                                                                                |         15 |        115 |          0 |         43 |        158 |
+| lib/src/ui/providers/authentication_providers                                                                                                       |          3 |         17 |          0 |          5 |         22 |
+| lib/src/ui/views                                                                                                                                    |         11 |      2,082 |          2 |        136 |      2,220 |
+| lib/src/ui/views/authentication_views                                                                                                               |          2 |        525 |          0 |         35 |        560 |
++-----------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| filename                                                                                                                                            | language     | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/README.md                                                                             | Markdown     |         10 |          0 |          7 |         17 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/build.gradle                                                              | Groovy       |         52 |          3 |         11 |         66 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/google-services.json                                                      | JSON         |         47 |          0 |          0 |         47 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/src/debug/AndroidManifest.xml                                             | XML          |          4 |          3 |          1 |          8 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/src/main/AndroidManifest.xml                                              | XML          |         30 |         11 |          1 |         42 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/src/main/res/drawable-v21/launch_background.xml                           | XML          |          6 |          0 |          0 |          6 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/src/main/res/drawable/launch_background.xml                               | XML          |          6 |          0 |          0 |          6 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/src/main/res/values-night/styles.xml                                      | XML          |         10 |          9 |          0 |         19 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/src/main/res/values/styles.xml                                            | XML          |         10 |          9 |          0 |         19 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/app/src/profile/AndroidManifest.xml                                           | XML          |          4 |          3 |          1 |          8 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/build.gradle                                                                  | Groovy       |         29 |          0 |          5 |         34 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/gradle.properties                                                             | Properties   |          3 |          0 |          1 |          4 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/gradle/wrapper/gradle-wrapper.properties                                      | Properties   |          5 |          1 |          1 |          7 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/android/settings.gradle                                                               | Groovy       |          8 |          0 |          4 |         12 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/.deploy/deploy.sh                                                                 | Shell Script |          5 |          1 |          4 |         10 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/.travis.yml                                                                       | YAML         |         23 |          0 |          6 |         29 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/Dockerfile                                                                        | Docker       |         11 |          0 |          6 |         17 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/Makefile                                                                          | Makefile     |         30 |          0 |          8 |         38 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/bible-mariadb/Dockerfile                                                          | Docker       |          2 |          0 |          2 |          4 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/bible-mariadb/initdb.d/seed.sql                                                   | SQL          |        327 |         90 |         60 |        477 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/book/handlers.go                                                                  | Go           |         55 |          0 |         22 |         77 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/book/models.go                                                                    | Go           |         16 |          0 |          6 |         22 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/book/repo.go                                                                      | Go           |         56 |          0 |         31 |         87 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/book/routes.go                                                                    | Go           |         26 |          0 |          7 |         33 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/common/translation.go                                                             | Go           |         81 |          0 |          9 |         90 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/core/db.go                                                                        | Go           |         41 |          0 |         15 |         56 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/core/handlers.go                                                                  | Go           |         13 |          0 |          5 |         18 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/core/logger.go                                                                    | Go           |         19 |          0 |          5 |         24 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/core/models.go                                                                    | Go           |          6 |          0 |          2 |          8 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/core/router.go                                                                    | Go           |         20 |          0 |          8 |         28 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/core/routes.go                                                                    | Go           |         23 |          0 |          8 |         31 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/docker-compose.yml                                                                | YAML         |         34 |          0 |          4 |         38 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/genre/handlers.go                                                                 | Go           |         35 |          0 |         14 |         49 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/genre/models.go                                                                   | Go           |          6 |          0 |          3 |          9 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/genre/repo.go                                                                     | Go           |         33 |          0 |         18 |         51 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/genre/routes.go                                                                   | Go           |         20 |          0 |          6 |         26 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/go.mod                                                                            | XML          |          7 |          0 |          3 |         10 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/main.go                                                                           | Go           |         22 |          0 |          6 |         28 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/relations/handlers.go                                                             | Go           |         24 |          0 |         10 |         34 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/relations/models.go                                                               | Go           |         18 |          0 |          4 |         22 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/relations/repo.go                                                                 | Go           |         81 |          0 |         39 |        120 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/relations/routes.go                                                               | Go           |         14 |          0 |          5 |         19 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/search/handlers.go                                                                | Go           |         49 |          0 |         19 |         68 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/search/models.go                                                                  | Go           |         58 |          0 |         14 |         72 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/search/repo.go                                                                    | Go           |        140 |          0 |         45 |        185 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/search/routes.go                                                                  | Go           |         20 |          0 |          6 |         26 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/text/handlers.go                                                                  | Go           |         48 |          0 |         20 |         68 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/text/models.go                                                                    | Go           |         14 |          0 |          4 |         18 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/text/repo.go                                                                      | Go           |         39 |          0 |         21 |         60 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/text/routes.go                                                                    | Go           |         20 |          0 |          6 |         26 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/translation/handlers.go                                                           | Go           |         35 |          0 |         14 |         49 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/translation/models.go                                                             | Go           |         10 |          0 |          3 |         13 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/translation/repo.go                                                               | Go           |         36 |          1 |         19 |         56 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/api/translation/routes.go                                                             | Go           |         20 |          0 |          6 |         26 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/firebase.json                                                                         | JSON         |         13 |          0 |          1 |         14 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/flutter_launcher_icons.yaml                                                           | YAML         |          4 |          0 |          1 |          5 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/flutter_native_splash.yaml                                                            | YAML         |          2 |         61 |         10 |         73 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Flutter/AppFrameworkInfo.plist                                                    | XML          |         26 |          0 |          1 |         27 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist        | XML          |          8 |          0 |          1 |          9 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist                          | XML          |          8 |          0 |          1 |          9 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/AppDelegate.swift                                                          | Swift        |         14 |          0 |          2 |         16 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json                           | JSON         |        122 |          0 |          1 |        123 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json                    | JSON         |         21 |          0 |          1 |         22 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json                         | JSON         |         23 |          0 |          1 |         24 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md                             | Markdown     |          3 |          0 |          2 |          5 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Base.lproj/LaunchScreen.storyboard                                         | XML          |         43 |          1 |          0 |         44 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Base.lproj/Main.storyboard                                                 | XML          |         25 |          1 |          1 |         27 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/GoogleService-Info.plist                                                   | XML          |         36 |          0 |          0 |         36 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Info.plist                                                                 | XML          |         60 |          0 |          0 |         60 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/ios/Runner/Runner-Bridging-Header.h                                                   | C++          |          1 |          0 |          1 |          2 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/main.dart                                                                         | Dart         |         31 |          0 |          7 |         38 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/config/authentication_exceptions.dart                                         | Dart         |         42 |          0 |          4 |         46 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/config/bottom_navigation_bar.dart                                             | Dart         |        131 |          0 |          4 |        135 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/config/constants.dart                                                         | Dart         |          1 |          0 |          1 |          2 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/config/exceptions.dart                                                        | Dart         |         46 |          0 |          5 |         51 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/book.dart                                                              | Dart         |         63 |          0 |         14 |         77 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/chapter.dart                                                           | Dart         |        101 |          0 |         25 |        126 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/daily_reading.dart                                                     | Dart         |         68 |          0 |         14 |         82 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/reading.dart                                                           | Dart         |         52 |          0 |         11 |         63 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/translation.dart                                                       | Dart         |         65 |          0 |         12 |         77 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/translation_book_chapter.dart                                          | Dart         |         65 |          0 |         12 |         77 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/user.dart                                                              | Dart         |        131 |          0 |         15 |        146 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/models/verse.dart                                                             | Dart         |         73 |          0 |         13 |         86 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/authentication/authentication_repository.dart                        | Dart         |         92 |          0 |         19 |        111 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/authentication/authentication_wrapper.dart                           | Dart         |         55 |          0 |         10 |         65 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/bible_service.dart                                                   | Dart         |        136 |          0 |         37 |        173 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/daily_readings_service.dart                                          | Dart         |         57 |          0 |         13 |         70 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/repositories/bible_repository.dart                                   | Dart         |        241 |          0 |         21 |        262 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/repositories/bookmarked_chapters_repository.dart                     | Dart         |         29 |          2 |         12 |         43 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/repositories/daily_readings_repository.dart                          | Dart         |          1 |          0 |          1 |          2 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/repositories/last_translation_book_chapter_repository.dart           | Dart         |         61 |          3 |         15 |         79 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/services/repositories/user_repository.dart                                    | Dart         |         17 |          0 |          4 |         21 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/components/error_body.dart                                                 | Dart         |         35 |          0 |          3 |         38 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/components/something_went_wrong.dart                                       | Dart         |         32 |          0 |          3 |         35 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/components/unexpected_error.dart                                           | Dart         |         32 |          0 |          2 |         34 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/authentication_providers/authentication_repository_provider.dart | Dart         |          6 |          0 |          1 |          7 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/authentication_providers/authentication_stream_provider.dart     | Dart         |          6 |          0 |          2 |          8 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/authentication_providers/firebase_auth_provider.dart             | Dart         |          5 |          0 |          2 |          7 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/bible_books_provider.dart                                        | Dart         |         10 |          0 |          5 |         15 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/bible_chapters_provider.dart                                     | Dart         |         12 |          0 |          5 |         17 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/bible_repository_provider.dart                                   | Dart         |          5 |          0 |          2 |          7 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/bible_service_provider.dart                                      | Dart         |          7 |          0 |          3 |         10 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/bible_translations_provider.dart                                 | Dart         |         11 |          0 |          5 |         16 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/bible_verses_provider.dart                                       | Dart         |         15 |          0 |          6 |         21 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/bookmarked_chapters_provider.dart                                | Dart         |          7 |          0 |          2 |          9 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/daily_readings_provider.dart                                     | Dart         |          7 |          0 |          2 |          9 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/daily_readings_service_provider.dart                             | Dart         |          5 |          0 |          2 |          7 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/last_translation_book_chapter_provider.dart                      | Dart         |          8 |          0 |          2 |         10 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/user_repository_provider.dart                                    | Dart         |          5 |          0 |          2 |          7 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/providers/user_stream_provider.dart                                        | Dart         |          6 |          0 |          2 |          8 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/account_view.dart                                                    | Dart         |         38 |          0 |          6 |         44 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/authentication_views/sign_in_view.dart                               | Dart         |        191 |          0 |         15 |        206 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/authentication_views/sign_up_view.dart                               | Dart         |        334 |          0 |         20 |        354 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/bible_view.dart                                                      | Dart         |        500 |          0 |         24 |        524 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/bookmarked_chapter_view.dart                                         | Dart         |        157 |          0 |         12 |        169 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/bookmarked_chapters_view.dart                                        | Dart         |        175 |          0 |         10 |        185 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/church_view.dart                                                     | Dart         |         90 |          0 |          8 |         98 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/current_view.dart                                                    | Dart         |         71 |          0 |         11 |         82 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/daily_readings_view.dart                                             | Dart         |        186 |          0 |         11 |        197 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/home_view.dart                                                       | Dart         |         84 |          0 |         10 |         94 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/ui/views/profile_view.dart                                                    | Dart         |        256 |          2 |          9 |        267 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/pubspec.yaml                                                                          | YAML         |         41 |         52 |         19 |        112 |
+| Total                                                                                                                                               |              |      6,065 |        253 |      1,024 |      7,342 |
++-----------------------------------------------------------------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
