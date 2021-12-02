@@ -1,0 +1,154 @@
+# Details
+
+Date : 2021-12-01 22:39:36
+
+Directory /Users/carltonaikins/Desktop/Home/Programming/projects/elisha
+
+Total : 139 files,  6664 codes, 290 comments, 1165 blanks, all 8119 lines
+
+[summary](results.md)
+
+## Files
+| filename | language | code | comment | blank | total |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| [.vscodecounter/2021-08-11_09-46-50/details.md](/.vscodecounter/2021-08-11_09-46-50/details.md) | Markdown | 71 | 0 | 6 | 77 |
+| [.vscodecounter/2021-08-11_09-46-50/results.md](/.vscodecounter/2021-08-11_09-46-50/results.md) | Markdown | 52 | 0 | 7 | 59 |
+| [.vscodecounter/2021-08-12_21-48-15/details.md](/.vscodecounter/2021-08-12_21-48-15/details.md) | Markdown | 131 | 0 | 6 | 137 |
+| [.vscodecounter/2021-08-12_21-48-15/results.md](/.vscodecounter/2021-08-12_21-48-15/results.md) | Markdown | 78 | 0 | 7 | 85 |
+| [.vscodecounter/2021-11-27_14-23-43/details.md](/.vscodecounter/2021-11-27_14-23-43/details.md) | Markdown | 145 | 0 | 6 | 151 |
+| [.vscodecounter/2021-11-27_14-23-43/results.md](/.vscodecounter/2021-11-27_14-23-43/results.md) | Markdown | 93 | 0 | 7 | 100 |
+| [README.md](/README.md) | Markdown | 10 | 0 | 7 | 17 |
+| [analysis_options.yaml](/analysis_options.yaml) | YAML | 3 | 23 | 3 | 29 |
+| [android/app/build.gradle](/android/app/build.gradle) | Groovy | 52 | 3 | 11 | 66 |
+| [android/app/google-services.json](/android/app/google-services.json) | JSON | 47 | 0 | 0 | 47 |
+| [android/app/src/debug/AndroidManifest.xml](/android/app/src/debug/AndroidManifest.xml) | XML | 4 | 3 | 1 | 8 |
+| [android/app/src/main/AndroidManifest.xml](/android/app/src/main/AndroidManifest.xml) | XML | 30 | 11 | 1 | 42 |
+| [android/app/src/main/res/drawable-night-v21/launch_background.xml](/android/app/src/main/res/drawable-night-v21/launch_background.xml) | XML | 6 | 0 | 0 | 6 |
+| [android/app/src/main/res/drawable-night/launch_background.xml](/android/app/src/main/res/drawable-night/launch_background.xml) | XML | 6 | 0 | 0 | 6 |
+| [android/app/src/main/res/drawable-v21/launch_background.xml](/android/app/src/main/res/drawable-v21/launch_background.xml) | XML | 6 | 0 | 0 | 6 |
+| [android/app/src/main/res/drawable/launch_background.xml](/android/app/src/main/res/drawable/launch_background.xml) | XML | 6 | 0 | 0 | 6 |
+| [android/app/src/main/res/values-night/styles.xml](/android/app/src/main/res/values-night/styles.xml) | XML | 10 | 9 | 0 | 19 |
+| [android/app/src/main/res/values/styles.xml](/android/app/src/main/res/values/styles.xml) | XML | 10 | 9 | 0 | 19 |
+| [android/app/src/profile/AndroidManifest.xml](/android/app/src/profile/AndroidManifest.xml) | XML | 4 | 3 | 1 | 8 |
+| [android/build.gradle](/android/build.gradle) | Groovy | 29 | 0 | 5 | 34 |
+| [android/gradle.properties](/android/gradle.properties) | Properties | 3 | 0 | 1 | 4 |
+| [android/gradle/wrapper/gradle-wrapper.properties](/android/gradle/wrapper/gradle-wrapper.properties) | Properties | 5 | 1 | 1 | 7 |
+| [android/settings.gradle](/android/settings.gradle) | Groovy | 8 | 0 | 4 | 12 |
+| [api/.deploy/deploy.sh](/api/.deploy/deploy.sh) | Shell Script | 5 | 1 | 4 | 10 |
+| [api/.travis.yml](/api/.travis.yml) | YAML | 23 | 0 | 6 | 29 |
+| [api/Dockerfile](/api/Dockerfile) | Docker | 11 | 0 | 6 | 17 |
+| [api/Makefile](/api/Makefile) | Makefile | 30 | 0 | 8 | 38 |
+| [api/bible-mariadb/Dockerfile](/api/bible-mariadb/Dockerfile) | Docker | 2 | 0 | 2 | 4 |
+| [api/bible-mariadb/initdb.d/seed.sql](/api/bible-mariadb/initdb.d/seed.sql) | SQL | 327 | 90 | 60 | 477 |
+| [api/book/handlers.go](/api/book/handlers.go) | Go | 55 | 0 | 22 | 77 |
+| [api/book/models.go](/api/book/models.go) | Go | 16 | 0 | 6 | 22 |
+| [api/book/repo.go](/api/book/repo.go) | Go | 56 | 0 | 31 | 87 |
+| [api/book/routes.go](/api/book/routes.go) | Go | 26 | 0 | 7 | 33 |
+| [api/common/translation.go](/api/common/translation.go) | Go | 81 | 0 | 9 | 90 |
+| [api/core/db.go](/api/core/db.go) | Go | 41 | 0 | 15 | 56 |
+| [api/core/handlers.go](/api/core/handlers.go) | Go | 13 | 0 | 5 | 18 |
+| [api/core/logger.go](/api/core/logger.go) | Go | 19 | 0 | 5 | 24 |
+| [api/core/models.go](/api/core/models.go) | Go | 6 | 0 | 2 | 8 |
+| [api/core/router.go](/api/core/router.go) | Go | 20 | 0 | 8 | 28 |
+| [api/core/routes.go](/api/core/routes.go) | Go | 23 | 0 | 8 | 31 |
+| [api/docker-compose.yml](/api/docker-compose.yml) | YAML | 34 | 0 | 4 | 38 |
+| [api/genre/handlers.go](/api/genre/handlers.go) | Go | 35 | 0 | 14 | 49 |
+| [api/genre/models.go](/api/genre/models.go) | Go | 6 | 0 | 3 | 9 |
+| [api/genre/repo.go](/api/genre/repo.go) | Go | 33 | 0 | 18 | 51 |
+| [api/genre/routes.go](/api/genre/routes.go) | Go | 20 | 0 | 6 | 26 |
+| [api/go.mod](/api/go.mod) | XML | 7 | 0 | 3 | 10 |
+| [api/go.sum](/api/go.sum) | Go Checksum File | 6 | 0 | 1 | 7 |
+| [api/main.go](/api/main.go) | Go | 22 | 0 | 6 | 28 |
+| [api/relations/handlers.go](/api/relations/handlers.go) | Go | 24 | 0 | 10 | 34 |
+| [api/relations/models.go](/api/relations/models.go) | Go | 18 | 0 | 4 | 22 |
+| [api/relations/repo.go](/api/relations/repo.go) | Go | 81 | 0 | 39 | 120 |
+| [api/relations/routes.go](/api/relations/routes.go) | Go | 14 | 0 | 5 | 19 |
+| [api/search/handlers.go](/api/search/handlers.go) | Go | 49 | 0 | 19 | 68 |
+| [api/search/models.go](/api/search/models.go) | Go | 58 | 0 | 14 | 72 |
+| [api/search/repo.go](/api/search/repo.go) | Go | 140 | 0 | 45 | 185 |
+| [api/search/routes.go](/api/search/routes.go) | Go | 20 | 0 | 6 | 26 |
+| [api/text/handlers.go](/api/text/handlers.go) | Go | 48 | 0 | 20 | 68 |
+| [api/text/models.go](/api/text/models.go) | Go | 14 | 0 | 4 | 18 |
+| [api/text/repo.go](/api/text/repo.go) | Go | 39 | 0 | 21 | 60 |
+| [api/text/routes.go](/api/text/routes.go) | Go | 20 | 0 | 6 | 26 |
+| [api/translation/handlers.go](/api/translation/handlers.go) | Go | 35 | 0 | 14 | 49 |
+| [api/translation/models.go](/api/translation/models.go) | Go | 10 | 0 | 3 | 13 |
+| [api/translation/repo.go](/api/translation/repo.go) | Go | 36 | 1 | 19 | 56 |
+| [api/translation/routes.go](/api/translation/routes.go) | Go | 20 | 0 | 6 | 26 |
+| [firebase.json](/firebase.json) | JSON | 13 | 0 | 1 | 14 |
+| [flutter_launcher_icons.yaml](/flutter_launcher_icons.yaml) | YAML | 4 | 0 | 1 | 5 |
+| [flutter_native_splash.yaml](/flutter_native_splash.yaml) | YAML | 3 | 60 | 10 | 73 |
+| [ios/Runner/AppDelegate.swift](/ios/Runner/AppDelegate.swift) | Swift | 14 | 0 | 2 | 16 |
+| [ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json](/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json) | JSON | 122 | 0 | 1 | 123 |
+| [ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json](/ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json) | JSON | 52 | 0 | 1 | 53 |
+| [ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json](/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json) | JSON | 23 | 0 | 1 | 24 |
+| [ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md](/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md) | Markdown | 3 | 0 | 2 | 5 |
+| [ios/Runner/Base.lproj/LaunchScreen.storyboard](/ios/Runner/Base.lproj/LaunchScreen.storyboard) | XML | 43 | 1 | 0 | 44 |
+| [ios/Runner/Base.lproj/Main.storyboard](/ios/Runner/Base.lproj/Main.storyboard) | XML | 25 | 1 | 1 | 27 |
+| [ios/Runner/Runner-Bridging-Header.h](/ios/Runner/Runner-Bridging-Header.h) | C++ | 1 | 0 | 1 | 2 |
+| [lib/main.dart](/lib/main.dart) | Dart | 49 | 1 | 11 | 61 |
+| [lib/src/config/authentication_exceptions.dart](/lib/src/config/authentication_exceptions.dart) | Dart | 39 | 0 | 4 | 43 |
+| [lib/src/config/bottom_navigation_bar.dart](/lib/src/config/bottom_navigation_bar.dart) | Dart | 50 | 0 | 6 | 56 |
+| [lib/src/config/constants.dart](/lib/src/config/constants.dart) | Dart | 1 | 0 | 1 | 2 |
+| [lib/src/config/exceptions.dart](/lib/src/config/exceptions.dart) | Dart | 45 | 0 | 5 | 50 |
+| [lib/src/models/book.dart](/lib/src/models/book.dart) | Dart | 63 | 0 | 14 | 77 |
+| [lib/src/models/chapter.dart](/lib/src/models/chapter.dart) | Dart | 98 | 0 | 25 | 123 |
+| [lib/src/models/daily_reading.dart](/lib/src/models/daily_reading.dart) | Dart | 63 | 0 | 14 | 77 |
+| [lib/src/models/reading.dart](/lib/src/models/reading.dart) | Dart | 52 | 0 | 11 | 63 |
+| [lib/src/models/translation.dart](/lib/src/models/translation.dart) | Dart | 65 | 0 | 12 | 77 |
+| [lib/src/models/translation_book_chapter.dart](/lib/src/models/translation_book_chapter.dart) | Dart | 65 | 0 | 12 | 77 |
+| [lib/src/models/user.dart](/lib/src/models/user.dart) | Dart | 121 | 0 | 15 | 136 |
+| [lib/src/models/verse.dart](/lib/src/models/verse.dart) | Dart | 73 | 0 | 13 | 86 |
+| [lib/src/providers/authentication_providers/authentication_repository_provider.dart](/lib/src/providers/authentication_providers/authentication_repository_provider.dart) | Dart | 6 | 0 | 3 | 9 |
+| [lib/src/providers/authentication_providers/authentication_stream_provider.dart](/lib/src/providers/authentication_providers/authentication_stream_provider.dart) | Dart | 6 | 0 | 3 | 9 |
+| [lib/src/providers/authentication_providers/firebase_auth_provider.dart](/lib/src/providers/authentication_providers/firebase_auth_provider.dart) | Dart | 5 | 0 | 2 | 7 |
+| [lib/src/providers/bible_books_provider.dart](/lib/src/providers/bible_books_provider.dart) | Dart | 10 | 0 | 6 | 16 |
+| [lib/src/providers/bible_chapters_provider.dart](/lib/src/providers/bible_chapters_provider.dart) | Dart | 12 | 0 | 6 | 18 |
+| [lib/src/providers/bible_repository_provider.dart](/lib/src/providers/bible_repository_provider.dart) | Dart | 5 | 0 | 3 | 8 |
+| [lib/src/providers/bible_service_provider.dart](/lib/src/providers/bible_service_provider.dart) | Dart | 7 | 0 | 4 | 11 |
+| [lib/src/providers/bible_translations_provider.dart](/lib/src/providers/bible_translations_provider.dart) | Dart | 10 | 0 | 6 | 16 |
+| [lib/src/providers/bible_verses_provider.dart](/lib/src/providers/bible_verses_provider.dart) | Dart | 13 | 0 | 7 | 20 |
+| [lib/src/providers/bookmarked_chapters_provider.dart](/lib/src/providers/bookmarked_chapters_provider.dart) | Dart | 7 | 0 | 3 | 10 |
+| [lib/src/providers/daily_readings_provider.dart](/lib/src/providers/daily_readings_provider.dart) | Dart | 7 | 0 | 3 | 10 |
+| [lib/src/providers/daily_readings_service_provider.dart](/lib/src/providers/daily_readings_service_provider.dart) | Dart | 5 | 0 | 3 | 8 |
+| [lib/src/providers/last_translation_book_chapter_provider.dart](/lib/src/providers/last_translation_book_chapter_provider.dart) | Dart | 8 | 0 | 3 | 11 |
+| [lib/src/providers/user_repository_provider.dart](/lib/src/providers/user_repository_provider.dart) | Dart | 5 | 0 | 3 | 8 |
+| [lib/src/providers/user_stream_provider.dart](/lib/src/providers/user_stream_provider.dart) | Dart | 14 | 0 | 3 | 17 |
+| [lib/src/repositories/bible_repository.dart](/lib/src/repositories/bible_repository.dart) | Dart | 225 | 0 | 23 | 248 |
+| [lib/src/repositories/bookmarked_chapters_repository.dart](/lib/src/repositories/bookmarked_chapters_repository.dart) | Dart | 28 | 2 | 13 | 43 |
+| [lib/src/repositories/daily_readings_repository.dart](/lib/src/repositories/daily_readings_repository.dart) | Dart | 1 | 0 | 1 | 2 |
+| [lib/src/repositories/last_translation_book_chapter_repository.dart](/lib/src/repositories/last_translation_book_chapter_repository.dart) | Dart | 56 | 3 | 17 | 76 |
+| [lib/src/repositories/streaks_repository.dart](/lib/src/repositories/streaks_repository.dart) | Dart | 4 | 0 | 2 | 6 |
+| [lib/src/repositories/user_repository.dart](/lib/src/repositories/user_repository.dart) | Dart | 17 | 0 | 5 | 22 |
+| [lib/src/services/authentication/authentication_repository.dart](/lib/src/services/authentication/authentication_repository.dart) | Dart | 106 | 0 | 21 | 127 |
+| [lib/src/services/authentication/authentication_wrapper.dart](/lib/src/services/authentication/authentication_wrapper.dart) | Dart | 55 | 1 | 11 | 67 |
+| [lib/src/services/bible_service.dart](/lib/src/services/bible_service.dart) | Dart | 112 | 0 | 38 | 150 |
+| [lib/src/services/daily_readings_service.dart](/lib/src/services/daily_readings_service.dart) | Dart | 57 | 0 | 14 | 71 |
+| [lib/src/ui/components/error_body.dart](/lib/src/ui/components/error_body.dart) | Dart | 32 | 0 | 3 | 35 |
+| [lib/src/ui/components/something_went_wrong.dart](/lib/src/ui/components/something_went_wrong.dart) | Dart | 32 | 0 | 4 | 36 |
+| [lib/src/ui/components/terms_and_privacy_policy_text.dart](/lib/src/ui/components/terms_and_privacy_policy_text.dart) | Dart | 32 | 0 | 3 | 35 |
+| [lib/src/ui/components/unexpected_error.dart](/lib/src/ui/components/unexpected_error.dart) | Dart | 31 | 0 | 4 | 35 |
+| [lib/src/ui/views/account_view/account_view.dart](/lib/src/ui/views/account_view/account_view.dart) | Dart | 38 | 0 | 7 | 45 |
+| [lib/src/ui/views/authentication_views/components/dont_have_an_account_text.dart](/lib/src/ui/views/authentication_views/components/dont_have_an_account_text.dart) | Dart | 37 | 0 | 4 | 41 |
+| [lib/src/ui/views/authentication_views/components/email_text_input.dart](/lib/src/ui/views/authentication_views/components/email_text_input.dart) | Dart | 19 | 0 | 4 | 23 |
+| [lib/src/ui/views/authentication_views/components/password_text_input.dart](/lib/src/ui/views/authentication_views/components/password_text_input.dart) | Dart | 19 | 0 | 4 | 23 |
+| [lib/src/ui/views/authentication_views/components/sign_in_view_header.dart](/lib/src/ui/views/authentication_views/components/sign_in_view_header.dart) | Dart | 29 | 0 | 3 | 32 |
+| [lib/src/ui/views/authentication_views/sign_in_providers_view/sign_in_providers_view.dart](/lib/src/ui/views/authentication_views/sign_in_providers_view/sign_in_providers_view.dart) | Dart | 109 | 0 | 11 | 120 |
+| [lib/src/ui/views/authentication_views/sign_in_view/sign_in_view.dart](/lib/src/ui/views/authentication_views/sign_in_view/sign_in_view.dart) | Dart | 96 | 0 | 12 | 108 |
+| [lib/src/ui/views/authentication_views/sign_up_view/components/birth_date_input.dart](/lib/src/ui/views/authentication_views/sign_up_view/components/birth_date_input.dart) | Dart | 43 | 0 | 4 | 47 |
+| [lib/src/ui/views/authentication_views/sign_up_view/components/first_name_input.dart](/lib/src/ui/views/authentication_views/sign_up_view/components/first_name_input.dart) | Dart | 20 | 0 | 4 | 24 |
+| [lib/src/ui/views/authentication_views/sign_up_view/components/last_name_input.dart](/lib/src/ui/views/authentication_views/sign_up_view/components/last_name_input.dart) | Dart | 20 | 0 | 4 | 24 |
+| [lib/src/ui/views/authentication_views/sign_up_view/components/sign_up_view_header.dart](/lib/src/ui/views/authentication_views/sign_up_view/components/sign_up_view_header.dart) | Dart | 27 | 0 | 3 | 30 |
+| [lib/src/ui/views/authentication_views/sign_up_view/sign_up_view.dart](/lib/src/ui/views/authentication_views/sign_up_view/sign_up_view.dart) | Dart | 240 | 0 | 17 | 257 |
+| [lib/src/ui/views/bible_view/bible_view.dart](/lib/src/ui/views/bible_view/bible_view.dart) | Dart | 479 | 0 | 24 | 503 |
+| [lib/src/ui/views/bookmarked_chapter_view/bookmarked_chapter_view.dart](/lib/src/ui/views/bookmarked_chapter_view/bookmarked_chapter_view.dart) | Dart | 152 | 0 | 13 | 165 |
+| [lib/src/ui/views/bookmarked_chapters_view/bookmarked_chapters_view.dart](/lib/src/ui/views/bookmarked_chapters_view/bookmarked_chapters_view.dart) | Dart | 166 | 0 | 11 | 177 |
+| [lib/src/ui/views/church_view/church_view.dart](/lib/src/ui/views/church_view/church_view.dart) | Dart | 75 | 0 | 9 | 84 |
+| [lib/src/ui/views/current_view.dart](/lib/src/ui/views/current_view.dart) | Dart | 153 | 1 | 14 | 168 |
+| [lib/src/ui/views/daily_readings_view/daily_readings_view.dart](/lib/src/ui/views/daily_readings_view/daily_readings_view.dart) | Dart | 185 | 0 | 12 | 197 |
+| [lib/src/ui/views/home_view/home_view.dart](/lib/src/ui/views/home_view/home_view.dart) | Dart | 84 | 0 | 11 | 95 |
+| [lib/src/ui/views/profile_view/profile_view.dart](/lib/src/ui/views/profile_view/profile_view.dart) | Dart | 250 | 2 | 10 | 262 |
+| [pubspec.yaml](/pubspec.yaml) | YAML | 50 | 56 | 22 | 128 |
+| [scripts/license_tool.py](/scripts/license_tool.py) | Python | 26 | 8 | 13 | 47 |
+
+[summary](results.md)
