@@ -1,132 +1,53 @@
-import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'package:canton_design_system/canton_design_system.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class BottomNavBar extends StatefulWidget {
   final int currentIndex;
   final void Function(int) onTabTapped;
 
-  const BottomNavBar(this.currentIndex, this.onTabTapped);
+  const BottomNavBar(this.currentIndex, this.onTabTapped, {Key? key}) : super(key: key);
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  static const _iconSize = 27.0;
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
       onTap: widget.onTabTapped,
-      selectedFontSize: 1,
-      unselectedFontSize: 1,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).colorScheme.onSecondary,
+      selectedItemColor: Theme.of(context).colorScheme.primary,
       unselectedItemColor: Theme.of(context).colorScheme.secondaryVariant,
-      items: [
+      selectedIconTheme: IconThemeData(color: Theme.of(context).primaryColor, size: 24),
+      items: const [
         BottomNavigationBarItem(
-          label: '',
+          label: 'Home',
           tooltip: '',
-          icon: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: IconlyIcon(
-                  IconlyBold.Home,
-                  size: 24,
-                  color: widget.currentIndex == 0
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).colorScheme.secondaryVariant,
-                ),
-              ),
-              Text(
-                'Home',
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: widget.currentIndex == 0
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).colorScheme.secondaryVariant,
-                    ),
-              ),
-            ],
-          ),
+          activeIcon: Icon(LineAwesomeIcons.home, size: _iconSize),
+          icon: Icon(LineAwesomeIcons.home, size: _iconSize),
         ),
         BottomNavigationBarItem(
-          label: '',
+          label: 'Bible',
           tooltip: '',
-          icon: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Icon(
-                  CupertinoIcons.book_fill,
-                  size: 24,
-                  color: widget.currentIndex == 1
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).colorScheme.secondaryVariant,
-                ),
-              ),
-              Text(
-                'Read',
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: widget.currentIndex == 1
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).colorScheme.secondaryVariant,
-                    ),
-              ),
-            ],
-          ),
+          activeIcon: Icon(LineAwesomeIcons.bible, size: _iconSize),
+          icon: Icon(LineAwesomeIcons.bible, size: _iconSize),
         ),
         BottomNavigationBarItem(
-          label: '',
+          label: 'Church',
           tooltip: '',
-          icon: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: IconlyIcon(
-                  IconlyBold.Video,
-                  size: 24,
-                  color: widget.currentIndex == 2
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).colorScheme.secondaryVariant,
-                ),
-              ),
-              Text(
-                'Church',
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: widget.currentIndex == 2
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).colorScheme.secondaryVariant,
-                    ),
-              ),
-            ],
-          ),
+          activeIcon: Icon(LineAwesomeIcons.church, size: _iconSize),
+          icon: Icon(LineAwesomeIcons.church, size: _iconSize),
         ),
         BottomNavigationBarItem(
-          label: '',
+          label: 'Profile',
           tooltip: '',
-          icon: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: IconlyIcon(
-                  IconlyBold.Profile,
-                  size: 24,
-                  color: widget.currentIndex == 3
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).colorScheme.secondaryVariant,
-                ),
-              ),
-              Text(
-                'Profile',
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: widget.currentIndex == 3
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).colorScheme.secondaryVariant,
-                    ),
-              ),
-            ],
-          ),
+          activeIcon: Icon(LineAwesomeIcons.user, size: _iconSize),
+          icon: Icon(LineAwesomeIcons.user, size: _iconSize),
         ),
       ],
     );
