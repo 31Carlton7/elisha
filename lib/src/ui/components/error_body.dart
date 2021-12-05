@@ -5,33 +5,30 @@ class ErrorBody extends ConsumerWidget {
   final String message;
   final AutoDisposeFutureProvider provider;
 
-  ErrorBody(this.message, this.provider);
+  const ErrorBody(this.message, this.provider, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(
-              message,
-              style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: Theme.of(context).colorScheme.secondaryVariant,
-                  ),
-            ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Center(
+          child: Text(
+            message,
+            style: Theme.of(context).textTheme.headline6?.copyWith(
+                  color: Theme.of(context).colorScheme.secondaryVariant,
+                ),
           ),
-          SizedBox(height: 12),
-          CantonPrimaryButton(
-            buttonText: 'Retry',
-            containerColor: Theme.of(context).primaryColor,
-            textColor: CantonColors.white,
-            containerWidth: MediaQuery.of(context).size.width / 2 - 74,
-            enabled: true,
-            onPressed: () => context.refresh(provider),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 12),
+        CantonPrimaryButton(
+          buttonText: 'Retry',
+          color: Theme.of(context).primaryColor,
+          textColor: CantonColors.white,
+          containerWidth: MediaQuery.of(context).size.width / 2 - 74,
+          onPressed: () => context.refresh(provider),
+        ),
+      ],
     );
   }
 }
