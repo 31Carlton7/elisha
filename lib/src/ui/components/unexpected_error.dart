@@ -2,8 +2,10 @@ import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UnexpectedError extends StatelessWidget {
-  const UnexpectedError(this.provider);
+  const UnexpectedError(this.provider, {Key? key}) : super(key: key);
+
   final AutoDisposeFutureProvider provider;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -17,13 +19,12 @@ class UnexpectedError extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondaryVariant,
                 ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CantonPrimaryButton(
             buttonText: 'Retry',
-            containerColor: Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryColor,
             textColor: CantonColors.white,
             containerWidth: MediaQuery.of(context).size.width / 2 - 74,
-            enabled: true,
             onPressed: () => context.refresh(provider),
           ),
         ],
