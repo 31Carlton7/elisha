@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class User {
-  String? id;
   String? email;
   String? firstName;
   String? lastName;
@@ -14,7 +13,6 @@ class User {
   int? bestStreak;
 
   User({
-    this.id,
     this.email,
     this.firstName,
     this.lastName,
@@ -26,7 +24,6 @@ class User {
   });
 
   User copyWith({
-    String? id,
     String? email,
     String? firstName,
     String? lastName,
@@ -37,7 +34,6 @@ class User {
     int? bestStreak,
   }) {
     return User(
-      id: id ?? this.id,
       email: email ?? this.email,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
@@ -51,7 +47,6 @@ class User {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
@@ -65,7 +60,6 @@ class User {
 
   Map<String, dynamic> toDocumentSnapshot() {
     return {
-      'id': id,
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
@@ -79,7 +73,6 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['id'],
       email: map['email'],
       firstName: map['firstName'],
       lastName: map['lastName'],
@@ -93,7 +86,6 @@ class User {
 
   factory User.fromDocumentSnapshot(DocumentSnapshot doc) {
     return User(
-      id: doc['id'],
       email: doc['email'],
       firstName: doc['firstName'],
       lastName: doc['lastName'],
@@ -111,7 +103,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, imageUrl: $imageUrl, birthDate: $birthDate, currentStreak: $currentStreak, perfectWeeks: $perfectWeeks, bestStreak: $bestStreak)';
+    return 'User(email: $email, firstName: $firstName, lastName: $lastName, imageUrl: $imageUrl, birthDate: $birthDate, currentStreak: $currentStreak, perfectWeeks: $perfectWeeks, bestStreak: $bestStreak)';
   }
 
   @override
@@ -119,7 +111,6 @@ class User {
     if (identical(this, other)) return true;
 
     return other is User &&
-        other.id == id &&
         other.email == email &&
         other.firstName == firstName &&
         other.lastName == lastName &&
@@ -132,8 +123,7 @@ class User {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        email.hashCode ^
+    return email.hashCode ^
         firstName.hashCode ^
         lastName.hashCode ^
         imageUrl.hashCode ^
