@@ -4,7 +4,6 @@ class Exceptions implements Exception {
   late String message;
 
   Exceptions.fromDioError(DioError dioError) {
-    print(dioError);
     switch (dioError.type) {
       case DioErrorType.cancel:
         message = 'Request to API server was cancelled';
