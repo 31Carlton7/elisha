@@ -57,8 +57,7 @@ class Chapter {
 
   String toJson() => json.encode(toMap());
 
-  factory Chapter.fromJson(String source) =>
-      Chapter.fromMap(json.decode(source));
+  factory Chapter.fromJson(String source) => Chapter.fromMap(json.decode(source));
 
   @override
   String toString() => 'Chapter(id: $id, number: $number, verses: $verses)';
@@ -75,8 +74,7 @@ class Chapter {
   }
 
   @override
-  int get hashCode =>
-      id.hashCode ^ number.hashCode ^ translation.hashCode ^ verses.hashCode;
+  int get hashCode => id.hashCode ^ number.hashCode ^ translation.hashCode ^ verses.hashCode;
 }
 
 class ChapterId {
@@ -107,8 +105,7 @@ class ChapterId {
 
   String toJson() => json.encode(toMap());
 
-  factory ChapterId.fromJson(String source) =>
-      ChapterId.fromMap(json.decode(source));
+  factory ChapterId.fromJson(String source) => ChapterId.fromMap(json.decode(source));
 
   @override
   String toString() => 'ChapterId(id: $id)';
