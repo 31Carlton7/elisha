@@ -1,7 +1,8 @@
-import 'package:elisha/src/models/daily_reading.dart';
-import 'package:elisha/src/models/reading.dart';
 import 'package:intl/intl.dart';
 import 'package:universal_html/controller.dart';
+
+import 'package:elisha/src/models/daily_reading.dart';
+import 'package:elisha/src/models/reading.dart';
 
 class DailyReadingsService {
   DailyReadingsService();
