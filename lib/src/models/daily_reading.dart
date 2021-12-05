@@ -45,15 +45,13 @@ class DailyReading {
       name: map['name'],
       lectionary: map['lectionary'],
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
-      readings:
-          List<Reading>.from(map['readings']?.map((x) => Reading.fromMap(x))),
+      readings: List<Reading>.from(map['readings']?.map((x) => Reading.fromMap(x))),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory DailyReading.fromJson(String source) =>
-      DailyReading.fromMap(json.decode(source));
+  factory DailyReading.fromJson(String source) => DailyReading.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -73,9 +71,6 @@ class DailyReading {
 
   @override
   int get hashCode {
-    return name.hashCode ^
-        lectionary.hashCode ^
-        date.hashCode ^
-        readings.hashCode;
+    return name.hashCode ^ lectionary.hashCode ^ date.hashCode ^ readings.hashCode;
   }
 }
