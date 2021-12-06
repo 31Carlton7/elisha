@@ -26,6 +26,7 @@ class BibleView extends StatefulWidget {
 
 class _BibleViewState extends State<BibleView> {
   bool isBookmarked = false;
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -118,12 +119,17 @@ class _BibleViewState extends State<BibleView> {
     }
 
     children.add(const SizedBox(height: 40));
+
     return Column(
       children: [
         _header(context, translations, books, chapter),
         Expanded(
-          child: ListView(
-            children: children,
+          child: Scrollbar(
+            isAlwaysShown: true,
+            controller: _scrollController,
+            child: ListView(
+              children: children,
+            ),
           ),
         ),
       ],
