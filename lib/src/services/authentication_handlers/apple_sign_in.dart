@@ -20,9 +20,10 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:elisha/src/config/authentication_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
+import 'package:elisha/src/config/authentication_exceptions.dart';
 
 /// Generates a cryptographically secure random nonce, to be included in a
 /// credential request.
