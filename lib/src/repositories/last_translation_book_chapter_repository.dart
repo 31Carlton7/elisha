@@ -51,7 +51,7 @@ class LastTranslationBookChapterRepository extends StateNotifier<TranslationBook
     box.put('bible_chapter_translation', savedBibleChapterAndTranslation);
   }
 
-  Future<void> loadLastChapterAndTranslation() async {
+  void loadLastChapterAndTranslation() {
     var box = Hive.box('elisha');
 
     // Removes all info
