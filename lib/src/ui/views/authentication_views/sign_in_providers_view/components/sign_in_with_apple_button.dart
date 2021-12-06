@@ -16,11 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/authentication_providers/authentication_repository_provider.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:elisha/src/providers/authentication_providers/authentication_repository_provider.dart';
 
 class SignInWithAppleButton extends StatelessWidget {
   const SignInWithAppleButton({Key? key}) : super(key: key);
