@@ -42,7 +42,6 @@ dependencies:
   # Firebase
   firebase_core: ^1.4.0
   firebase_auth: ^3.0.1
-  cloud_firestore: ^2.4.0
   firebase_analytics: ^8.2.0
   firebase_crashlytics: ^2.1.1
   firebase_performance: ^0.7.0+7
@@ -54,10 +53,10 @@ dependencies:
   # Third Party OAuth
   google_sign_in: ^5.0.7
   sign_in_with_apple: ^3.3.0
-  flutter_facebook_auth: ^3.5.0
 
   # Other
   intl: ^0.17.0
+  crypto: ^3.0.1
   url_launcher: ^6.0.9
   flutter_linkify: ^5.0.2
   flutter_launcher_icons: ^0.9.1
