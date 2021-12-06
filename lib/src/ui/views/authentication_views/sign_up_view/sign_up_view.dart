@@ -18,7 +18,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:io';
 
-import 'package:elisha/src/ui/components/terms_and_privacy_policy_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -27,6 +26,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:elisha/src/providers/authentication_providers/authentication_repository_provider.dart';
+import 'package:elisha/src/ui/components/terms_and_privacy_policy_text.dart';
 import 'package:elisha/src/ui/views/authentication_views/components/email_text_input.dart';
 import 'package:elisha/src/ui/views/authentication_views/components/password_text_input.dart';
 import 'package:elisha/src/ui/views/authentication_views/sign_up_view/components/birth_date_input.dart';
