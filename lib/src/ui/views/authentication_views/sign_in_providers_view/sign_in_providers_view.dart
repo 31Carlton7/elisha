@@ -18,16 +18,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:io';
 
+import 'package:canton_design_system/canton_design_system.dart';
+
 import 'package:elisha/src/ui/components/terms_and_privacy_policy_text.dart';
 import 'package:elisha/src/ui/views/authentication_views/components/dont_have_an_account_text.dart';
+import 'package:elisha/src/ui/views/authentication_views/components/sign_in_view_header.dart';
 import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_anonymously_button.dart';
 import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_with_apple_button.dart';
 import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_with_email_button.dart';
 import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_with_google_button.dart';
-
-import 'package:canton_design_system/canton_design_system.dart';
-
-import 'package:elisha/src/ui/views/authentication_views/components/sign_in_view_header.dart';
 
 class SignInProvidersView extends StatelessWidget {
   const SignInProvidersView(this.toggleView, {Key? key}) : super(key: key);
