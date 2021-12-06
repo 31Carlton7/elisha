@@ -201,8 +201,8 @@ class _SignUpViewState extends State<SignUpView> {
                 height: 200,
                 child: Platform.isIOS
                     ? CupertinoTheme(
-                        data: const CupertinoThemeData(
-                          brightness: Brightness.dark,
+                        data: CupertinoThemeData(
+                          brightness: MediaQuery.of(context).platformBrightness,
                         ),
                         child: CupertinoDatePicker(
                           mode: CupertinoDatePickerMode.date,
