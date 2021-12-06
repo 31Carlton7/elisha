@@ -1,4 +1,6 @@
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/providers/local_user_repository_provider.dart';
+import 'package:elisha/src/providers/streaks_repository_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,11 +58,11 @@ class _CurrentViewState extends State<CurrentView> {
   }
 
   void _loadData() async {
-    await context.read(localRepositoryProvider.notifier).loadLastChapterAndTranslation();
-    await context.read(bookmarkedChaptersProvider.notifier).loadData();
+    context.read(localRepositoryProvider.notifier).loadLastChapterAndTranslation();
+    context.read(bookmarkedChaptersProvider.notifier).loadData();
+    context.read(localUserRepositoryProvider.notifier).loadUser();
+    await context.read(streaksRepositoryProvider).updateStreaks();
   }
-
-  // void _handleStreaks() async {}
 
   @override
   Widget build(BuildContext context) {
