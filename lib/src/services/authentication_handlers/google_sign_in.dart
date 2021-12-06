@@ -16,9 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/config/authentication_exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'package:elisha/src/config/authentication_exceptions.dart';
 
 Future<String> handleGoogleSignIn(FirebaseAuth firebaseAuth) async {
   try {
