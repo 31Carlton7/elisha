@@ -30,7 +30,7 @@ class BookmarkedChaptersRepository extends StateNotifier<List<Chapter>> {
     box.put('bookmarked_chapters', chapters);
   }
 
-  Future<void> loadData() async {
+  void loadData() {
     var box = Hive.box('elisha');
 
     /// Removes all [Chapters] (s) from device.
