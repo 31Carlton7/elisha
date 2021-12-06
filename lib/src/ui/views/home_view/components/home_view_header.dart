@@ -17,8 +17,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:elisha/src/providers/local_user_repository_provider.dart';
 
 class HomeViewHeader extends StatelessWidget {
   const HomeViewHeader({Key? key}) : super(key: key);
