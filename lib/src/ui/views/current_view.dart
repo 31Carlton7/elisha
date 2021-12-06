@@ -17,8 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/local_user_repository_provider.dart';
-import 'package:elisha/src/providers/streaks_repository_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,6 +26,8 @@ import 'package:elisha/src/config/exceptions.dart';
 import 'package:elisha/src/providers/bookmarked_chapters_provider.dart';
 import 'package:elisha/src/providers/daily_readings_provider.dart';
 import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
+import 'package:elisha/src/providers/local_user_repository_provider.dart';
+import 'package:elisha/src/providers/streaks_repository_provider.dart';
 import 'package:elisha/src/ui/components/error_body.dart';
 import 'package:elisha/src/ui/components/unexpected_error.dart';
 import 'package:elisha/src/ui/views/bible_view/bible_view.dart';
