@@ -16,13 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:elisha/src/config/authentication_exceptions.dart';
 import 'package:elisha/src/models/local_user.dart';
 import 'package:elisha/src/repositories/local_user_repository.dart';
 import 'package:elisha/src/services/authentication_handlers/apple_sign_in.dart';
 import 'package:elisha/src/services/authentication_handlers/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:elisha/src/config/authentication_exceptions.dart';
 
 class AuthenticationRepository {
   final FirebaseAuth _firebaseAuth;
