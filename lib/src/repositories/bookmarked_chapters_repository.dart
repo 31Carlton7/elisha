@@ -19,9 +19,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:elisha/src/models/chapter.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class BookmarkedChaptersRepository extends StateNotifier<List<Chapter>> {
   BookmarkedChaptersRepository() : super([]);
