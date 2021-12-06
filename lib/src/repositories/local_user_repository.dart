@@ -16,9 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/models/local_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:elisha/src/models/local_user.dart';
 
 class LocalUserRepository extends StateNotifier<LocalUser> {
   LocalUserRepository() : super(LocalUser(firstName: '', lastName: '', email: '', birthDate: DateTime.now()));
