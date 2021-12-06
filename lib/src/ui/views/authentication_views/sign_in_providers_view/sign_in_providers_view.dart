@@ -1,14 +1,15 @@
+import 'dart:io';
+
 import 'package:elisha/src/ui/components/terms_and_privacy_policy_text.dart';
 import 'package:elisha/src/ui/views/authentication_views/components/dont_have_an_account_text.dart';
-import 'package:flutter/services.dart';
+import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_anonymously_button.dart';
+import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_with_apple_button.dart';
+import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_with_email_button.dart';
+import 'package:elisha/src/ui/views/authentication_views/sign_in_providers_view/components/sign_in_with_google_button.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:elisha/src/providers/authentication_providers/authentication_repository_provider.dart';
 import 'package:elisha/src/ui/views/authentication_views/components/sign_in_view_header.dart';
-import 'package:elisha/src/ui/views/authentication_views/sign_in_view/sign_in_view.dart';
 
 class SignInProvidersView extends StatelessWidget {
   const SignInProvidersView(this.toggleView, {Key? key}) : super(key: key);
@@ -32,88 +33,19 @@ class SignInProvidersView extends StatelessWidget {
           children: [
             const SignInViewHeader(),
             const SizedBox(height: 20),
-            _signInWithGoogleButton(context),
+            SignInWithEmailButton(toggleView: toggleView),
             const SizedBox(height: buttonSpacing),
-            _signInWithAppleButton(context),
+            const SignInAnonymouslyButton(),
             const SizedBox(height: buttonSpacing),
-            _signInWithEmailButton(context),
+            const SignInWithGoogleButton(),
+            Platform.isIOS ? const SizedBox(height: buttonSpacing) : Container(),
+            Platform.isIOS ? const SignInWithAppleButton() : Container(),
             const SizedBox(height: 15),
             DontHaveAnAccountText(toggleView: toggleView),
             const Expanded(child: Align(alignment: FractionalOffset.bottomCenter, child: TermsAndPrivacyPolicyText())),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _signInWithGoogleButton(BuildContext context) {
-    return CantonPrimaryButton(
-      borderRadius: CantonSmoothBorder.smallBorder().borderRadius,
-      buttonText: 'Continue with Google',
-      alignment: MainAxisAlignment.spaceAround,
-      prefixIcon: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Image.asset(
-          'assets/images/google_icon.png',
-          height: 24,
-        ),
-      ),
-      textColor: Theme.of(context).colorScheme.secondaryVariant,
-      color: Theme.of(context).colorScheme.onSecondary,
-      border: BorderSide(
-        color: Theme.of(context).colorScheme.secondary,
-        width: 1.5,
-      ),
-      onPressed: () async {
-        HapticFeedback.lightImpact();
-
-        await context.read(authenticationRepositoryProvider).signInWithGoogle();
-      },
-    );
-  }
-
-  Widget _signInWithEmailButton(BuildContext context) {
-    return CantonPrimaryButton(
-      buttonText: 'Continue with Email',
-      borderRadius: CantonSmoothBorder.smallBorder().borderRadius,
-      prefixIcon: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: FaIcon(
-          FontAwesomeIcons.solidEnvelope,
-          color: Theme.of(context).colorScheme.secondaryVariant,
-        ),
-      ),
-      alignment: MainAxisAlignment.spaceAround,
-      textColor: Theme.of(context).colorScheme.secondaryVariant,
-      color: Theme.of(context).colorScheme.onSecondary,
-      border: BorderSide(
-        color: Theme.of(context).colorScheme.secondary,
-        width: 1.5,
-      ),
-      onPressed: () {
-        CantonMethods.viewTransition(context, SignInView(toggleView));
-      },
-    );
-  }
-
-  Widget _signInWithAppleButton(BuildContext context) {
-    return CantonPrimaryButton(
-      buttonText: 'Continue with Apple',
-      borderRadius: CantonSmoothBorder.smallBorder().borderRadius,
-      prefixIcon: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: const FaIcon(FontAwesomeIcons.apple, size: 24),
-      ),
-      alignment: MainAxisAlignment.spaceAround,
-      textColor: Theme.of(context).colorScheme.secondaryVariant,
-      color: Theme.of(context).colorScheme.onSecondary,
-      border: BorderSide(
-        color: Theme.of(context).colorScheme.secondary,
-        width: 1.5,
-      ),
-      onPressed: () {
-        CantonMethods.viewTransition(context, SignInView(toggleView));
-      },
     );
   }
 }
