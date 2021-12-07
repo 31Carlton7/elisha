@@ -112,7 +112,7 @@ class _CurrentViewState extends State<CurrentView> {
             return CantonScaffold(
               safeArea: false,
               bottomNavBar: BottomNavBar(_currentIndex, _onTabTapped),
-              padding: _currentIndex == 1 ? const EdgeInsets.only(top: 17) : EdgeInsets.zero,
+              padding: EdgeInsets.zero,
               backgroundColor: CantonMethods.alternateCanvasColor(context, index: _currentIndex, targetIndexes: [1, 2]),
               body: IndexedStack(
                 index: _currentIndex,
