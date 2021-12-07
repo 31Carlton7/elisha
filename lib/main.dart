@@ -69,9 +69,7 @@ class MyApp extends StatelessWidget {
       primaryLightVariantColor: const Color(0xFFB97D3C),
       primaryDarkColor: const Color(0xFFB97D3C),
       primaryDarkVariantColor: const Color(0xFFB97D3C),
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
-      ],
+      navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())],
       home: const AuthenticationWrapper(),
     );
   }
