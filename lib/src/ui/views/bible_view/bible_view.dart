@@ -20,6 +20,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/config/exceptions.dart';
@@ -101,20 +102,22 @@ class _BibleViewState extends State<BibleView> {
   }
 
   Widget _content(BuildContext context, List<Translation> translations, List<Book> books, Chapter chapter) {
-    List<Widget> children = [const SizedBox(height: 20)];
+    List<Widget> children = [const SliverToBoxAdapter(child: SizedBox(height: 20))];
     List<InlineSpan> spans = [];
     children.add(
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 36),
-        child: Text.rich(
-          TextSpan(
-            children: spans,
+      SliverToBoxAdapter(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 32),
+          child: Text.rich(
+            TextSpan(
+              children: spans,
+            ),
+            style: Theme.of(context).textTheme.headline5!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 21,
+                  height: 1.97,
+                ),
           ),
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: 21,
-                height: 1.97,
-              ),
         ),
       ),
     );
@@ -137,21 +140,12 @@ class _BibleViewState extends State<BibleView> {
       }
     }
 
-    children.add(const SizedBox(height: 40));
+    children.add(const SliverToBoxAdapter(child: SizedBox(height: 40)));
 
-    return Column(
-      children: [
-        _header(context, translations, books, chapter),
-        Expanded(
-          child: Scrollbar(
-            isAlwaysShown: true,
-            controller: _scrollController,
-            child: ListView(
-              children: children,
-            ),
-          ),
-        ),
-      ],
+    return Scrollbar(
+      child: CustomScrollView(
+        slivers: [_header(context, translations, books, chapter), ...children],
+      ),
     );
   }
 
@@ -161,14 +155,12 @@ class _BibleViewState extends State<BibleView> {
         children: [
           GestureDetector(
             onTap: () {
+              HapticFeedback.lightImpact();
+
               context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, true);
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
-                shape: BoxShape.circle,
-              ),
               child: Icon(
                 Iconsax.arrow_left,
                 size: 20,
@@ -179,14 +171,12 @@ class _BibleViewState extends State<BibleView> {
           const SizedBox(width: 7),
           GestureDetector(
             onTap: () {
+              HapticFeedback.lightImpact();
+
               context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, false);
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
-                shape: BoxShape.circle,
-              ),
               child: Icon(
                 Iconsax.arrow_right_1,
                 size: 20,
@@ -199,21 +189,27 @@ class _BibleViewState extends State<BibleView> {
     }
 
     Widget _chapterVerseTranslationControls(
-        BuildContext context, List<Translation> translations, List<Book> books, Chapter chapter) {
+      BuildContext context,
+      List<Translation> translations,
+      List<Book> books,
+      Chapter chapter,
+    ) {
       var bookChapterTitle = chapter.verses![0].book!.name! + ' ' + chapter.number!;
+
       return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
             onTap: () async {
-              _showBookAndChapterBottomSheet();
+              HapticFeedback.lightImpact();
+
+              await _showBookAndChapterBottomSheet();
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
               decoration: ShapeDecoration(
                 shape: const SquircleBorder(
-                  radius: BorderRadius.horizontal(
-                    left: Radius.circular(20),
-                  ),
+                  radius: BorderRadius.horizontal(left: Radius.circular(20)),
                 ),
                 color: Theme.of(context).colorScheme.secondary,
               ),
@@ -225,16 +221,16 @@ class _BibleViewState extends State<BibleView> {
           ),
           const SizedBox(width: 2),
           GestureDetector(
-            onTap: () {
-              _showTranslationsBottomSheet(translations);
+            onTap: () async {
+              HapticFeedback.lightImpact();
+
+              await _showTranslationsBottomSheet(translations);
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
               decoration: ShapeDecoration(
                 shape: const SquircleBorder(
-                  radius: BorderRadius.horizontal(
-                    right: Radius.circular(20),
-                  ),
+                  radius: BorderRadius.horizontal(right: Radius.circular(20)),
                 ),
                 color: Theme.of(context).colorScheme.secondary,
               ),
@@ -248,50 +244,39 @@ class _BibleViewState extends State<BibleView> {
       );
     }
 
-    Widget _bookmarkButton(BuildContext context) {
-      return GestureDetector(
-        onTap: () {
-          if (isBookmarked == false) {
-            context.read(bookmarkedChaptersProvider.notifier).bookmarkChapter(chapter);
-          } else {
-            context.read(bookmarkedChaptersProvider.notifier).removeChapter(chapter);
-          }
-          setState(() {
-            isBookmarked = !isBookmarked;
-          });
-        },
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            isBookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
-            size: 20,
-            color: isBookmarked ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondaryVariant,
-          ),
-        ),
-      );
-    }
-
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 17),
-          child: Row(
-            children: [
-              _bookmarkButton(context),
-              const Spacer(flex: 9),
-              _chapterVerseTranslationControls(context, translations, books, chapter),
-              const Spacer(flex: 5),
-              _quickChapterNavigationControls(context),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        const Divider(height: 0),
+    return SliverAppBar(
+      centerTitle: true,
+      title: _chapterVerseTranslationControls(context, translations, books, chapter),
+      leading: _bookmarkButton(context, chapter),
+      actions: [
+        _quickChapterNavigationControls(context),
+        const SizedBox(width: 10),
       ],
+    );
+  }
+
+  Widget _bookmarkButton(BuildContext context, Chapter chapter) {
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.lightImpact();
+
+        if (isBookmarked == false) {
+          context.read(bookmarkedChaptersProvider.notifier).bookmarkChapter(chapter);
+        } else {
+          context.read(bookmarkedChaptersProvider.notifier).removeChapter(chapter);
+        }
+        setState(() {
+          isBookmarked = !isBookmarked;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: Icon(
+          isBookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
+          size: 20,
+          color: isBookmarked ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondaryVariant,
+        ),
+      ),
     );
   }
 
@@ -326,14 +311,8 @@ class _BibleViewState extends State<BibleView> {
       }
 
       return CantonExpansionTile(
-        childrenPadding: const EdgeInsets.symmetric(
-          vertical: 3,
-          horizontal: 17,
-        ),
-        title: Text(
-          book.name!,
-          style: Theme.of(context).textTheme.headline6,
-        ),
+        childrenPadding: const EdgeInsets.symmetric(horizontal: 17),
+        title: Text(book.name!, style: Theme.of(context).textTheme.headline6),
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 12),
@@ -347,9 +326,7 @@ class _BibleViewState extends State<BibleView> {
                 crossAxisSpacing: 10.0,
               ),
               itemCount: book.chapters!.length,
-              itemBuilder: (context, index) {
-                return _chapterCard(book.chapters![index]);
-              },
+              itemBuilder: (context, index) => _chapterCard(book.chapters![index]),
             ),
           ),
         ],
