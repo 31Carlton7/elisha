@@ -38,6 +38,10 @@ class AuthenticationRepository {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
 
+      // final localUser = LocalUser(firstName: firstName, lastName: lastName, email: email, birthDate: birthDate);
+
+      // await _updateLocalUser(localUser);
+
       return 'success';
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -76,14 +80,17 @@ class AuthenticationRepository {
     required String password,
   }) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
 
-      final user = LocalUser(firstName: firstName, lastName: lastName, email: email, birthDate: birthDate);
+      final user = FirebaseAuth.instance.currentUser;
 
-      await _updateLocalUser(user);
+      if (!user!.emailVerified) {
+        await user.sendEmailVerification();
+      }
+
+      final localUser = LocalUser(firstName: firstName, lastName: lastName, email: email, birthDate: birthDate);
+
+      await _updateLocalUser(localUser);
 
       return 'success';
     } on FirebaseAuthException catch (e) {
