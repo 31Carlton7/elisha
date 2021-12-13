@@ -143,6 +143,7 @@ class _BibleViewState extends State<BibleView> {
     children.add(const SliverToBoxAdapter(child: SizedBox(height: 40)));
 
     return Scrollbar(
+      controller: _scrollController,
       child: CustomScrollView(
         slivers: [_header(context, translations, books, chapter), ...children],
       ),
@@ -196,56 +197,60 @@ class _BibleViewState extends State<BibleView> {
     ) {
       var bookChapterTitle = chapter.verses![0].book!.name! + ' ' + chapter.number!;
 
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () async {
-              HapticFeedback.lightImpact();
+      return LayoutBuilder(builder: (context, constraints) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () async {
+                HapticFeedback.lightImpact();
 
-              await _showBookAndChapterBottomSheet();
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: ShapeDecoration(
-                shape: const SquircleBorder(
-                  radius: BorderRadius.horizontal(left: Radius.circular(20)),
+                await _showBookAndChapterBottomSheet();
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: ShapeDecoration(
+                  shape: const SquircleBorder(
+                    radius: BorderRadius.horizontal(left: Radius.circular(20)),
+                  ),
+                  color: Theme.of(context).inputDecorationTheme.fillColor,
                 ),
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              child: Text(
-                bookChapterTitle,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+                child: Text(
+                  bookChapterTitle,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 2),
-          GestureDetector(
-            onTap: () async {
-              HapticFeedback.lightImpact();
+            const SizedBox(width: 2),
+            GestureDetector(
+              onTap: () async {
+                HapticFeedback.lightImpact();
 
-              await _showTranslationsBottomSheet(translations);
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: ShapeDecoration(
-                shape: const SquircleBorder(
-                  radius: BorderRadius.horizontal(right: Radius.circular(20)),
+                await _showTranslationsBottomSheet(translations);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: ShapeDecoration(
+                  shape: const SquircleBorder(
+                    radius: BorderRadius.horizontal(right: Radius.circular(20)),
+                  ),
+                  color: Theme.of(context).inputDecorationTheme.fillColor,
                 ),
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-              child: Text(
-                translations[int.parse(translationID)].abbreviation!,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+                child: Text(
+                  translations[int.parse(translationID)].abbreviation!,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+                ),
               ),
             ),
-          ),
-        ],
-      );
+          ],
+        );
+      });
     }
 
     return SliverAppBar(
       centerTitle: true,
+      floating: true,
+      backgroundColor: CantonMethods.alternateCanvasColor(context),
       title: _chapterVerseTranslationControls(context, translations, books, chapter),
       leading: _bookmarkButton(context, chapter),
       actions: [
@@ -265,15 +270,17 @@ class _BibleViewState extends State<BibleView> {
         } else {
           context.read(bookmarkedChaptersProvider.notifier).removeChapter(chapter);
         }
+
         setState(() {
           isBookmarked = !isBookmarked;
         });
       },
       child: Container(
         padding: const EdgeInsets.all(8.0),
+        color: CantonMethods.alternateCanvasColor(context),
         child: Icon(
           isBookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
-          size: 20,
+          size: 24,
           color: isBookmarked ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondaryVariant,
         ),
       ),
