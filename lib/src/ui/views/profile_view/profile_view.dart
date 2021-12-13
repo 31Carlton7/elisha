@@ -62,109 +62,13 @@ class ProfileView extends StatelessWidget {
           style: Theme.of(context).textTheme.headline4,
         ),
         const SizedBox(height: 10),
-        ..._statCards(context),
+        // ..._statCards(context),
         const SizedBox(height: 10),
         ..._viewCards(context),
         const SizedBox(height: 10),
         ..._applicationCards(context),
       ],
     );
-  }
-
-  List<Widget> _statCards(BuildContext context) {
-    return [
-      Card(
-        margin: const EdgeInsets.only(top: 5),
-        shape: SquircleBorder(
-          radius: const BorderRadius.vertical(
-            top: Radius.circular(37),
-          ),
-          side: BorderSide(
-            width: 1.5,
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Current Streak',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                'Num',
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      Card(
-        margin: EdgeInsets.zero,
-        shape: Border(
-          left: BorderSide(
-            width: 1.5,
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
-          right: BorderSide(
-            width: 1.5,
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Perfect Weeks',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                'Num',
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      Card(
-        margin: const EdgeInsets.only(bottom: 5),
-        shape: SquircleBorder(
-          radius: const BorderRadius.vertical(
-            bottom: Radius.circular(37),
-          ),
-          side: BorderSide(
-            width: 1.5,
-            color: Theme.of(context).colorScheme.onSecondary,
-          ),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Best Streak',
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              Text(
-                'Num',
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ];
   }
 
   List<Widget> _viewCards(BuildContext context) {
