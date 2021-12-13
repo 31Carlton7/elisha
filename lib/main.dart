@@ -53,8 +53,8 @@ void main() async {
         .then((_) {
       runApp(const ProviderScope(child: MyApp()));
     });
-  }, (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack);
+  }, (error, stack) async {
+    await FirebaseCrashlytics.instance.recordError(error, stack);
   });
 }
 
