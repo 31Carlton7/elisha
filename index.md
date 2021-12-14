@@ -1,37 +1,10 @@
-## Welcome to GitHub Pages
+## About
+Hi, I'm Carlton, and welcome to Elisha! Elisha is a simple Bible app that is focused on personal use. I made this app in hopes to get people who aren't connected to God or who are, to read/study the Bible in a very simple format and manner that is more or less intended towards younger crowds, however this app is very useable for older crowds as well. No matter if you read 10 chapters a day or read just one verse, that is all it takes to connect with God and I hope this app can help anyone who uses it do too 🙏🏾.
 
-You can use the [editor on GitHub](https://github.com/31Carlton7/elisha/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Inspiration
+I learned how to code when I was 16, and I was starting to think about the first app I would make and publish on the app store. I thought carefully and I believed that God gave me the knowledge to be able to program in general so why not make my first app, an app to honor him and show thanks to him.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Quick Links
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/31Carlton7/elisha/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+- [Support]()
+- [Privacy Policy]()
