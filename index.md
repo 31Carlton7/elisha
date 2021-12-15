@@ -7,4 +7,4 @@ I learned how to code when I was 16, and I was starting to think about the first
 ### Quick Links
 
 - [Support]()
-- [Privacy Policy]()
+- [Privacy Policy](https://31carlton7.github.io/elisha/privacy_policy)
