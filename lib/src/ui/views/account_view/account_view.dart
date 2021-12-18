@@ -27,6 +27,7 @@ class AccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CantonScaffold(
+      backgroundColor: CantonMethods.alternateCanvasColor(context),
       body: _content(context),
     );
   }
@@ -52,6 +53,7 @@ class AccountView extends StatelessWidget {
       buttonText: 'Sign Out',
       color: Theme.of(context).colorScheme.onError,
       textColor: Theme.of(context).colorScheme.error,
+      borderRadius: CantonSmoothBorder.smallBorder().borderRadius,
       containerWidth: MediaQuery.of(context).size.width / 2 - 34,
       onPressed: () {
         context.read(authenticationRepositoryProvider).signOut();
