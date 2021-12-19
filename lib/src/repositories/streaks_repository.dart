@@ -71,12 +71,13 @@ class StreaksRepository extends ChangeNotifier {
 
     final box = Hive.box('elisha');
 
-    var lastVisitDate = box.get('visitKey', defaultValue: DateTime.now().toString());
-    var todayDate = DateTime.now().toString();
+    var lastVisitDate = DateTime.parse(box.get('visitKey', defaultValue: DateTime.now().toString()));
+    var todayDate = DateTime.now();
+    var yesterdayDate = DateTime.now().subtract(const Duration(days: 1));
 
-    if (todayDate == lastVisitDate) {
+    if (todayDate.day.toString() == lastVisitDate.day.toString()) {
       DoNothingAction();
-    } else if (DateTime.parse(lastVisitDate).isBefore(DateTime.now())) {
+    } else if (!(todayDate.isAfter(lastVisitDate) && yesterdayDate.isBefore(lastVisitDate))) {
       await _resetCurrentStreak();
     } else {
       await _incrementStreak();
@@ -89,7 +90,7 @@ class StreaksRepository extends ChangeNotifier {
         await _incrementPerfectWeeks();
       }
 
-      await box.put('visitKey', todayDate);
+      await box.put('visitKey', todayDate.toString());
     }
   }
 }

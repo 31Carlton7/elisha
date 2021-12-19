@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:dio/dio.dart';
+import 'package:elisha/src/repositories/bible_repository.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 
 import 'package:elisha/src/config/exceptions.dart';
@@ -69,23 +70,7 @@ class BibleService {
         var trace = FirebasePerformance.instance.newTrace('book_chapter_bottom_sheet_open_time');
         trace.start();
 
-        final response = await _dio.get(_rootUrl + '/books');
-
-        final results = List<Map<String, dynamic>>.from(
-          response.data,
-        );
-
-        var books = results.map((book) => Book.fromMap(book)).toList(growable: false);
-
-        for (var i = 0; i < books.length; i++) {
-          final chaptersResponse = await _dio.get(_rootUrl + '/books/${books[i].id}/chapters');
-
-          final chaptersResult = List<Map<String, dynamic>>.from(chaptersResponse.data);
-
-          final chapters = chaptersResult.map((chapter) => ChapterId.fromMap(chapter)).toList(growable: false);
-
-          books[i].chapters = chapters;
-        }
+        final books = BibleRepository().getBooks();
 
         trace.stop();
 
@@ -102,9 +87,7 @@ class BibleService {
         _rootUrl + '/books/$bookID/chapters/$chapterID?translation=${translationID.replaceAll('"', '')}',
       );
 
-      final results = List<Map<String, dynamic>>.from(
-        response.data,
-      );
+      final results = List<Map<String, dynamic>>.from(response.data);
 
       final verses = results.map((verse) => Verse.fromMap(verse)).toList(growable: false);
 

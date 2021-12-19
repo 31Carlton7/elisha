@@ -113,7 +113,7 @@ class _CurrentViewState extends State<CurrentView> {
               safeArea: false,
               bottomNavBar: BottomNavBar(_currentIndex, _onTabTapped),
               padding: EdgeInsets.zero,
-              backgroundColor: CantonMethods.alternateCanvasColor(context, index: _currentIndex, targetIndexes: [1, 2]),
+              backgroundColor: CantonMethods.alternateCanvasColor(context, index: _currentIndex, targetIndexes: [1]),
               body: IndexedStack(
                 index: _currentIndex,
                 children: [
