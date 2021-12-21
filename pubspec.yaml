@@ -27,7 +27,7 @@ dependencies:
   # UI
   canton_design_system:
     git:
-      url: https://github.com/31Carlton7/canton_design_system.git
+      url: git://github.com/31Carlton7/canton_design_system.git
       ref: master
   font_awesome_flutter: ^9.2.0
   line_awesome_flutter: ^2.0.0
@@ -111,17 +111,14 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: NewYork
+      fonts:
+        - asset: fonts/NewYork.ttf
+        - asset: fonts/NewYorkItalic.ttf
+          style: italic
+        - asset: fonts/NewYork.ttf
+          weight: 800
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
