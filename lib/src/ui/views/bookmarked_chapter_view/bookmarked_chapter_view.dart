@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/views/bookmarked_chapter_view/components/bookmarked_chapter_view_header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/chapter.dart';
@@ -78,7 +79,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
     }
     return Column(
       children: [
-        _header(context),
+        BookmarkedChapterViewHeader(chapter: widget.chapter, showBottomSheet: _showBookmarkedChapterOptionsBottomSheet),
         const SizedBox(height: 10),
         Expanded(
           child: ListView(
@@ -89,27 +90,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
     );
   }
 
-  Widget _header(BuildContext context) {
-    String name() {
-      return widget.chapter.verses![0].book!.name! + ' ' + widget.chapter.number!;
-    }
-
-    return ViewHeaderTwo(
-      title: name(),
-      backButton: true,
-      buttonTwo: CantonHeaderButton(
-        onPressed: () {
-          _showBookmarkedChapterOptionsBottomSheet(widget.chapter);
-        },
-        icon: Icon(
-          Iconsax.more,
-          color: Theme.of(context).primaryColor,
-        ),
-      ),
-    );
-  }
-
-  Future<void> _showBookmarkedChapterOptionsBottomSheet(Chapter chapter) {
+  void _showBookmarkedChapterOptionsBottomSheet(Chapter chapter) async {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -160,7 +141,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
                   child: Column(
                     children: [
                       CantonPrimaryButton(
-                        buttonText: 'Remove',
+                        buttonText: 'Remove Bookmark',
                         color: Theme.of(context).colorScheme.onError,
                         textColor: Theme.of(context).colorScheme.error,
                         onPressed: () {
