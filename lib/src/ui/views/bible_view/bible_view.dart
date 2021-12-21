@@ -102,22 +102,20 @@ class _BibleViewState extends State<BibleView> {
   }
 
   Widget _content(BuildContext context, List<Translation> translations, List<Book> books, Chapter chapter) {
-    List<Widget> children = [const SliverToBoxAdapter(child: SizedBox(height: 20))];
+    List<Widget> children = [const SizedBox(height: 10)];
     List<InlineSpan> spans = [];
     children.add(
-      SliverToBoxAdapter(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32),
-          child: Text.rich(
-            TextSpan(
-              children: spans,
-            ),
-            style: Theme.of(context).textTheme.headline5!.copyWith(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 21,
-                  height: 1.97,
-                ),
+      Container(
+        margin: const EdgeInsets.symmetric(horizontal: 32),
+        child: Text.rich(
+          TextSpan(
+            children: spans,
           ),
+          style: Theme.of(context).textTheme.headline5!.copyWith(
+                fontWeight: FontWeight.w400,
+                fontSize: 21,
+                height: 1.97,
+              ),
         ),
       ),
     );
@@ -140,17 +138,35 @@ class _BibleViewState extends State<BibleView> {
       }
     }
 
-    children.add(const SliverToBoxAdapter(child: SizedBox(height: 40)));
+    children.add(const SizedBox(height: 40));
+
+    Widget reader() {
+      return SliverToBoxAdapter(
+        child: GestureDetector(
+          onHorizontalDragUpdate: (details) {
+            HapticFeedback.lightImpact();
+
+            setState(() {
+              bool dir = details.delta.dx < 0 ? false : true;
+              context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, dir);
+            });
+          },
+          child: Column(children: children),
+        ),
+      );
+    }
 
     return Scrollbar(
       controller: _scrollController,
       child: CustomScrollView(
-        slivers: [_header(context, translations, books, chapter), ...children],
+        controller: _scrollController,
+        slivers: [_header(context, translations, books, chapter), reader()],
       ),
     );
   }
 
   Widget _header(BuildContext context, List<Translation> translations, List<Book> books, Chapter chapter) {
+    // ignore: unused_element
     Widget _quickChapterNavigationControls(BuildContext context) {
       return Row(
         children: [
@@ -163,7 +179,7 @@ class _BibleViewState extends State<BibleView> {
             child: Container(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
-                Iconsax.arrow_left,
+                Iconsax.arrow_left_2,
                 size: 20,
                 color: Theme.of(context).colorScheme.secondaryVariant,
               ),
@@ -179,13 +195,46 @@ class _BibleViewState extends State<BibleView> {
             child: Container(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
-                Iconsax.arrow_right_1,
+                Iconsax.arrow_right_3,
                 size: 20,
                 color: Theme.of(context).colorScheme.secondaryVariant,
               ),
             ),
           ),
         ],
+      );
+    }
+
+    Widget _previousChapterButton(BuildContext context) {
+      return GestureDetector(
+        onTap: () {
+          HapticFeedback.lightImpact();
+
+          context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, true);
+        },
+        child: Icon(
+          FeatherIcons.chevronLeft,
+          size: 27,
+          color: Theme.of(context).colorScheme.secondaryVariant,
+        ),
+      );
+    }
+
+    Widget _nextChapterButton(BuildContext context) {
+      return GestureDetector(
+        onTap: () {
+          HapticFeedback.lightImpact();
+
+          context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, false);
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 17.0),
+          child: Icon(
+            FeatherIcons.chevronRight,
+            size: 27,
+            color: Theme.of(context).colorScheme.secondaryVariant,
+          ),
+        ),
       );
     }
 
@@ -197,54 +246,56 @@ class _BibleViewState extends State<BibleView> {
     ) {
       var bookChapterTitle = chapter.verses![0].book!.name! + ' ' + chapter.number!;
 
-      return LayoutBuilder(builder: (context, constraints) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () async {
-                HapticFeedback.lightImpact();
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _readerSettingsButton(context),
+          const SizedBox(width: 40),
+          GestureDetector(
+            onTap: () async {
+              HapticFeedback.lightImpact();
 
-                await _showBookAndChapterBottomSheet();
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: ShapeDecoration(
-                  shape: const SquircleBorder(
-                    radius: BorderRadius.horizontal(left: Radius.circular(20)),
-                  ),
-                  color: Theme.of(context).inputDecorationTheme.fillColor,
+              await _showBookAndChapterBottomSheet();
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: ShapeDecoration(
+                shape: const SquircleBorder(
+                  radius: BorderRadius.horizontal(left: Radius.circular(20)),
                 ),
-                child: Text(
-                  bookChapterTitle,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
-                ),
+                color: Theme.of(context).inputDecorationTheme.fillColor,
+              ),
+              child: Text(
+                bookChapterTitle,
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
-            const SizedBox(width: 2),
-            GestureDetector(
-              onTap: () async {
-                HapticFeedback.lightImpact();
+          ),
+          const SizedBox(width: 2),
+          GestureDetector(
+            onTap: () async {
+              HapticFeedback.lightImpact();
 
-                await _showTranslationsBottomSheet(translations);
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: ShapeDecoration(
-                  shape: const SquircleBorder(
-                    radius: BorderRadius.horizontal(right: Radius.circular(20)),
-                  ),
-                  color: Theme.of(context).inputDecorationTheme.fillColor,
+              await _showTranslationsBottomSheet(translations);
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: ShapeDecoration(
+                shape: const SquircleBorder(
+                  radius: BorderRadius.horizontal(right: Radius.circular(20)),
                 ),
-                child: Text(
-                  translations[int.parse(translationID)].abbreviation!,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
-                ),
+                color: Theme.of(context).inputDecorationTheme.fillColor,
+              ),
+              child: Text(
+                translations[int.parse(translationID)].abbreviation!,
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
-          ],
-        );
-      });
+          ),
+          const SizedBox(width: 40),
+          _bookmarkButton(context, chapter),
+        ],
+      );
     }
 
     return SliverAppBar(
@@ -252,10 +303,9 @@ class _BibleViewState extends State<BibleView> {
       floating: true,
       backgroundColor: CantonMethods.alternateCanvasColor(context),
       title: _chapterVerseTranslationControls(context, translations, books, chapter),
-      leading: _bookmarkButton(context, chapter),
+      leading: _previousChapterButton(context),
       actions: [
-        _quickChapterNavigationControls(context),
-        const SizedBox(width: 10),
+        _nextChapterButton(context),
       ],
     );
   }
@@ -276,12 +326,27 @@ class _BibleViewState extends State<BibleView> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.all(8.0),
         color: CantonMethods.alternateCanvasColor(context),
         child: Icon(
           isBookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
           size: 24,
           color: isBookmarked ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondaryVariant,
+        ),
+      ),
+    );
+  }
+
+  Widget _readerSettingsButton(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.lightImpact();
+      },
+      child: Container(
+        color: CantonMethods.alternateCanvasColor(context),
+        child: Icon(
+          FeatherIcons.settings,
+          size: 24,
+          color: Theme.of(context).colorScheme.secondaryVariant,
         ),
       ),
     );
@@ -380,7 +445,7 @@ class _BibleViewState extends State<BibleView> {
                     ),
                     const Spacer(flex: 6),
                     Text(
-                      'Versions',
+                      'Books',
                       style: Theme.of(context).textTheme.headline5,
                     ),
                     const Spacer(flex: 9),
