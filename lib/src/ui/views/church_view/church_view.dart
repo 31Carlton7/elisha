@@ -19,7 +19,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:canton_design_system/canton_design_system.dart';
 
 import 'package:elisha/src/models/daily_reading.dart';
-import 'package:elisha/src/ui/views/daily_readings_view/daily_readings_view.dart';
+import 'package:elisha/src/ui/views/church_view/components/church_view_header.dart';
+import 'package:elisha/src/ui/views/church_view/components/daily_readings_card.dart';
+import 'package:elisha/src/ui/views/church_view/components/sunday_mass_card.dart';
 
 class ChurchView extends StatefulWidget {
   const ChurchView(this.reading, {Key? key}) : super(key: key);
@@ -38,64 +40,14 @@ class _ChurchViewState extends State<ChurchView> {
 
   Widget _content(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _header(context),
-        _dailyReadingsCard(context, widget.reading),
+        const ChurchViewHeader(),
+        DailyReadingsCard(dailyReading: widget.reading),
+        const SizedBox(height: 20),
+        const SundayMassCard(),
       ],
-    );
-  }
-
-  Widget _header(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Church',
-            style: Theme.of(context).textTheme.headline2?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _dailyReadingsCard(BuildContext context, DailyReading dailyReading) {
-    return GestureDetector(
-      onTap: () {
-        CantonMethods.viewTransition(context, DailyReadingsView(dailyReading));
-      },
-      child: Card(
-        color: CantonMethods.alternateCanvasColor(context),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 22),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Daily Readings',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              const SizedBox(height: 7),
-              Text(
-                'SCRIPTURES FOR TODAY\'S SERVICE',
-                style: Theme.of(context).textTheme.overline?.copyWith(
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).primaryColor,
-                    ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'Join Mass today by reading the scriptures for ${dailyReading.name}.',
-                style: Theme.of(context).textTheme.bodyText1,
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
