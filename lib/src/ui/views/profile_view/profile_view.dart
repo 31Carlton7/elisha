@@ -17,9 +17,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/providers/local_user_repository_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/ui/views/account_view/account_view.dart';
 import 'package:elisha/src/ui/views/bookmarked_chapters_view/bookmarked_chapters_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -45,22 +48,20 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
+    String? dbName = context.read(localUserRepositoryProvider).firstName;
+
+    String name(String source) {
+      if (source.length > 18) {
+        return source.substring(0, 15) + '...';
+      }
+      return source;
+    }
+
     return Column(
       children: [
-        CircleAvatar(
-          radius: 65,
-          backgroundColor: Theme.of(context).primaryColor,
-          child: const Icon(
-            Iconsax.user,
-            size: 40,
-            color: CantonColors.white,
-          ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          'Name',
-          style: Theme.of(context).textTheme.headline4,
-        ),
+        dbName != ''
+            ? Text(name(dbName), style: Theme.of(context).textTheme.headline3?.copyWith(fontWeight: FontWeight.w600))
+            : Container(),
         const SizedBox(height: 10),
         // ..._statCards(context),
         const SizedBox(height: 10),
@@ -128,8 +129,14 @@ class ProfileView extends StatelessWidget {
         ),
       ),
       GestureDetector(
-        onTap: () {
-          // CantonMethods.viewTransition(context, BookmarkedChaptersView());
+        onTap: () async {
+          const link = 'https://31carlton7.github.io/elisha';
+
+          if (await canLaunch(link)) {
+            await launch(link);
+          } else {
+            throw 'Could not launch $link';
+          }
         },
         child: Card(
           margin: EdgeInsets.zero,
@@ -154,8 +161,14 @@ class ProfileView extends StatelessWidget {
         ),
       ),
       GestureDetector(
-        onTap: () {
-          // CantonMethods.viewTransition(context, BookmarkedChaptersView());
+        onTap: () async {
+          const link = 'https://31carlton7.github.io/elisha/privacy_policy';
+
+          if (await canLaunch(link)) {
+            await launch(link);
+          } else {
+            throw 'Could not launch $link';
+          }
         },
         child: Card(
           margin: EdgeInsets.zero,
@@ -172,7 +185,7 @@ class ProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             alignment: Alignment.centerLeft,
             child: Text(
-              'FAQ',
+              'Privacy Policy',
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
