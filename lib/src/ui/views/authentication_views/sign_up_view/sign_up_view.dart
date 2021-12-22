@@ -150,6 +150,7 @@ class _SignUpViewState extends State<SignUpView> {
             });
           } else {
             var res = await context.read(authenticationRepositoryProvider).signUp(
+                  context: context,
                   email: _emailController.text.trim(),
                   password: _passwordController.text.trim(),
                   firstName: _firstNameController.text.trim(),
