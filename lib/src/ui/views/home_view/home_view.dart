@@ -17,13 +17,17 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/models/verse.dart';
+import 'package:elisha/src/ui/components/verse_of_the_day_card.dart';
 import 'package:elisha/src/ui/views/home_view/components/streaks_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/ui/views/home_view/components/home_view_header.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({required this.verse, Key? key}) : super(key: key);
+
+  final Verse verse;
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -36,21 +40,27 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _content(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const HomeViewHeader(),
-          _body(context),
-        ],
-      );
-    });
+    return Consumer(
+      builder: (context, watch, child) {
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const HomeViewHeader(),
+              _body(context),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget _body(BuildContext context) {
     return Column(
-      children: const [
-        StreaksCard(),
+      children: [
+        const StreaksCard(),
+        const SizedBox(height: 15),
+        VerseOfTheDayCard(verse: widget.verse),
       ],
     );
   }
