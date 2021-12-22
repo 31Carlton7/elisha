@@ -124,14 +124,14 @@ class _BibleViewState extends State<BibleView> {
 
       spans.add(
         TextSpan(
-          text: item.verseId!.toString() + ' ',
+          text: item.verseId.toString() + ' ',
           style: Theme.of(context).textTheme.bodyText1?.copyWith(
                 color: Theme.of(context).colorScheme.secondaryVariant,
               ),
         ),
       );
 
-      spans.add(TextSpan(text: item.text!));
+      spans.add(TextSpan(text: item.text));
 
       if (!(i == chapter.verses!.length - 1)) {
         spans.add(const TextSpan(text: ' '));
@@ -244,7 +244,7 @@ class _BibleViewState extends State<BibleView> {
       List<Book> books,
       Chapter chapter,
     ) {
-      var bookChapterTitle = chapter.verses![0].book!.name! + ' ' + chapter.number!;
+      var bookChapterTitle = chapter.verses![0].book.name! + ' ' + chapter.number!;
 
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
