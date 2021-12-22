@@ -10,7 +10,7 @@ class BookmarkedChapterViewHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String name() {
-      return chapter.verses![0].book!.name! + ' ' + chapter.number!;
+      return chapter.verses![0].book.name! + ' ' + chapter.number!;
     }
 
     return ViewHeaderTwo(
