@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/views/authentication_views/verify_email_view/verify_email_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:elisha/src/config/authentication_exceptions.dart';
@@ -23,6 +25,7 @@ import 'package:elisha/src/models/local_user.dart';
 import 'package:elisha/src/repositories/local_user_repository.dart';
 import 'package:elisha/src/services/authentication_handlers/apple_sign_in.dart';
 import 'package:elisha/src/services/authentication_handlers/google_sign_in.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class AuthenticationRepository {
   final FirebaseAuth _firebaseAuth;
@@ -44,6 +47,8 @@ class AuthenticationRepository {
 
       return 'success';
     } catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, null);
+
       if (e is FirebaseAuthException) {
         return AuthenticationExceptions.fromFirebaseAuthError(e).toString();
       }
@@ -57,6 +62,8 @@ class AuthenticationRepository {
 
       return 'success';
     } catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, null);
+
       if (e is FirebaseAuthException) {
         return AuthenticationExceptions.fromFirebaseAuthError(e).toString();
       }
@@ -73,6 +80,7 @@ class AuthenticationRepository {
   }
 
   Future<String> signUp({
+    required BuildContext context,
     required String firstName,
     required String lastName,
     required String email,
@@ -84,8 +92,20 @@ class AuthenticationRepository {
 
       final user = FirebaseAuth.instance.currentUser;
 
-      if (!user!.emailVerified) {
-        await user.sendEmailVerification();
+      if (user != null && !user.emailVerified) {
+        CantonMethods.viewTransition(context, const VerifyEmailView());
+
+        var actionCodeSettings = ActionCodeSettings(
+          url: 'https://elishaapp.page.link/?email=${user.email}',
+          dynamicLinkDomain: 'elishaapp.page.link',
+          androidPackageName: 'com.elisha.app',
+          androidInstallApp: true,
+          androidMinimumVersion: '12',
+          iOSBundleId: 'com.elisha.app',
+          handleCodeInApp: true,
+        );
+
+        await user.sendEmailVerification(actionCodeSettings);
       }
 
       final localUser = LocalUser(firstName: firstName, lastName: lastName, email: email, birthDate: birthDate);
@@ -94,6 +114,8 @@ class AuthenticationRepository {
 
       return 'success';
     } on FirebaseAuthException catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
+
       return e.message!;
     }
   }
@@ -104,6 +126,8 @@ class AuthenticationRepository {
 
       return 'success';
     } catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, null);
+
       if (e is FirebaseAuthException) {
         return AuthenticationExceptions.fromFirebaseAuthError(e).toString();
       }
