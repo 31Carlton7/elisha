@@ -17,14 +17,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/providers/verse_of_the_day_future_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/config/bottom_navigation_bar.dart';
 import 'package:elisha/src/config/exceptions.dart';
 import 'package:elisha/src/providers/bookmarked_chapters_provider.dart';
-import 'package:elisha/src/providers/daily_readings_provider.dart';
+import 'package:elisha/src/providers/daily_readings_future_provider.dart';
 import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/streaks_repository_provider.dart';
@@ -86,99 +86,117 @@ class _CurrentViewState extends State<CurrentView> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        final dailyReadingsRepo = watch(dailyReadingsProvider);
+        final dailyReadingsRepo = watch(dailyReadingsFutureProvider);
+        final votdRepo = watch(verseOfTheDayFutureProvider);
 
-        return dailyReadingsRepo.when(
+        return votdRepo.when(
           error: (e, s) {
             if (e is Exceptions) {
-              return ErrorBody(e.message, dailyReadingsProvider);
+              return ErrorBody(e.message, dailyReadingsFutureProvider);
             }
-            return UnexpectedError(dailyReadingsProvider);
+            return UnexpectedError(dailyReadingsFutureProvider);
           },
-          loading: () {
-            return CantonScaffold(
-              bottomNavBar: BottomNavBar(_currentIndex, _onTabTapped),
-              body: Container(),
-            );
-          },
-          data: (readings) {
-            final _views = <Widget>[
-              const HomeView(),
-              const BibleView(),
-              ChurchView(readings),
-              const ProfileView(),
-            ];
+          loading: () => CantonScaffold(
+            bottomNavBar: BottomNavBar(_currentIndex, _onTabTapped),
+            body: Container(),
+          ),
+          data: (verse) {
+            return dailyReadingsRepo.when(
+              error: (e, s) {
+                if (e is Exceptions) {
+                  return ErrorBody(e.message, dailyReadingsFutureProvider);
+                }
+                return UnexpectedError(dailyReadingsFutureProvider);
+              },
+              loading: () {
+                return CantonScaffold(
+                  bottomNavBar: BottomNavBar(_currentIndex, _onTabTapped),
+                  body: Container(),
+                );
+              },
+              data: (readings) {
+                final _views = <Widget>[
+                  HomeView(verse: verse),
+                  const BibleView(),
+                  ChurchView(readings),
+                  const ProfileView(),
+                ];
 
-            return CantonScaffold(
-              safeArea: false,
-              bottomNavBar: BottomNavBar(_currentIndex, _onTabTapped),
-              padding: EdgeInsets.zero,
-              backgroundColor:
-                  CantonMethods.alternateCanvasColorType2(context, index: _currentIndex, targetIndexes: [1]),
-              body: IndexedStack(
-                index: _currentIndex,
-                children: [
-                  Navigator(
-                    key: _homeNavigatorKey,
-                    observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())],
-                    onGenerateRoute: (settings) {
-                      return MaterialPageRoute(
-                        settings: settings,
-                        fullscreenDialog: true,
-                        builder: (context) => SafeArea(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 17),
-                            child: _views[_currentIndex],
-                          ),
-                        ),
-                      );
-                    },
+                return CantonScaffold(
+                  safeArea: false,
+                  bottomNavBar: BottomNavBar(_currentIndex, _onTabTapped),
+                  padding: EdgeInsets.zero,
+                  backgroundColor: CantonMethods.alternateCanvasColorType2(
+                    context,
+                    index: _currentIndex,
+                    targetIndexes: [1],
                   ),
-                  Navigator(
-                    key: _bibleNavigatorKey,
-                    observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())],
-                    onGenerateRoute: (settings) {
-                      return MaterialPageRoute(
-                        settings: settings,
-                        fullscreenDialog: true,
-                        builder: (context) => SafeArea(child: _views[_currentIndex]),
-                      );
-                    },
+                  body: IndexedStack(
+                    index: _currentIndex,
+                    children: [
+                      Navigator(
+                        key: _homeNavigatorKey,
+                        observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
+                        onGenerateRoute: (settings) {
+                          return MaterialPageRoute(
+                            settings: settings,
+                            fullscreenDialog: true,
+                            builder: (context) => SafeArea(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 17),
+                                child: _views[_currentIndex],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Navigator(
+                        key: _bibleNavigatorKey,
+                        observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
+                        onGenerateRoute: (settings) {
+                          return MaterialPageRoute(
+                            settings: settings,
+                            fullscreenDialog: true,
+                            builder: (context) => SafeArea(child: _views[_currentIndex]),
+                          );
+                        },
+                      ),
+                      Navigator(
+                        key: _churchNavigatorKey,
+                        observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
+                        onGenerateRoute: (settings) {
+                          return MaterialPageRoute(
+                            settings: settings,
+                            fullscreenDialog: true,
+                            builder: (context) => SafeArea(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 17),
+                                child: _views[_currentIndex],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      Navigator(
+                        key: _profileNavigatorKey,
+                        observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
+                        onGenerateRoute: (settings) {
+                          return MaterialPageRoute(
+                            settings: settings,
+                            fullscreenDialog: true,
+                            builder: (context) => SafeArea(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 17),
+                                child: _views[_currentIndex],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                  Navigator(
-                    key: _churchNavigatorKey,
-                    observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())],
-                    onGenerateRoute: (settings) {
-                      return MaterialPageRoute(
-                        settings: settings,
-                        fullscreenDialog: true,
-                        builder: (context) => SafeArea(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 17),
-                            child: _views[_currentIndex],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  Navigator(
-                    key: _profileNavigatorKey,
-                    observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())],
-                    onGenerateRoute: (settings) {
-                      return MaterialPageRoute(
-                        settings: settings,
-                        fullscreenDialog: true,
-                        builder: (context) => SafeArea(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 17),
-                            child: _views[_currentIndex],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+                );
+              },
             );
           },
         );
