@@ -40,7 +40,7 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
     super.initState();
   }
 
-  void toggleView() {
+  void _toggleView() {
     setState(() {
       showSignIn = !showSignIn;
     });
@@ -58,11 +58,11 @@ class _AuthenticationWrapperState extends State<AuthenticationWrapper> {
           },
           loading: () => Loading(),
           data: (user) {
-            if (user == null) {
+            if (user == null || user.emailVerified == false) {
               if (showSignIn) {
-                return SignInProvidersView(toggleView);
+                return SignInProvidersView(_toggleView);
               } else {
-                return SignUpView(toggleView);
+                return SignUpView(_toggleView);
               }
             } else {
               return const CurrentView();
