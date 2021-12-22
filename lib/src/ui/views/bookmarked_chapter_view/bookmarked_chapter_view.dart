@@ -64,14 +64,14 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
 
       spans.add(
         TextSpan(
-          text: item.verseId!.toString() + ' ',
+          text: item.verseId.toString() + ' ',
           style: Theme.of(context).textTheme.bodyText1?.copyWith(
                 color: Theme.of(context).colorScheme.secondaryVariant,
               ),
         ),
       );
 
-      spans.add(TextSpan(text: item.text!));
+      spans.add(TextSpan(text: item.text));
 
       if (!(i == widget.chapter.verses!.length - 1)) {
         spans.add(const TextSpan(text: ' '));
