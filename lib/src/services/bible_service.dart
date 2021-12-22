@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:dio/dio.dart';
 import 'package:elisha/src/repositories/bible_repository.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
 
 import 'package:elisha/src/config/exceptions.dart';
@@ -44,6 +45,7 @@ class BibleService {
 
       return translations;
     } on DioError catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
@@ -77,6 +79,7 @@ class BibleService {
         return books;
       }
     } on DioError catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
@@ -92,14 +95,15 @@ class BibleService {
       final verses = results.map((verse) => Verse.fromMap(verse)).toList(growable: false);
 
       final chapter = Chapter(
-        id: verses[0].book!.id,
-        number: verses[0].chapterId!.toString(),
+        id: verses[0].book.id,
+        number: verses[0].chapterId.toString(),
         translation: translationID,
         verses: verses,
       );
 
       return chapter;
     } on DioError catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
@@ -116,6 +120,7 @@ class BibleService {
 
       return chapters;
     } on DioError catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
@@ -144,6 +149,7 @@ class BibleService {
         return verses;
       }
     } on DioError catch (e) {
+      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
