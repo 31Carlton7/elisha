@@ -23,7 +23,6 @@ import 'package:flutter/services.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,7 +69,7 @@ class MyApp extends StatelessWidget {
       primaryLightVariantColor: const Color(0xFFB97D3C),
       primaryDarkColor: const Color(0xFFB97D3C),
       primaryDarkVariantColor: const Color(0xFFB97D3C),
-      navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics())],
+      navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
       home: const AuthenticationWrapper(),
     );
   }
