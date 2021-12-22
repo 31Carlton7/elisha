@@ -21,18 +21,20 @@ import 'dart:convert';
 import 'package:elisha/src/models/book.dart';
 
 class Verse {
-  int? id;
-  int? chapterId;
-  int? verseId;
-  String? text;
-  Book? book;
+  int id;
+  int chapterId;
+  int verseId;
+  String text;
+  Book book;
+  bool favorite;
 
   Verse({
-    this.id,
-    this.chapterId,
-    this.verseId,
-    this.text,
-    this.book,
+    required this.id,
+    required this.chapterId,
+    required this.verseId,
+    required this.text,
+    required this.book,
+    required this.favorite,
   });
 
   Verse copyWith({
@@ -41,6 +43,7 @@ class Verse {
     int? verseId,
     String? text,
     Book? book,
+    bool? favorite,
   }) {
     return Verse(
       id: id ?? this.id,
@@ -48,6 +51,7 @@ class Verse {
       verseId: verseId ?? this.verseId,
       text: text ?? this.text,
       book: book ?? this.book,
+      favorite: favorite ?? this.favorite,
     );
   }
 
@@ -57,7 +61,8 @@ class Verse {
       'chapterId': chapterId,
       'verseId': verseId,
       'text': text,
-      'book': book?.toMap(),
+      'book': book.toMap(),
+      'favorite': favorite,
     };
   }
 
@@ -68,6 +73,32 @@ class Verse {
       verseId: map['verseId'],
       text: map['verse'] ?? map['text'],
       book: Book.fromMap(map['book']),
+      favorite: false,
+    );
+  }
+
+  factory Verse.fromMapFromVOTD(Map<String, dynamic> map) {
+    final data = map['verse']['details'] as Map<String, dynamic>;
+    final reference = data['reference'] as String;
+
+    final chapterId = int.parse(reference.substring(reference.lastIndexOf(' '), reference.lastIndexOf(':')).trim());
+    final verseId = int.parse(reference.substring(reference.lastIndexOf(':') + 1).trim());
+    final text = data['text'];
+
+    final book = Book(
+      id: 0,
+      name: reference.substring(0, reference.lastIndexOf(' ')).trim(),
+      testament: '',
+      chapters: [],
+    );
+
+    return Verse(
+      id: verseId,
+      chapterId: chapterId,
+      verseId: verseId,
+      text: text,
+      book: book,
+      favorite: false,
     );
   }
 
@@ -77,7 +108,7 @@ class Verse {
 
   @override
   String toString() {
-    return 'Verse(id: $id, chapterId: $chapterId, verseId: $verseId, text: $text, book: $book)';
+    return 'Verse(id: $id, chapterId: $chapterId, verseId: $verseId, text: $text, book: $book, favorite: $favorite)';
   }
 
   @override
@@ -89,15 +120,12 @@ class Verse {
         other.chapterId == chapterId &&
         other.verseId == verseId &&
         other.text == text &&
-        other.book == book;
+        other.book == book &&
+        other.favorite == favorite;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        chapterId.hashCode ^
-        verseId.hashCode ^
-        text.hashCode ^
-        book.hashCode;
+    return id.hashCode ^ chapterId.hashCode ^ verseId.hashCode ^ text.hashCode ^ book.hashCode ^ favorite.hashCode;
   }
 }
