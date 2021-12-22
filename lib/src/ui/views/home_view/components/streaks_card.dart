@@ -20,6 +20,7 @@ class StreaksCard extends StatelessWidget {
       final perfectWeeks = streaksRepo.perfectWeeks.toString();
 
       return Card(
+        shape: CantonSmoothBorder.defaultBorder(),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: IntrinsicHeight(
