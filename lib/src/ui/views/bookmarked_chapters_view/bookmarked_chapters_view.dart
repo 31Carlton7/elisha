@@ -91,7 +91,7 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
 
   Widget _bookmarkedChapterCard(BuildContext context, Chapter chapter) {
     String cardTitle() {
-      return chapter.verses![0].book!.name! +
+      return chapter.verses![0].book.name! +
           ' ' +
           chapter.number!.toString() +
           ' ' +
