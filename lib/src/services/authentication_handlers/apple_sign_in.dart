@@ -21,6 +21,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'package:elisha/src/config/authentication_exceptions.dart';
@@ -62,6 +63,8 @@ Future<String> handleAppleSignIn(FirebaseAuth firebaseAuth) async {
 
     return 'success';
   } catch (e) {
+    await FirebaseCrashlytics.instance.recordError(e, null);
+
     if (e is FirebaseAuthException) {
       return AuthenticationExceptions.fromFirebaseAuthError(e).toString();
     } else if (e is RangeError) {
