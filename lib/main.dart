@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:async';
 
+import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
       primaryDarkColor: const Color(0xFFB97D3C),
       primaryDarkVariantColor: const Color(0xFFB97D3C),
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-      home: const AuthenticationWrapper(),
+      home: const CurrentView(),
     );
   }
 }
