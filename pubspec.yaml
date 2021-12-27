@@ -31,6 +31,7 @@ dependencies:
       ref: master
   font_awesome_flutter: ^9.2.0
   line_awesome_flutter: ^2.0.0
+  vertical_card_pager: ^1.5.0
 
   # State Management
   flutter_riverpod: ^0.14.0+3
@@ -100,6 +101,11 @@ flutter:
     - assets/images/app_icon.png
     - assets/images/store_icon.png
     - assets/images/google_icon.png
+    - assets/images/light.jpg
+    - assets/images/appreciate.jpeg
+    - assets/images/bow.jpg
+    - assets/images/heart.jpeg
+    - assets/images/master.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

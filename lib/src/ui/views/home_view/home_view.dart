@@ -19,10 +19,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/ui/components/verse_of_the_day_card.dart';
+import 'package:elisha/src/ui/views/home_view/components/bible_in_a_year_card.dart';
+import 'package:elisha/src/ui/views/home_view/components/devotional_today_card.dart';
 import 'package:elisha/src/ui/views/home_view/components/streaks_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/ui/views/home_view/components/home_view_header.dart';
+
+import 'components/study_plans_listview.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({required this.verse, Key? key}) : super(key: key);
@@ -61,6 +65,12 @@ class _HomeViewState extends State<HomeView> {
         const StreaksCard(),
         const SizedBox(height: 15),
         VerseOfTheDayCard(verse: widget.verse),
+        const SizedBox(height: 15),
+        DevotionalTodayCard(),
+        const SizedBox(height: 15),
+        BibleInAYearCard(),
+        const SizedBox(height: 15),
+        StudyPlansListView()
       ],
     );
   }
