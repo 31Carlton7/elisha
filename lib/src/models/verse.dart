@@ -81,8 +81,8 @@ class Verse {
     final data = map['verse']['details'] as Map<String, dynamic>;
     final reference = data['reference'] as String;
 
-    final chapterId = int.parse(reference.substring(reference.lastIndexOf(' '), reference.lastIndexOf(':')).trim());
-    final verseId = int.parse(reference.substring(reference.lastIndexOf(':') + 1).trim());
+    final chapterId = int.parse(reference.substring(reference.trim().lastIndexOf(' '), reference.lastIndexOf(':')).trim());
+    final verseId = int.parse(reference.substring(reference.trim().lastIndexOf(':') + 1).trim());
     final text = data['text'];
 
     final book = Book(
