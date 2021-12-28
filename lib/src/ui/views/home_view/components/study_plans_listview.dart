@@ -1,4 +1,5 @@
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/views/bibestudy_series_view/biblestudy_series_view.dart';
 import 'package:flutter/cupertino.dart';
 
 class StudyPlansListView extends StatefulWidget {
@@ -23,6 +24,15 @@ class _StudyPlansListViewState extends State<StudyPlansListView> {
           ListTile(
             title: Text('Study Series',
                 style: Theme.of(context).textTheme.headline4?.copyWith(fontWeight: FontWeight.bold)),
+            trailing: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BibleStudySeriesPage(),
+                ),
+                );
+              },
+              child: Text('View All',
+                  style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.normal)),
+            ),
           ),
           SizedBox(
             height: 200,
@@ -39,7 +49,9 @@ class _StudyPlansListViewState extends State<StudyPlansListView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+
+                      },
                       child: Card(
                           color: CantonMethods.alternateCanvasColorType2(context),
                           shape: CantonSmoothBorder.defaultBorder(),
@@ -63,7 +75,6 @@ class _StudyPlansListViewState extends State<StudyPlansListView> {
                   ],
                 )),
           )
-          //CategoryScroller(),
         ],
       ),
     );

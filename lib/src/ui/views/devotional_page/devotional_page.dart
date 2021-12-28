@@ -1,4 +1,5 @@
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/views/devotional_page/full_word_content.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 class DevotionalPage extends StatefulWidget {
@@ -46,15 +47,25 @@ class _DevotionalPageState extends State<DevotionalPage> {
       Card(
         color: CantonMethods.alternateCanvasColorType2(context),
         shape: CantonSmoothBorder.defaultBorder(),
-        child: Column(
-          children: [
-            ListTile(
-              title: Text('Word',
-                  style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(height: 5),
-            Text('Write-up for today', style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal))
-          ],
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => FullWordContentPage()),
+            );
+          },
+          child: Column(
+            children: [
+              ListTile(
+                title: Text('Word',
+                    style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
+                trailing: Text(
+                  'More',
+                  style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal),
+                ),
+              ),
+              SizedBox(height: 5),
+              Text('Write-up for today', style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal))
+            ],
+          ),
         ),
       ),
       Card(

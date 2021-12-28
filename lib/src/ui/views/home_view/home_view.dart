@@ -21,6 +21,7 @@ import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/ui/components/verse_of_the_day_card.dart';
 import 'package:elisha/src/ui/views/home_view/components/bible_in_a_year_card.dart';
 import 'package:elisha/src/ui/views/home_view/components/devotional_today_card.dart';
+import 'package:elisha/src/ui/views/home_view/components/selected_study_plans_listview.dart';
 import 'package:elisha/src/ui/views/home_view/components/streaks_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -69,6 +70,8 @@ class _HomeViewState extends State<HomeView> {
         DevotionalTodayCard(),
         const SizedBox(height: 15),
         BibleInAYearCard(),
+        const SizedBox(height: 15),
+        SelectedStudyPlansListview(),
         const SizedBox(height: 15),
         StudyPlansListView()
       ],
