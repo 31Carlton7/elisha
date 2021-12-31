@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:elisha/src/config/authentication_exceptions.dart';
@@ -38,6 +39,8 @@ Future<String> handleGoogleSignIn(FirebaseAuth firebaseAuth) async {
 
     return 'success';
   } catch (e) {
+    await FirebaseCrashlytics.instance.recordError(e, null);
+
     if (e is FirebaseAuthException) {
       return AuthenticationExceptions.fromFirebaseAuthError(e).toString();
     } else if (e is RangeError) {

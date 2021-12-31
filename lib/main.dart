@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:async';
 
+import 'package:elisha/src/ui/views/login_wrapper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -30,7 +31,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:elisha/src/config/constants.dart';
-import 'package:elisha/src/services/authentication_services/authentication_wrapper.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
       primaryDarkColor: const Color(0xFFB97D3C),
       primaryDarkVariantColor: const Color(0xFFB97D3C),
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-      home: const AuthenticationWrapper(),
+      home: const LoginWrapper(),
     );
   }
 }

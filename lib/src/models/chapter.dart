@@ -27,12 +27,14 @@ class Chapter {
   String? number;
   String? translation;
   List<Verse>? verses;
+  bool bookmarked;
 
   Chapter({
     this.id,
     this.number,
     this.translation,
     this.verses,
+    required this.bookmarked,
   });
 
   Chapter copyWith({
@@ -40,19 +42,19 @@ class Chapter {
     String? number,
     String? translation,
     List<Verse>? verses,
+    bool? bookmarked,
   }) {
     return Chapter(
       id: id ?? this.id,
       translation: translation ?? this.translation,
       number: number ?? this.number,
       verses: verses ?? this.verses,
+      bookmarked: bookmarked ?? this.bookmarked,
     );
   }
 
   ChapterId get getID {
-    return ChapterId(
-      id: id,
-    );
+    return ChapterId(id: id);
   }
 
   Map<String, dynamic> toMap() {
@@ -61,6 +63,7 @@ class Chapter {
       'number': number,
       'translation': translation,
       'verses': verses?.map((x) => x.toMap()).toList(),
+      'bookmarked': bookmarked,
     };
   }
 
@@ -70,6 +73,7 @@ class Chapter {
       number: map['number'].toString(),
       translation: map['translation'],
       verses: List<Verse>.from(map['verses']?.map((x) => Verse.fromMap(x))),
+      bookmarked: map['bookmarked'] ?? false,
     );
   }
 
@@ -78,7 +82,7 @@ class Chapter {
   factory Chapter.fromJson(String source) => Chapter.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Chapter(id: $id, number: $number, verses: $verses)';
+  String toString() => 'Chapter(id: $id, number: $number, verses: $verses, bookmarked: $bookmarked)';
 
   @override
   bool operator ==(Object other) {
@@ -88,18 +92,17 @@ class Chapter {
         other.id == id &&
         other.number == number &&
         other.translation == translation &&
-        listEquals(other.verses, verses);
+        listEquals(other.verses, verses) &&
+        other.bookmarked == bookmarked;
   }
 
   @override
-  int get hashCode => id.hashCode ^ number.hashCode ^ translation.hashCode ^ verses.hashCode;
+  int get hashCode => id.hashCode ^ number.hashCode ^ translation.hashCode ^ verses.hashCode ^ bookmarked.hashCode;
 }
 
 class ChapterId {
   int? id;
-  ChapterId({
-    this.id,
-  });
+  ChapterId({this.id});
 
   ChapterId copyWith({
     int? id,
