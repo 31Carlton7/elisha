@@ -15,17 +15,35 @@ class _OpenedStudyPlanScreenState extends State<OpenedStudyPlanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: ListView.builder(
-        itemCount: 5,
-          itemBuilder: (BuildContext context, int index) => Card(
-              color: CantonMethods.alternateCanvasColorType2(context),
-              elevation: 5,
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: ListTile(
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/appreciate.jpeg"),
+                  fit: BoxFit.fill
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) => Card(
+                color: CantonMethods.alternateCanvasColorType2(context),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.white70, width: 1),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(0.0)
+                // ),
+                elevation: 5.0,
+                child: InkWell(
+                  onTap: () {},
+                  child: ListTile (
                     leading: CircleAvatar(
                       backgroundImage: AssetImage(pictures[index]),
                     ),
@@ -35,13 +53,14 @@ class _OpenedStudyPlanScreenState extends State<OpenedStudyPlanScreen> {
                     subtitle: Text(
                       titles[index], style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal),
                     ),
-                  )
+                  ),
                 ),
               ),
+
             ),
-
-    ),
-
+          ),
+        ],
+      ),
     );
   }
 }

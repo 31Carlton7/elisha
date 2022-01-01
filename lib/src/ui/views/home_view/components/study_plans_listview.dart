@@ -1,5 +1,6 @@
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:elisha/src/ui/views/bibestudy_series_view/biblestudy_series_view.dart';
+import 'package:elisha/src/ui/views/opened_studyplan_view/opened_studyplan_view.dart';
 import 'package:flutter/cupertino.dart';
 
 class StudyPlansListView extends StatefulWidget {
@@ -50,7 +51,7 @@ class _StudyPlansListViewState extends State<StudyPlansListView> {
                   children: [
                     InkWell(
                       onTap: () {
-
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => OpenedStudyPlanScreen()));
                       },
                       child: Card(
                           color: CantonMethods.alternateCanvasColorType2(context),
