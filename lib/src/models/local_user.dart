@@ -21,13 +21,11 @@ import 'dart:convert';
 class LocalUser {
   String firstName;
   String lastName;
-  String email;
   DateTime birthDate;
 
   LocalUser({
     required this.firstName,
     required this.lastName,
-    required this.email,
     required this.birthDate,
   });
 
@@ -40,7 +38,6 @@ class LocalUser {
     return LocalUser(
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
-      email: email ?? this.email,
       birthDate: birthDate ?? this.birthDate,
     );
   }
@@ -49,7 +46,6 @@ class LocalUser {
     return {
       'firstName': firstName,
       'lastName': lastName,
-      'email': email,
       'birthDate': birthDate.millisecondsSinceEpoch,
     };
   }
@@ -58,7 +54,6 @@ class LocalUser {
     return LocalUser(
       firstName: map['firstName'],
       lastName: map['lastName'],
-      email: map['email'],
       birthDate: DateTime.fromMillisecondsSinceEpoch(map['birthDate']),
     );
   }
@@ -69,7 +64,7 @@ class LocalUser {
 
   @override
   String toString() {
-    return 'LocalUser(firstName: $firstName, lastName: $lastName, email: $email, birthDate: $birthDate)';
+    return 'LocalUser(firstName: $firstName, lastName: $lastName, birthDate: $birthDate)';
   }
 
   @override
@@ -79,12 +74,11 @@ class LocalUser {
     return other is LocalUser &&
         other.firstName == firstName &&
         other.lastName == lastName &&
-        other.email == email &&
         other.birthDate == birthDate;
   }
 
   @override
   int get hashCode {
-    return firstName.hashCode ^ lastName.hashCode ^ email.hashCode ^ birthDate.hashCode;
+    return firstName.hashCode ^ lastName.hashCode ^ birthDate.hashCode;
   }
 }
