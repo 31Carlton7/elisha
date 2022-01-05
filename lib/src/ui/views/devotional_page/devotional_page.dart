@@ -20,38 +20,54 @@ class _DevotionalPageState extends State<DevotionalPage> {
           child: Column(
             children: [
               ListTile(
-                title: Text('Topic for today',
-                    style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
+                title: Text('Topic for today:',
+                    style: Theme.of(context).textTheme.headline4?.copyWith(fontWeight: FontWeight.bold)),
               ),
               SizedBox(height: 5),
-              Text('Topic', style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal))
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                    child: Text('Topic', style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.normal))),
+              ),
+              SizedBox(height: 15),
+              ListTile(
+                title: Text('Memory Verse:',
+                    style: Theme.of(context).textTheme.headline4?.copyWith(fontWeight: FontWeight.bold)),
+              ),
+              SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Memory Verse for today, scripture and text', style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.normal))),
+              ),
             ],
           ),
         ),
       ),
-      Expanded(
+      // Expanded(
+      //   child: Card(
+      //   color: CantonMethods.alternateCanvasColorType2(context),
+      //   shape: CantonSmoothBorder.defaultBorder(),
+      //   child: Column(
+      //     children: [
+      //       ListTile(
+      //         title: Text('Memory Verse',
+      //             style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
+      //       ),
+      //       Text('Memory verse for today', style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal))
+      //     ],
+      //   ),
+      // ),
+      // ),
+      InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => FullWordContentPage()));
+        },
         child: Card(
-        color: CantonMethods.alternateCanvasColorType2(context),
-        shape: CantonSmoothBorder.defaultBorder(),
-        child: Column(
-          children: [
-            ListTile(
-              title: Text('Memory Verse',
-                  style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
-            ),
-            Text('Memory verse for today', style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal))
-          ],
-        ),
-      ),
-      ),
-      Card(
-        color: CantonMethods.alternateCanvasColorType2(context),
-        shape: CantonSmoothBorder.defaultBorder(),
-        child: InkWell(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => FullWordContentPage()),
-            );
-          },
+          color: CantonMethods.alternateCanvasColorType2(context),
+          shape: CantonSmoothBorder.defaultBorder(),
           child: Column(
             children: [
               ListTile(
@@ -75,10 +91,10 @@ class _DevotionalPageState extends State<DevotionalPage> {
           children: [
             ListTile(
               title: Text('Prayer',
-                  style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
+                  style: Theme.of(context).textTheme.headline4?.copyWith(fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 5),
-            Text('Prayer for today', style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal))
+            Text('Prayer for today', style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.normal))
           ],
         ),
       ),
@@ -112,7 +128,6 @@ class _DevotionalPageState extends State<DevotionalPage> {
                 },
                 initialPage: 2, // optional
                 align : ALIGN.CENTER
-
               ),),
           ],
         ),
