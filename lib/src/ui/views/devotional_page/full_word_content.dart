@@ -5,17 +5,27 @@ class FullWordContentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
         child: Column(
           children: [
             ListTile(
-              title: Text('Word',
-                  style: Theme.of(context).textTheme.headline5?.copyWith(fontWeight: FontWeight.bold)),
-              trailing: Icon(Icons.arrow_back, color: Colors.black, size: 20)
-            ),
+                title: Text('Word',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5
+                        ?.copyWith(fontWeight: FontWeight.bold)),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () => Navigator.of(context).pop(),
+                )),
             SizedBox(height: 5),
-            Text('Write-up for today', style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.normal))
+            Text('Write-up for today',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    ?.copyWith(fontWeight: FontWeight.normal))
           ],
         ),
       ),
