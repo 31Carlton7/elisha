@@ -14,12 +14,11 @@ To build the app I utilized the [Flutter SDK](https://flutter.dev) as the UI Fra
 
 ## Features
 
-- _Read 9 versions of the Bible_:
+- _Read 8 versions of the Bible_:
   - _King James Version_ (KJV)
   - _American Standard Version_ (ASV)
   - _New Living Translation_ (NLT)
   - _New International Version_ (NIV)
-  - _Ensglish Standard Version_ (ESV)
   - _World English Bible_ (WEB)
   - _Young's Literal Translation_ (YLT)
   - _Darby's Translation_ (DARBY)

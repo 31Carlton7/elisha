@@ -73,30 +73,22 @@ class Verse {
       verseId: map['verseId'],
       text: map['verse'] ?? map['text'],
       book: Book.fromMap(map['book']),
-      favorite: false,
+      favorite: map['favorite'] ?? false,
     );
   }
 
-  factory Verse.fromMapFromVOTD(Map<String, dynamic> map) {
-    final data = map['verse']['details'] as Map<String, dynamic>;
-    final reference = data['reference'] as String;
+  factory Verse.fromMapFromVOTD(Map<String, dynamic> map, int verseNum) {
+    final data = map['1'] as Map<String, dynamic>;
 
-    final chapterId = int.parse(reference.substring(reference.lastIndexOf(' '), reference.lastIndexOf(':')).trim());
-    final verseId = int.parse(reference.substring(reference.lastIndexOf(':') + 1).trim());
-    final text = data['text'];
-
-    final book = Book(
-      id: 0,
-      name: reference.substring(0, reference.lastIndexOf(' ')).trim(),
-      testament: '',
-      chapters: [],
-    );
+    final chapterId = data['chapter'] as int;
+    final verseId = verseNum;
+    final book = Book(id: data['bookNumber'], name: data['book'], testament: 'New', chapters: const []);
 
     return Verse(
       id: verseId,
       chapterId: chapterId,
       verseId: verseId,
-      text: text,
+      text: '',
       book: book,
       favorite: false,
     );

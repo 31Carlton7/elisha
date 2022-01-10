@@ -18,32 +18,36 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:convert';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:elisha/src/models/chapter.dart';
 
-class BookmarkedChaptersRepository extends StateNotifier<List<Chapter>> {
-  BookmarkedChaptersRepository() : super([]);
+class BookmarkedChaptersRepository extends ChangeNotifier {
+  var _chapters = <Chapter>[];
+
+  List<Chapter> get getChapters => _chapters;
 
   Future<void> bookmarkChapter(Chapter chapter) async {
-    state = [...state, chapter];
+    _chapters = [..._chapters, chapter];
     await _saveChapters();
+    notifyListeners();
   }
 
   Future<void> removeChapter(Chapter chapter) async {
-    state = [
-      for (final item in state)
+    _chapters = [
+      for (final item in _chapters)
         if (item != chapter) item,
     ];
 
     await _saveChapters();
+    notifyListeners();
   }
 
   Future<void> _saveChapters() async {
     var box = Hive.box('elisha');
 
-    List<String> chapters = state.map((e) => json.encode(e.toMap())).toList();
+    List<String> chapters = _chapters.map((e) => json.encode(e.toMap())).toList();
 
     box.put('bookmarked_chapters', chapters);
   }
@@ -55,6 +59,6 @@ class BookmarkedChaptersRepository extends StateNotifier<List<Chapter>> {
     // box.remove('bookmarked_chapters');
 
     List<String> savedChapters = box.get('bookmarked_chapters', defaultValue: <String>[]);
-    state = savedChapters.map((e) => Chapter.fromMap(json.decode(e))).toList();
+    _chapters = savedChapters.map((e) => Chapter.fromMap(json.decode(e))).toList();
   }
 }
