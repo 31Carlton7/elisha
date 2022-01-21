@@ -31,9 +31,9 @@ func (t TranslationFactory) GetTable(key string) (table string) {
 	case "t_ylt":
 	case "ylt":
 		table = "t_ylt"
-	case "t_esv":
-	case "esv":
-		table = "t_esv"
+	// case "t_esv":
+	// case "esv":
+	// 	table = "t_esv"
 	case "t_niv":
 	case "niv":
 		table = "t_niv"
@@ -72,9 +72,9 @@ func (t TranslationFactory) GetIndex(key string) (index string) {
 	case "t_ylt":
 	case "ylt":
 		index = "ylt"
-	case "t_esv":
-	case "esv":
-		index = "esv"
+	// case "t_esv":
+	// case "esv":
+	// 	index = "esv"
 	case "t_niv":
 	case "niv":
 		index = "niv"
