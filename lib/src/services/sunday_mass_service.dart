@@ -1,6 +1,7 @@
 class SundayMassService {
   SundayMassService();
-  final _videoId = '2jNNnbJo1aI';
 
-  String get getMassVideoThumbnail => 'https://img.youtube.com/vi/watch?v=' + _videoId;
+  final _churchYouTubeChannelIds = <String>['UCubahKRKNc4cj3sZSAmc-Nw', 'UCv0TUu1tuIdVqRLFwGlos4A'];
+
+  List<String> get getChurchYouTubeChannelIds => _churchYouTubeChannelIds;
 }

@@ -36,7 +36,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
       onTap: widget.onTabTapped,
-      backgroundColor: Theme.of(context).colorScheme.onSecondary,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       selectedItemColor: Theme.of(context).colorScheme.primary,
       unselectedItemColor: Theme.of(context).colorScheme.secondaryVariant,
       selectedIconTheme: IconThemeData(color: Theme.of(context).primaryColor, size: 24),
@@ -60,7 +60,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           icon: Icon(LineAwesomeIcons.church, size: _iconSize),
         ),
         BottomNavigationBarItem(
-          label: 'Profile',
+          label: 'Me',
           tooltip: '',
           activeIcon: Icon(LineAwesomeIcons.user, size: _iconSize),
           icon: Icon(LineAwesomeIcons.user, size: _iconSize),

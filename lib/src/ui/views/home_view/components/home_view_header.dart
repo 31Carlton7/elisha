@@ -21,11 +21,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 
-class HomeViewHeader extends StatelessWidget {
+class HomeViewHeader extends ConsumerWidget {
   const HomeViewHeader({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     String greeting() {
       var hour = DateTime.now().hour;
       if (hour < 12) {
@@ -44,33 +44,15 @@ class HomeViewHeader extends StatelessWidget {
       return source;
     }
 
-    String? dbName = context.read(localUserRepositoryProvider).firstName;
+    String? dbName = watch(localUserRepositoryProvider).getUser.firstName;
 
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Good ' + greeting(),
-                style: Theme.of(context).textTheme.headline6?.copyWith(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
-                    ),
-              ),
-              dbName != ''
-                  ? Text(
-                      name(dbName),
-                      style: Theme.of(context).textTheme.headline2?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                    )
-                  : Container(),
-            ],
-          ),
-        ],
+    return GestureDetector(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+        child: Text(
+          'Good ' + greeting() + ', ' + (dbName != '' ? name(dbName) : ''),
+          style: Theme.of(context).textTheme.headline2?.copyWith(letterSpacing: 0.1),
+        ),
       ),
     );
   }

@@ -17,11 +17,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/providers/study_tools_repository_provider.dart';
+import 'package:elisha/src/ui/components/bible_reader.dart';
 import 'package:elisha/src/ui/views/bookmarked_chapter_view/components/bookmarked_chapter_view_header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/chapter.dart';
-import 'package:elisha/src/providers/bookmarked_chapters_provider.dart';
 
 class BookmarkedChapterView extends StatefulWidget {
   const BookmarkedChapterView(this.chapter, {Key? key}) : super(key: key);
@@ -42,51 +43,21 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
   }
 
   Widget _content(BuildContext context) {
-    List<Widget> children = [];
-    List<InlineSpan> spans = [];
-    children.add(
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        child: Text.rich(
-          TextSpan(
-            children: spans,
-          ),
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: 21,
-                height: 1.97,
+    return Consumer(
+      builder: (context, watch, child) {
+        return Column(
+          children: [
+            BookmarkedChapterViewHeader(
+                chapter: widget.chapter, showBottomSheet: _showBookmarkedChapterOptionsBottomSheet),
+            const SizedBox(height: 10),
+            Expanded(
+              child: SingleChildScrollView(
+                child: BibleReader(chapter: widget.chapter),
               ),
-        ),
-      ),
-    );
-    for (int i = 0; i < widget.chapter.verses!.length; i++) {
-      var item = widget.chapter.verses![i];
-
-      spans.add(
-        TextSpan(
-          text: item.verseId.toString() + ' ',
-          style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                color: Theme.of(context).colorScheme.secondaryVariant,
-              ),
-        ),
-      );
-
-      spans.add(TextSpan(text: item.text));
-
-      if (!(i == widget.chapter.verses!.length - 1)) {
-        spans.add(const TextSpan(text: ' '));
-      }
-    }
-    return Column(
-      children: [
-        BookmarkedChapterViewHeader(chapter: widget.chapter, showBottomSheet: _showBookmarkedChapterOptionsBottomSheet),
-        const SizedBox(height: 10),
-        Expanded(
-          child: ListView(
-            children: children,
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -142,11 +113,10 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
                     children: [
                       CantonPrimaryButton(
                         buttonText: 'Remove Bookmark',
-                        color: Theme.of(context).colorScheme.onError,
+                        color: Theme.of(context).colorScheme.secondary,
                         textColor: Theme.of(context).colorScheme.error,
-                        onPressed: () {
-                          context.read(bookmarkedChaptersProvider.notifier).removeChapter(chapter);
-                          Navigator.pop(context);
+                        onPressed: () async {
+                          await context.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
                           Navigator.pop(context);
                         },
                       ),

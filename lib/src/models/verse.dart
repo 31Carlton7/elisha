@@ -19,6 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'dart:convert';
 
 import 'package:elisha/src/models/book.dart';
+import 'package:elisha/src/repositories/study_tools_repository.dart';
 
 class Verse {
   int id;
@@ -36,6 +37,10 @@ class Verse {
     required this.book,
     required this.favorite,
   });
+
+  String get bookChapterVerse => book.name! + ' ' + chapterId.toString() + ':' + verseId.toString();
+
+  bool get isFavorite => StudyToolsRepository().favoriteVerses.where((element) => element.id == id).isNotEmpty;
 
   Verse copyWith({
     int? id,

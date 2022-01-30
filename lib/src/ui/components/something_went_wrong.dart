@@ -17,9 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:elisha/src/providers/authentication_providers/authentication_repository_provider.dart';
 
 class SomethingWentWrong extends StatelessWidget {
   const SomethingWentWrong({Key? key}) : super(key: key);
@@ -43,7 +40,7 @@ class SomethingWentWrong extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             containerWidth: MediaQuery.of(context).size.width / 2 - 34,
             onPressed: () {
-              context.read(authenticationRepositoryProvider).signOut();
+              // context.read(authenticationRepositoryProvider).signOut();
             },
           ),
         ],

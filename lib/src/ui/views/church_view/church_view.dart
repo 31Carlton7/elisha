@@ -17,16 +17,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/components/church_view_banner_ad_card.dart';
 
-import 'package:elisha/src/models/daily_reading.dart';
 import 'package:elisha/src/ui/views/church_view/components/church_view_header.dart';
 import 'package:elisha/src/ui/views/church_view/components/daily_readings_card.dart';
-import 'package:elisha/src/ui/views/church_view/components/sunday_mass_card.dart';
+import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 
 class ChurchView extends StatefulWidget {
-  const ChurchView(this.reading, {Key? key}) : super(key: key);
-
-  final DailyReading reading;
+  const ChurchView({Key? key}) : super(key: key);
 
   @override
   _ChurchViewState createState() => _ChurchViewState();
@@ -39,15 +37,24 @@ class _ChurchViewState extends State<ChurchView> {
   }
 
   Widget _content(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const ChurchViewHeader(),
-        DailyReadingsCard(dailyReading: widget.reading),
-        const SizedBox(height: 20),
-        const SundayMassCard(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const ChurchViewHeader(),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: const DailyReadingsCard(),
+          ),
+          const SizedBox(height: 20),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: const SundayMassCard(),
+          ),
+          const ChurchViewBannerAdCard(),
+        ],
+      ),
     );
   }
 }

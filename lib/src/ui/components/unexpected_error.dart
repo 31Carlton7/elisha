@@ -33,16 +33,17 @@ class UnexpectedError extends StatelessWidget {
           Text(
             'Oops, something unexpected happened :(',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline5?.copyWith(
-                  color: Theme.of(context).colorScheme.secondaryVariant,
-                ),
+            style: Theme.of(context).textTheme.headline5,
           ),
           const SizedBox(height: 20),
           CantonPrimaryButton(
             buttonText: 'Retry',
-            color: Theme.of(context).primaryColor,
-            textColor: CantonColors.white,
-            containerWidth: MediaQuery.of(context).size.width / 2 - 74,
+            color: Theme.of(context).colorScheme.primary,
+            textColor: Theme.of(context).colorScheme.onBackground,
+            borderRadius: BorderRadius.circular(27.5),
+            containerWidth: MediaQuery.of(context).size.width / 2 - 90,
+            containerHeight: 45,
+            padding: EdgeInsets.zero,
             onPressed: () => context.refresh(provider),
           ),
         ],

@@ -17,11 +17,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/providers/study_tools_repository_provider.dart';
+import 'package:elisha/src/ui/views/bookmarked_chapters_view/components/bookmarked_chapter_card.dart';
+import 'package:elisha/src/ui/views/bookmarked_chapters_view/components/bookmarked_chapters_view_header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/chapter.dart';
-import 'package:elisha/src/providers/bookmarked_chapters_provider.dart';
-import 'package:elisha/src/ui/views/bookmarked_chapter_view/bookmarked_chapter_view.dart';
 
 class BookmarkedChaptersView extends StatefulWidget {
   const BookmarkedChaptersView({Key? key}) : super(key: key);
@@ -43,81 +44,52 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
   Widget _content(BuildContext context) {
     return Column(
       children: [
-        _header(),
+        const BookmarkedChaptersViewHeader(),
         _bookmarkedChapters(context),
       ],
     );
   }
 
-  Widget _header() {
-    return Container(
-      padding: const EdgeInsets.only(top: 17, left: 17, right: 17),
-      child: const ViewHeaderTwo(
-        title: 'Bookmarks',
-        backButton: true,
-      ),
-    );
-  }
-
   Widget _bookmarkedChapters(BuildContext context) {
-    return Expanded(
-      child: context.read(bookmarkedChaptersProvider).isNotEmpty
-          ? ListView.separated(
-              itemCount: context.read(bookmarkedChaptersProvider).length,
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    if (index == 0) const Divider(),
-                    _bookmarkedChapterCard(
-                      context,
-                      context.read(bookmarkedChaptersProvider)[index],
+    return Consumer(
+      builder: (context, watch, child) {
+        return Expanded(
+          child: watch(studyToolsRepositoryProvider).bookmarkedChapters.isNotEmpty
+              ? Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 17),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 700),
+                    child: ListView.separated(
+                      itemCount: watch(studyToolsRepositoryProvider).bookmarkedChapters.length,
+                      separatorBuilder: (context, index) {
+                        return const Divider();
+                      },
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            BookmarkedChapterCard(
+                              chapter: watch(studyToolsRepositoryProvider).bookmarkedChapters[index],
+                              setState: setState,
+                              showBookmarkedChapterOptionsBottomSheet: _showBookmarkedChapterOptionsBottomSheet,
+                            ),
+                            if (index == watch(studyToolsRepositoryProvider).bookmarkedChapters.length - 1)
+                              const Divider(),
+                          ],
+                        );
+                      },
                     ),
-                    if (index == context.read(bookmarkedChaptersProvider).length - 1) const Divider(),
-                  ],
-                );
-              },
-            )
-          : Text(
-              'No Bookmarked Chapters',
-              style: Theme.of(context).textTheme.headline5?.copyWith(
-                    color: Theme.of(context).colorScheme.secondaryVariant,
                   ),
-            ),
-    );
-  }
-
-  Widget _bookmarkedChapterCard(BuildContext context, Chapter chapter) {
-    String cardTitle() {
-      return chapter.verses![0].book.name! +
-          ' ' +
-          chapter.number!.toString() +
-          ' ' +
-          chapter.translation!.toUpperCase();
-    }
-
-    return GestureDetector(
-      onTap: () {
-        CantonMethods.viewTransition(context, BookmarkedChapterView(chapter)).then((value) => setState(() {}));
+                )
+              : Center(
+                  child: Text(
+                    'No Bookmarked Chapters',
+                    style: Theme.of(context).textTheme.headline5?.copyWith(
+                          color: Theme.of(context).colorScheme.secondaryVariant,
+                        ),
+                  ),
+                ),
+        );
       },
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 27),
-        leading: Text(
-          cardTitle(),
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        trailing: GestureDetector(
-          onTap: () {
-            _showBookmarkedChapterOptionsBottomSheet(chapter);
-          },
-          child: Icon(
-            Iconsax.more,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
-      ),
     );
   }
 
@@ -135,49 +107,30 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
             child: Column(
               children: [
                 Container(
-                  height: 5,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-                Container(
                   padding: const EdgeInsets.only(top: 10, left: 27, right: 27),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          'Cancel',
-                          style: Theme.of(context).textTheme.headline6?.copyWith(
-                                color: Theme.of(context).colorScheme.secondaryVariant,
-                              ),
-                        ),
-                      ),
-                      const Spacer(flex: 7),
                       Text(
                         'Options',
                         style: Theme.of(context).textTheme.headline5,
                       ),
-                      const Spacer(flex: 10),
                     ],
                   ),
                 ),
-                const Divider(height: 30),
+                const SizedBox(height: 30),
                 Container(
                   padding: const EdgeInsets.only(top: 15, left: 27, right: 27),
                   child: Column(
                     children: [
                       CantonPrimaryButton(
-                        buttonText: 'Remove',
-                        color: Theme.of(context).colorScheme.onError,
+                        buttonText: 'Remove Bookmark',
+                        color: Theme.of(context).colorScheme.secondary,
                         textColor: Theme.of(context).colorScheme.error,
-                        onPressed: () {
-                          context.read(bookmarkedChaptersProvider.notifier).removeChapter(chapter);
+                        onPressed: () async {
+                          await context.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
                           Navigator.pop(context);
+
                           setState(() {});
                         },
                       ),

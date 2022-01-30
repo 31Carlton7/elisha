@@ -33,17 +33,18 @@ class ErrorBody extends ConsumerWidget {
         Center(
           child: Text(
             message,
-            style: Theme.of(context).textTheme.headline6?.copyWith(
-                  color: Theme.of(context).colorScheme.secondaryVariant,
-                ),
+            style: Theme.of(context).textTheme.headline6,
           ),
         ),
         const SizedBox(height: 12),
         CantonPrimaryButton(
           buttonText: 'Retry',
-          color: Theme.of(context).primaryColor,
-          textColor: CantonColors.white,
-          containerWidth: MediaQuery.of(context).size.width / 2 - 74,
+          color: Theme.of(context).colorScheme.primary,
+          textColor: Theme.of(context).colorScheme.onBackground,
+          borderRadius: BorderRadius.circular(27.5),
+          containerWidth: MediaQuery.of(context).size.width / 2 - 90,
+          containerHeight: 45,
+          padding: EdgeInsets.zero,
           onPressed: () => context.refresh(provider),
         ),
       ],

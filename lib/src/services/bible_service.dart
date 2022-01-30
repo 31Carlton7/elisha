@@ -17,6 +17,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:dio/dio.dart';
+import 'package:elisha/src/config/constants.dart';
+import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:elisha/src/repositories/bible_repository.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_performance/firebase_performance.dart';
@@ -30,18 +32,28 @@ import 'package:elisha/src/models/verse.dart';
 class BibleService {
   BibleService(this._dio);
   final Dio _dio;
-  final _rootUrl = 'https://bible-go-api.rkeplin.com/v1';
+  final _rootUrl = isEmulator ? 'https://localhost:8084' : 'https://bible-go-api.rkeplin.com/v1';
 
   Future<List<Translation>> getTranslations() async {
     try {
       final response = await _dio.get(_rootUrl + '/translations');
 
-      final results = List<Map<String, dynamic>>.from(
-        response.data,
-      );
+      final results = List<Map<String, dynamic>>.from(response.data);
 
-      final List<Translation> translations =
-          results.map((version) => Translation.fromMap(version)).toList(growable: false);
+      final translations = results.map((version) => Translation.fromMap(version)).toList(growable: true);
+
+      translations.removeWhere((element) {
+        switch (element.abbreviation) {
+          case 'NLT':
+            return true;
+          case 'NIV':
+            return true;
+          case 'ESV':
+            return true;
+          default:
+            return false;
+        }
+      });
 
       return translations;
     } on DioError catch (e) {
@@ -99,6 +111,7 @@ class BibleService {
         number: verses[0].chapterId.toString(),
         translation: translationID,
         verses: verses,
+        bookmarked: false,
       );
 
       return chapter;
@@ -125,24 +138,45 @@ class BibleService {
     }
   }
 
-  Future<List<Verse>> getVerses(String? bookID, String? chapterID, String? verseID) async {
+  Future<List<Verse>> getVerses(String bookID, String chapterID, String? verseID) async {
     try {
       if (!['', null].contains(verseID)) {
-        final response = await _dio.get(_rootUrl + '/books/$bookID/chapters/$chapterID/verseID');
+        var vId = bookID;
 
-        final results = List<Map<String, dynamic>>.from(
-          response.data,
-        );
+        switch (chapterID.length) {
+          case 1:
+            vId += '00' + chapterID;
+            break;
+          case 2:
+            vId += '0' + chapterID;
+            break;
+          default:
+            vId += chapterID;
+        }
 
-        final List<Verse> verses = results.map((verse) => Verse.fromMap(verse)).toList(growable: false);
+        switch (verseID!.length) {
+          case 1:
+            vId += '00' + verseID;
+            break;
+          case 2:
+            vId += '0' + verseID;
+            break;
+          default:
+            vId += verseID;
+        }
+
+        final response =
+            await _dio.get(_rootUrl + '/books/$bookID/chapters/$chapterID/$vId?translation=$translationAbb');
+
+        final result = Map<String, dynamic>.from(response.data);
+
+        final verses = [Verse.fromMap(result)];
 
         return verses;
       } else {
         final response = await _dio.get(_rootUrl + '/books/$bookID/chapters/$chapterID');
 
-        final results = List<Map<String, dynamic>>.from(
-          response.data,
-        );
+        final results = List<Map<String, dynamic>>.from(response.data);
 
         final List<Verse> verses = results.map((verse) => Verse.fromMap(verse)).toList(growable: false);
 

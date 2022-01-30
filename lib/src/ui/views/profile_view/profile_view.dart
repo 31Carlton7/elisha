@@ -17,12 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/local_user_repository_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:elisha/src/ui/views/account_view/account_view.dart';
-import 'package:elisha/src/ui/views/bookmarked_chapters_view/bookmarked_chapters_view.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:elisha/src/ui/components/streaks_card.dart';
+import 'package:elisha/src/ui/views/profile_view/components/about_card.dart';
+import 'package:elisha/src/ui/views/profile_view/components/bookmarks_card.dart';
+import 'package:elisha/src/ui/views/profile_view/components/favorite_verses_card.dart';
+import 'package:elisha/src/ui/views/profile_view/components/privacy_policy_card.dart';
+import 'package:elisha/src/ui/views/profile_view/components/profile_view_header.dart';
+import 'package:elisha/src/ui/views/profile_view/components/settings_card.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -34,163 +35,46 @@ class ProfileView extends StatelessWidget {
 
   Widget _content(BuildContext context) {
     return Column(
-      children: [_header(context), _body(context)],
-    );
-  }
-
-  Widget _header(BuildContext context) {
-    return ViewHeaderTwo(
-      title: 'Profile',
-      textColor: Theme.of(context).colorScheme.primary,
-      backButton: false,
-      buttonOne: const CantonHeaderButton(),
-    );
-  }
-
-  Widget _body(BuildContext context) {
-    String? dbName = context.read(localUserRepositoryProvider).firstName;
-
-    String name(String source) {
-      if (source.length > 18) {
-        return source.substring(0, 15) + '...';
-      }
-      return source;
-    }
-
-    return Column(
+      crossAxisAlignment: Responsive.isMobile(context) ? CrossAxisAlignment.start : CrossAxisAlignment.center,
       children: [
-        dbName != ''
-            ? Text(name(dbName), style: Theme.of(context).textTheme.headline3?.copyWith(fontWeight: FontWeight.w600))
-            : Container(),
-        const SizedBox(height: 10),
-        // ..._statCards(context),
-        const SizedBox(height: 10),
-        ..._viewCards(context),
-        const SizedBox(height: 10),
-        ..._applicationCards(context),
+        const ProfileViewHeader(),
+        _body(context),
       ],
     );
   }
 
-  List<Widget> _viewCards(BuildContext context) {
-    return [
-      GestureDetector(
-        onTap: () {
-          CantonMethods.viewTransition(context, const BookmarkedChaptersView());
-        },
-        child: Card(
-          margin: const EdgeInsets.only(bottom: 5),
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Bookmarks',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                Icon(
-                  Iconsax.arrow_right_3,
-                  color: Theme.of(context).colorScheme.secondaryVariant,
-                ),
-              ],
-            ),
-          ),
+  Widget _body(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 17),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: const StreaksCard(marginalPadding: true),
         ),
-      ),
-    ];
-  }
-
-  List<Widget> _applicationCards(BuildContext context) {
-    return [
-      GestureDetector(
-        onTap: () {
-          CantonMethods.viewTransition(context, const AccountView());
-        },
-        child: Card(
-          margin: EdgeInsets.zero,
-          shape: SquircleBorder(
-            radius: const BorderRadius.vertical(
-              top: Radius.circular(37),
-            ),
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.onSecondary,
-              width: 1.5,
-            ),
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Account',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
+        const SizedBox(height: 17),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: const BookmarksCard(),
         ),
-      ),
-      GestureDetector(
-        onTap: () async {
-          const link = 'https://31carlton7.github.io/elisha';
-
-          if (await canLaunch(link)) {
-            await launch(link);
-          } else {
-            throw 'Could not launch $link';
-          }
-        },
-        child: Card(
-          margin: EdgeInsets.zero,
-          shape: Border(
-            left: BorderSide(
-              width: 1.5,
-              color: Theme.of(context).colorScheme.onSecondary,
-            ),
-            right: BorderSide(
-              width: 1.5,
-              color: Theme.of(context).colorScheme.onSecondary,
-            ),
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'About',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: const FavoriteVersesCard(),
         ),
-      ),
-      GestureDetector(
-        onTap: () async {
-          const link = 'https://31carlton7.github.io/elisha/privacy_policy';
-
-          if (await canLaunch(link)) {
-            await launch(link);
-          } else {
-            throw 'Could not launch $link';
-          }
-        },
-        child: Card(
-          margin: EdgeInsets.zero,
-          shape: SquircleBorder(
-            radius: const BorderRadius.vertical(
-              bottom: Radius.circular(37),
-            ),
-            side: BorderSide(
-              color: Theme.of(context).colorScheme.onSecondary,
-              width: 1.5,
-            ),
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(15),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Privacy Policy',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-          ),
+        const SizedBox(height: 17),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: const SettingsCard(),
         ),
-      ),
-    ];
+        const SizedBox(height: 17),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: const AboutCard(),
+        ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: const PrivacyPolicyCard(),
+        ),
+      ],
+    );
   }
 }

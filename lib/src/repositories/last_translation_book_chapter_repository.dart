@@ -28,14 +28,12 @@ import 'package:elisha/src/providers/bible_translations_provider.dart';
 
 class LastTranslationBookChapterRepository extends StateNotifier<TranslationBookChapter> {
   LastTranslationBookChapterRepository()
-      : super(
-          TranslationBookChapter(
-            translationAbb: 'asv',
-            translation: 0,
-            book: 1,
-            chapter: 1,
-          ),
-        );
+      : super(TranslationBookChapter(translationAbb: 'asv', translation: 0, book: 1, chapter: 1));
+
+  String get getCurrentTranslationAbb => state.translationAbb ?? 'asv';
+  int get getCurrentTranslationId => state.translation ?? 0;
+  int get getCurrentBookId => state.book ?? 1;
+  int get getCurrentChapterId => state.chapter ?? 1;
 
   Future<void> changeBibleTranslation(int number, String abb) async {
     state.translation = number;

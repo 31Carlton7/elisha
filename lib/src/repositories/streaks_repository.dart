@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:elisha/src/repositories/local_user_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
@@ -71,15 +72,23 @@ class StreaksRepository extends ChangeNotifier {
 
     final box = Hive.box('elisha');
 
-    var lastVisitDate = DateTime.parse(box.get('visitKey', defaultValue: DateTime.now().toString()));
-    var todayDate = DateTime.now();
-    var yesterdayDate = DateTime.now().subtract(const Duration(days: 1));
+    final now = DateTime.now();
 
-    if (todayDate.day.toString() == lastVisitDate.day.toString()) {
+    var lastVisitDate = DateTime.parse(box.get('visitKey', defaultValue: DateTime.now().toString()));
+    var startDayDate = DateTime(now.year, now.month, now.day);
+    var endDayDate = startDayDate.add(const Duration(days: 1));
+
+    if (startDayDate.day == lastVisitDate.day) {
       DoNothingAction();
-    } else if (!(todayDate.isAfter(lastVisitDate) && yesterdayDate.isBefore(lastVisitDate))) {
+    } else if ((startDayDate.isBefore(lastVisitDate) && endDayDate.isAfter(lastVisitDate))) {
+      await LocalUserRepository().updateNatureImage();
+      await LocalUserRepository().updateChurchImage();
+
       await _resetCurrentStreak();
     } else {
+      await LocalUserRepository().updateNatureImage();
+      await LocalUserRepository().updateChurchImage();
+
       await _incrementStreak();
 
       if (_currentStreak > _bestStreak) {
@@ -89,8 +98,8 @@ class StreaksRepository extends ChangeNotifier {
       if (_currentStreak % 7 == 0) {
         await _incrementPerfectWeeks();
       }
-
-      await box.put('visitKey', todayDate.toString());
     }
+
+    await box.put('visitKey', startDayDate.toString());
   }
 }

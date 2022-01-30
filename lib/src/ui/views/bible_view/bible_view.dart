@@ -16,6 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
+import 'package:elisha/src/providers/study_tools_repository_provider.dart';
+import 'package:elisha/src/ui/components/bible_reader.dart';
+import 'package:elisha/src/ui/views/bible_view/components/show_translations_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
@@ -31,11 +35,10 @@ import 'package:elisha/src/providers/bible_books_provider.dart';
 import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:elisha/src/providers/bible_repository_provider.dart';
 import 'package:elisha/src/providers/bible_translations_provider.dart';
-import 'package:elisha/src/providers/bookmarked_chapters_provider.dart';
-import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
 import 'package:elisha/src/services/bible_service.dart';
 import 'package:elisha/src/ui/components/error_body.dart';
 import 'package:elisha/src/ui/components/unexpected_error.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
 class BibleView extends StatefulWidget {
   const BibleView({Key? key}) : super(key: key);
@@ -45,7 +48,7 @@ class BibleView extends StatefulWidget {
 }
 
 class _BibleViewState extends State<BibleView> {
-  bool isBookmarked = false;
+  var _isBookmarked = false;
   final _scrollController = ScrollController();
 
   @override
@@ -84,12 +87,14 @@ class _BibleViewState extends State<BibleView> {
                   },
                   loading: () => Container(),
                   data: (chapter) {
-                    isBookmarked = context.read(bookmarkedChaptersProvider).contains(chapter);
-                    return _content(
-                      context,
-                      translations,
-                      books,
-                      chapter,
+                    _isBookmarked = _isBookmarked = context
+                        .read(studyToolsRepositoryProvider)
+                        .bookmarkedChapters
+                        .where((e) => e.id == chapter.id)
+                        .isNotEmpty;
+                    return Responsive(
+                      tablet: _buildTabletContent(context, watch, translations, books, chapter),
+                      mobile: _buildMobileContent(context, watch, translations, books, chapter),
                     );
                   },
                 );
@@ -101,58 +106,16 @@ class _BibleViewState extends State<BibleView> {
     );
   }
 
-  Widget _content(BuildContext context, List<Translation> translations, List<Book> books, Chapter chapter) {
-    List<Widget> children = [const SizedBox(height: 10)];
-    List<InlineSpan> spans = [];
-    children.add(
-      Container(
-        margin: const EdgeInsets.symmetric(horizontal: 32),
-        child: Text.rich(
-          TextSpan(
-            children: spans,
-          ),
-          style: Theme.of(context).textTheme.headline5!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: 21,
-                height: 1.97,
-              ),
-        ),
-      ),
-    );
-    for (int i = 0; i < chapter.verses!.length; i++) {
-      var item = chapter.verses![i];
-
-      spans.add(
-        TextSpan(
-          text: item.verseId.toString() + ' ',
-          style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                color: Theme.of(context).colorScheme.secondaryVariant,
-              ),
-        ),
-      );
-
-      spans.add(TextSpan(text: item.text));
-
-      if (!(i == chapter.verses!.length - 1)) {
-        spans.add(const TextSpan(text: ' '));
-      }
-    }
-
-    children.add(const SizedBox(height: 40));
-
+  Widget _buildMobileContent(
+    BuildContext context,
+    ScopedReader watch,
+    List<Translation> translations,
+    List<Book> books,
+    Chapter chapter,
+  ) {
     Widget reader() {
       return SliverToBoxAdapter(
-        child: GestureDetector(
-          onHorizontalDragUpdate: (details) {
-            HapticFeedback.lightImpact();
-
-            setState(() {
-              bool dir = details.delta.dx < 0 ? false : true;
-              context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, dir);
-            });
-          },
-          child: Column(children: children),
-        ),
+        child: BibleReader(chapter: chapter),
       );
     }
 
@@ -160,52 +123,36 @@ class _BibleViewState extends State<BibleView> {
       controller: _scrollController,
       child: CustomScrollView(
         controller: _scrollController,
-        slivers: [_header(context, translations, books, chapter), reader()],
+        slivers: [_buildMobileHeader(context, watch, translations, books, chapter), reader()],
       ),
     );
   }
 
-  Widget _header(BuildContext context, List<Translation> translations, List<Book> books, Chapter chapter) {
-    // ignore: unused_element
-    Widget _quickChapterNavigationControls(BuildContext context) {
-      return Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              HapticFeedback.lightImpact();
-
-              context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, true);
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Iconsax.arrow_left_2,
-                size: 20,
-                color: Theme.of(context).colorScheme.secondaryVariant,
-              ),
-            ),
-          ),
-          const SizedBox(width: 7),
-          GestureDetector(
-            onTap: () {
-              HapticFeedback.lightImpact();
-
-              context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, false);
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Iconsax.arrow_right_3,
-                size: 20,
-                color: Theme.of(context).colorScheme.secondaryVariant,
-              ),
-            ),
-          ),
-        ],
+  Widget _buildTabletContent(
+    BuildContext context,
+    ScopedReader watch,
+    List<Translation> translations,
+    List<Book> books,
+    Chapter chapter,
+  ) {
+    Widget reader() {
+      return SliverToBoxAdapter(
+        child: BibleReader(chapter: chapter),
       );
     }
 
-    Widget _previousChapterButton(BuildContext context) {
+    return Scrollbar(
+      controller: _scrollController,
+      child: CustomScrollView(
+        controller: _scrollController,
+        slivers: [_buildTabletHeader(context, watch, translations, books, chapter), reader()],
+      ),
+    );
+  }
+
+  Widget _buildMobileHeader(
+      BuildContext context, ScopedReader watch, List<Translation> translations, List<Book> books, Chapter chapter) {
+    Widget _previousChapterButton() {
       return GestureDetector(
         onTap: () {
           HapticFeedback.lightImpact();
@@ -215,42 +162,67 @@ class _BibleViewState extends State<BibleView> {
         child: Icon(
           FeatherIcons.chevronLeft,
           size: 27,
-          color: Theme.of(context).colorScheme.secondaryVariant,
+          color: Theme.of(context).colorScheme.primary,
         ),
       );
     }
 
-    Widget _nextChapterButton(BuildContext context) {
+    Widget _nextChapterButton() {
       return GestureDetector(
         onTap: () {
           HapticFeedback.lightImpact();
 
           context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, false);
         },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 17.0),
-          child: Icon(
-            FeatherIcons.chevronRight,
-            size: 27,
-            color: Theme.of(context).colorScheme.secondaryVariant,
-          ),
+        child: Icon(
+          FeatherIcons.chevronRight,
+          size: 27,
+          color: Theme.of(context).colorScheme.primary,
         ),
       );
     }
 
-    Widget _chapterVerseTranslationControls(
-      BuildContext context,
-      List<Translation> translations,
-      List<Book> books,
-      Chapter chapter,
-    ) {
-      var bookChapterTitle = chapter.verses![0].book.name! + ' ' + chapter.number!;
+    Widget _bookmarkButton(Chapter chapter) {
+      return CantonActionButton(
+        onPressed: () async {
+          HapticFeedback.lightImpact();
 
+          setState(() {
+            _isBookmarked = !_isBookmarked;
+          });
+
+          if (_isBookmarked) {
+            await context.read(studyToolsRepositoryProvider.notifier).addBookmarkChapter(chapter);
+          } else {
+            await context.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
+          }
+        },
+        icon: Icon(
+          _isBookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
+          size: 24,
+          color: _isBookmarked ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.primary,
+        ),
+      );
+    }
+
+    Widget _readerSettingsButton() {
+      return CantonActionButton(
+        onPressed: () async {
+          HapticFeedback.lightImpact();
+
+          await _showReaderSettingsBottomSheet();
+        },
+        icon: Icon(
+          FeatherIcons.settings,
+          size: 24,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      );
+    }
+
+    Widget _translationControls(String bookChapterTitle, List<Translation> translations) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _readerSettingsButton(context),
-          const SizedBox(width: 40),
           GestureDetector(
             onTap: () async {
               HapticFeedback.lightImpact();
@@ -259,10 +231,8 @@ class _BibleViewState extends State<BibleView> {
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
-              decoration: ShapeDecoration(
-                shape: const SquircleBorder(
-                  radius: BorderRadius.horizontal(left: Radius.circular(20)),
-                ),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
                 color: Theme.of(context).inputDecorationTheme.fillColor,
               ),
               child: Text(
@@ -276,14 +246,12 @@ class _BibleViewState extends State<BibleView> {
             onTap: () async {
               HapticFeedback.lightImpact();
 
-              await _showTranslationsBottomSheet(translations);
+              await showTranslationsBottomSheet(context, translations, setState);
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
-              decoration: ShapeDecoration(
-                shape: const SquircleBorder(
-                  radius: BorderRadius.horizontal(right: Radius.circular(20)),
-                ),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
                 color: Theme.of(context).inputDecorationTheme.fillColor,
               ),
               child: Text(
@@ -292,8 +260,25 @@ class _BibleViewState extends State<BibleView> {
               ),
             ),
           ),
-          const SizedBox(width: 40),
-          _bookmarkButton(context, chapter),
+        ],
+      );
+    }
+
+    Widget _chapterVerseTranslationControls(List<Translation> translations, List<Book> books, Chapter chapter) {
+      var bookChapterTitle = chapter.verses![0].book.name! + ' ' + chapter.number!;
+
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _previousChapterButton(),
+          const Spacer(),
+          _readerSettingsButton(),
+          const Spacer(),
+          _translationControls(bookChapterTitle, translations),
+          const Spacer(),
+          _bookmarkButton(chapter),
+          const Spacer(),
+          _nextChapterButton(),
         ],
       );
     }
@@ -302,53 +287,375 @@ class _BibleViewState extends State<BibleView> {
       centerTitle: true,
       floating: true,
       backgroundColor: CantonMethods.alternateCanvasColor(context),
-      title: _chapterVerseTranslationControls(context, translations, books, chapter),
-      leading: _previousChapterButton(context),
-      actions: [
-        _nextChapterButton(context),
-      ],
+      title: _chapterVerseTranslationControls(translations, books, chapter),
     );
   }
 
-  Widget _bookmarkButton(BuildContext context, Chapter chapter) {
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.lightImpact();
+  Widget _buildTabletHeader(
+      BuildContext context, ScopedReader watch, List<Translation> translations, List<Book> books, Chapter chapter) {
+    Widget _previousChapterButton() {
+      return GestureDetector(
+        onTap: () {
+          HapticFeedback.lightImpact();
 
-        if (isBookmarked == false) {
-          context.read(bookmarkedChaptersProvider.notifier).bookmarkChapter(chapter);
-        } else {
-          context.read(bookmarkedChaptersProvider.notifier).removeChapter(chapter);
-        }
-
-        setState(() {
-          isBookmarked = !isBookmarked;
-        });
-      },
-      child: Container(
-        color: CantonMethods.alternateCanvasColor(context),
+          context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, true);
+        },
         child: Icon(
-          isBookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
-          size: 24,
-          color: isBookmarked ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondaryVariant,
+          FeatherIcons.chevronLeft,
+          size: 34,
+          color: Theme.of(context).colorScheme.primary,
         ),
-      ),
-    );
-  }
+      );
+    }
 
-  Widget _readerSettingsButton(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.lightImpact();
-      },
-      child: Container(
-        color: CantonMethods.alternateCanvasColor(context),
+    Widget _nextChapterButton() {
+      return GestureDetector(
+        onTap: () {
+          HapticFeedback.lightImpact();
+
+          context.read(bibleRepositoryProvider).goToNextPreviousChapter(context, false);
+        },
         child: Icon(
+          FeatherIcons.chevronRight,
+          size: 34,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      );
+    }
+
+    Widget _bookmarkButton(Chapter chapter) {
+      return CantonActionButton(
+        onPressed: () async {
+          HapticFeedback.lightImpact();
+
+          setState(() {
+            _isBookmarked = !_isBookmarked;
+          });
+
+          if (_isBookmarked) {
+            await context.read(studyToolsRepositoryProvider.notifier).addBookmarkChapter(chapter);
+          } else {
+            await context.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
+          }
+        },
+        icon: Icon(
+          _isBookmarked ? CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark,
+          size: 28,
+          color: _isBookmarked ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.primary,
+        ),
+      );
+    }
+
+    Widget _readerSettingsButton() {
+      return CantonActionButton(
+        onPressed: () async {
+          HapticFeedback.lightImpact();
+
+          await _showReaderSettingsBottomSheet();
+        },
+        icon: Icon(
           FeatherIcons.settings,
-          size: 24,
-          color: Theme.of(context).colorScheme.secondaryVariant,
+          size: 28,
+          color: Theme.of(context).colorScheme.primary,
         ),
-      ),
+      );
+    }
+
+    Widget _translationControls(String bookChapterTitle, List<Translation> translations) {
+      return Row(
+        children: [
+          GestureDetector(
+            onTap: () async {
+              HapticFeedback.lightImpact();
+
+              await _showBookAndChapterBottomSheet();
+            },
+            child: Container(
+              padding: const EdgeInsets.all(18.0),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.horizontal(left: Radius.circular(10)),
+                color: Theme.of(context).inputDecorationTheme.fillColor,
+              ),
+              child: Text(
+                bookChapterTitle,
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                      height: 1.3,
+                    ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 2),
+          GestureDetector(
+            onTap: () async {
+              HapticFeedback.lightImpact();
+
+              await showTranslationsBottomSheet(context, translations, setState);
+            },
+            child: Container(
+              padding: const EdgeInsets.all(18.0),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.horizontal(right: Radius.circular(10)),
+                color: Theme.of(context).inputDecorationTheme.fillColor,
+              ),
+              child: Text(
+                translations[int.parse(translationID)].abbreviation!,
+                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                      height: 1.3,
+                    ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    Widget _chapterVerseTranslationControls(List<Translation> translations, List<Book> books, Chapter chapter) {
+      var bookChapterTitle = chapter.verses![0].book.name! + ' ' + chapter.number!;
+
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _previousChapterButton(),
+          const Spacer(),
+          _readerSettingsButton(),
+          const Spacer(),
+          _translationControls(bookChapterTitle, translations),
+          const Spacer(),
+          _bookmarkButton(chapter),
+          const Spacer(),
+          _nextChapterButton(),
+        ],
+      );
+    }
+
+    return SliverAppBar(
+      centerTitle: true,
+      floating: true,
+      backgroundColor: CantonMethods.alternateCanvasColor(context),
+      title: _chapterVerseTranslationControls(translations, books, chapter),
+    );
+  }
+
+  Future<void> _showReaderSettingsBottomSheet() async {
+    var screenBrightness = await ScreenBrightness().system;
+
+    return await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      elevation: 0,
+      useRootNavigator: true,
+      builder: (context) {
+        return Consumer(
+          builder: (context, watch, child) {
+            return FractionallySizedBox(
+              heightFactor: 0.6,
+              widthFactor: 0.75,
+              child: StatefulBuilder(
+                builder: (context, setState) {
+                  Widget brightnessControls = Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(CupertinoIcons.sun_min_fill, size: 27),
+                        Expanded(
+                          child: Slider(
+                            value: screenBrightness,
+                            onChanged: (val) async {
+                              await ScreenBrightness().setScreenBrightness(val);
+                              setState(() => screenBrightness = val);
+                            },
+                          ),
+                        ),
+                        const Icon(CupertinoIcons.sun_max_fill, size: 34),
+                      ],
+                    ),
+                  );
+
+                  Widget textSizeControls = Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Text Size', style: Theme.of(context).textTheme.headline5),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () async {
+                            await context.read(readerSettingsRepositoryProvider).decrementBodyTextSize();
+                            await context.read(readerSettingsRepositoryProvider).decrementVerseNumberSize();
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              'A',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline6?.copyWith(
+                                    fontSize: 16,
+                                    height: 1.25,
+                                    color: Theme.of(context).colorScheme.onBackground,
+                                  ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: () async {
+                            await context.read(readerSettingsRepositoryProvider).incrementBodyTextSize();
+                            await context.read(readerSettingsRepositoryProvider).incrementVerseNumberSize();
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              'A',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline6?.copyWith(
+                                    fontSize: 24,
+                                    height: 1.25,
+                                    color: Theme.of(context).colorScheme.onBackground,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+
+                  Widget fontControls = CantonExpansionTile(
+                    childrenPadding: EdgeInsets.zero,
+                    iconColor: Theme.of(context).colorScheme.primary,
+                    title: Text(
+                      watch(readerSettingsRepositoryProvider).typeFace,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    children: [
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              await context.read(readerSettingsRepositoryProvider).setTypeFace('New York');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                'New York',
+                                style: Theme.of(context).textTheme.headline4?.copyWith(
+                                      fontFamily: 'New York',
+                                    ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 17),
+                          GestureDetector(
+                            onTap: () async {
+                              await context.read(readerSettingsRepositoryProvider).setTypeFace('Inter');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                'Inter',
+                                style: Theme.of(context).textTheme.headline4?.copyWith(
+                                      fontFamily: 'Inter',
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+
+                  Widget lineHeightControls = Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Line Spacing', style: Theme.of(context).textTheme.headline5),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () async {
+                            await context.read(readerSettingsRepositoryProvider).decrementBodyTextHeight();
+                            await context.read(readerSettingsRepositoryProvider).decrementVerseNumberHeight();
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(Icons.format_line_spacing,
+                                color: Theme.of(context).colorScheme.onBackground, size: 16),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: () async {
+                            await context.read(readerSettingsRepositoryProvider).incrementBodyTextHeight();
+                            await context.read(readerSettingsRepositoryProvider).incrementVerseNumberHeight();
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(Icons.format_line_spacing,
+                                color: Theme.of(context).colorScheme.onBackground, size: 26),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+
+                  return Consumer(
+                    builder: (context, watch, child) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(vertical: 17),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            brightnessControls,
+                            const Divider(height: 34),
+                            textSizeControls,
+                            const SizedBox(height: 17),
+                            const Divider(),
+                            const SizedBox(height: 5),
+                            fontControls,
+                            const Divider(height: 17),
+                            const SizedBox(height: 8.5),
+                            lineHeightControls,
+                            const Divider(height: 34),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -363,14 +670,9 @@ class _BibleViewState extends State<BibleView> {
             Navigator.of(context, rootNavigator: true).pop();
           },
           child: Container(
-            decoration: ShapeDecoration(
-              shape: SquircleBorder(
-                radius: BorderRadius.circular(20),
-                side: BorderSide(
-                  width: 1.5,
-                  color: Theme.of(context).colorScheme.onSecondary,
-                ),
-              ),
+            decoration: BoxDecoration(
+              border: Border.all(color: Theme.of(context).colorScheme.secondary, width: 1.5),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Text(
@@ -385,6 +687,7 @@ class _BibleViewState extends State<BibleView> {
       return CantonExpansionTile(
         childrenPadding: const EdgeInsets.symmetric(horizontal: 17),
         title: Text(book.name!, style: Theme.of(context).textTheme.headline6),
+        iconColor: Theme.of(context).colorScheme.primary,
         children: [
           Container(
             margin: const EdgeInsets.only(bottom: 12),
@@ -405,7 +708,7 @@ class _BibleViewState extends State<BibleView> {
       );
     }
 
-    return showModalBottomSheet(
+    return await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       elevation: 0,
@@ -413,47 +716,24 @@ class _BibleViewState extends State<BibleView> {
       builder: (context) {
         return FractionallySizedBox(
           heightFactor: 0.95,
+          widthFactor: 0.75,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 15, left: 27, right: 27),
-                child: Container(
-                  height: 5,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 27),
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 27),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        'Cancel',
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                              color: Theme.of(context).colorScheme.secondaryVariant,
-                            ),
-                      ),
-                    ),
-                    const Spacer(flex: 6),
                     Text(
                       'Books',
                       style: Theme.of(context).textTheme.headline5,
                     ),
-                    const Spacer(flex: 9),
                   ],
                 ),
               ),
               const SizedBox(height: 7),
-              const Divider(),
               Expanded(
                 child: ListView.builder(
                   itemCount: books.length,
@@ -461,107 +741,6 @@ class _BibleViewState extends State<BibleView> {
                     return Column(
                       children: [
                         _bookCard(books[index]),
-                        const Divider(),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _showTranslationsBottomSheet(List<Translation> translations) async {
-    Widget _translationCard(Translation translation, int index) {
-      return GestureDetector(
-        onTap: () {
-          setState(() {
-            context.read(localRepositoryProvider.notifier).changeBibleTranslation(
-                  index - 1,
-                  translation.abbreviation!,
-                );
-
-            context.refresh(bibleChaptersProvider);
-          });
-
-          Navigator.of(context, rootNavigator: true).pop();
-        },
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(vertical: 3, horizontal: 17),
-          title: Text(
-            translation.name!,
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          trailing: Text(
-            translation.abbreviation!,
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  color: Theme.of(context).colorScheme.secondaryVariant,
-                ),
-          ),
-        ),
-      );
-    }
-
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      elevation: 0,
-      useRootNavigator: true,
-      builder: (context) {
-        return FractionallySizedBox(
-          heightFactor: 0.95,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(top: 15, left: 27, right: 27),
-                child: Container(
-                  height: 5,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 27),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        'Cancel',
-                        style: Theme.of(context).textTheme.headline6?.copyWith(
-                              color: Theme.of(context).colorScheme.secondaryVariant,
-                            ),
-                      ),
-                    ),
-                    const Spacer(flex: 6),
-                    Text(
-                      'Versions',
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                    const Spacer(flex: 9),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 7),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: translations.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        if (index == 0) const Divider(),
-                        _translationCard(translations[index], index + 1),
-                        const Divider(),
                       ],
                     );
                   },
