@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+
 import 'package:elisha/src/ui/views/settings_view/components/change_birth_date_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/change_first_name_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/change_last_name_card.dart';
