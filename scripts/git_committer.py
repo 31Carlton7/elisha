@@ -33,7 +33,7 @@ def commit_file(fileName: str):
     call('git add ' + fileName, shell=True)
 
     # Add your commit
-    call('git commit -a -m "' + message + '"', shell=True)
+    call('git commit -m "' + message + '"', shell=True)
 
     # Push the new or update files
     call('git push origin master -f', shell=True)
