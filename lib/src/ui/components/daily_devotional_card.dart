@@ -17,13 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
 import 'package:elisha/src/providers/daily_devotional_service_provider.dart';
 import 'package:elisha/src/ui/components/error_card.dart';
 import 'package:elisha/src/ui/components/loading_card.dart';
 import 'package:elisha/src/ui/views/daily_devotional_view/daily_devotional_view.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class DailyDevotionalCard extends StatefulWidget {
   const DailyDevotionalCard({Key? key}) : super(key: key);
