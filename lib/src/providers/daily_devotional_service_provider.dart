@@ -17,8 +17,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:dio/dio.dart';
-import 'package:elisha/src/services/daily_devotional_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:elisha/src/services/daily_devotional_service.dart';
 
 final dailyDevotionalServiceProvider = FutureProvider<String>((ref) {
   return DailyDevotionalService(Dio()).todaysDailyDevotional;
