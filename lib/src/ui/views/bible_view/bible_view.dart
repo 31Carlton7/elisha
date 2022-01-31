@@ -16,15 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
-import 'package:elisha/src/providers/study_tools_repository_provider.dart';
-import 'package:elisha/src/ui/components/bible_reader.dart';
-import 'package:elisha/src/ui/views/bible_view/components/show_translations_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
 import 'package:elisha/src/config/exceptions.dart';
 import 'package:elisha/src/models/book.dart';
@@ -34,10 +31,13 @@ import 'package:elisha/src/providers/bible_books_provider.dart';
 import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:elisha/src/providers/bible_repository_provider.dart';
 import 'package:elisha/src/providers/bible_translations_provider.dart';
+import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
+import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:elisha/src/services/bible_service.dart';
+import 'package:elisha/src/ui/components/bible_reader.dart';
 import 'package:elisha/src/ui/components/error_body.dart';
 import 'package:elisha/src/ui/components/unexpected_error.dart';
-import 'package:screen_brightness/screen_brightness.dart';
+import 'package:elisha/src/ui/views/bible_view/components/show_translations_bottom_sheet.dart';
 
 class BibleView extends StatefulWidget {
   const BibleView({Key? key}) : super(key: key);
