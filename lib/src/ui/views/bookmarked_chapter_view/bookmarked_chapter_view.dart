@@ -38,6 +38,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
   Widget build(BuildContext context) {
     return CantonScaffold(
       backgroundColor: CantonMethods.alternateCanvasColor(context),
+      padding: EdgeInsets.zero,
       body: _content(context),
     );
   }

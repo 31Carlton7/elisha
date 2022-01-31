@@ -32,16 +32,19 @@ class BookmarkedChapterViewHeader extends StatelessWidget {
       return chapter.verses![0].book.name! + ' ' + chapter.number!;
     }
 
-    return ViewHeaderTwo(
-      title: name(),
-      backButton: true,
-      buttonTwo: CantonHeaderButton(
-        onPressed: () {
-          showBottomSheet(chapter);
-        },
-        icon: Icon(
-          Iconsax.more,
-          color: Theme.of(context).primaryColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: ViewHeaderTwo(
+        title: name(),
+        backButton: true,
+        buttonTwo: CantonHeaderButton(
+          onPressed: () {
+            showBottomSheet(chapter);
+          },
+          icon: Icon(
+            Iconsax.more,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
       ),
     );
