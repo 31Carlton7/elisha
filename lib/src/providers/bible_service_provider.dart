@@ -16,11 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 
 import 'package:elisha/src/services/bible_service.dart';
 
 final bibleServiceProvider = Provider<BibleService>((ref) {
-  return BibleService(Dio());
+  return BibleService();
 });

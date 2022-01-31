@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/chapter.dart';
+import 'package:elisha/src/models/translation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -98,7 +99,7 @@ class BibleRepository {
     66: 'Revelation',
   };
 
-  final Map<int, int> _mapOfBibleChaptersAndBooks = {
+  final _mapOfBibleChaptersAndBooks = <int, int>{
     0: 1,
     1: 50,
     2: 40,
@@ -169,7 +170,19 @@ class BibleRepository {
     67: 22,
   };
 
+  final _translations = <Translation>[
+    Translation(id: 1, name: 'American Standard-ASV1901', abbreviation: 'asv', language: 'english'),
+    Translation(id: 2, name: 'Bible in Basic English', abbreviation: 'bbe', language: 'english'),
+    Translation(id: 3, name: 'King James Version', abbreviation: 'kjv', language: 'english'),
+    Translation(id: 4, name: 'World English Bible', abbreviation: 'web', language: 'english'),
+    Translation(id: 5, name: 'Young\'s Literal Translation', abbreviation: 'ylt', language: 'english'),
+  ];
+
+  List<Translation> get translations => _translations;
+
   Map<int, int> get mapOfBibleChaptersAndBooks => _mapOfBibleChaptersAndBooks;
+
+  Map<int, String> get mapOfBibleBooks => _mapOfBibleBooks;
 
   List<Book> getBooks() {
     var books = <Book>[];

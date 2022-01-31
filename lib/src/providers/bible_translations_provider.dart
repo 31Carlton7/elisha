@@ -16,18 +16,18 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:elisha/src/providers/bible_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/translation.dart';
-import 'package:elisha/src/providers/bible_service_provider.dart';
 
 String translationID = '';
 
-final bibleTranslationsProvider = FutureProvider.autoDispose<List<Translation>>((ref) async {
+final bibleTranslationsProvider = Provider.autoDispose<List<Translation>>((ref) {
   ref.maintainState = true;
 
-  final bibleService = ref.read(bibleServiceProvider);
-  final versions = bibleService.getTranslations();
+  final bibleService = ref.read(bibleRepositoryProvider);
+  final versions = bibleService.translations;
 
   return versions;
 });

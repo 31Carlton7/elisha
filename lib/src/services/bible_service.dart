@@ -16,77 +16,51 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
-import 'package:elisha/src/config/constants.dart';
-import 'package:elisha/src/providers/bible_chapters_provider.dart';
+import 'package:elisha/src/providers/bible_translations_provider.dart';
 import 'package:elisha/src/repositories/bible_repository.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_performance/firebase_performance.dart';
 
 import 'package:elisha/src/config/exceptions.dart';
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/chapter.dart';
-import 'package:elisha/src/models/translation.dart';
 import 'package:elisha/src/models/verse.dart';
+import 'package:flutter/services.dart';
 
 class BibleService {
-  BibleService(this._dio);
-  final Dio _dio;
-  final _rootUrl = isEmulator ? 'https://localhost:8084' : 'https://bible-go-api.rkeplin.com/v1';
+  BibleService();
 
-  Future<List<Translation>> getTranslations() async {
-    try {
-      final response = await _dio.get(_rootUrl + '/translations');
-
-      final results = List<Map<String, dynamic>>.from(response.data);
-
-      final translations = results.map((version) => Translation.fromMap(version)).toList(growable: true);
-
-      translations.removeWhere((element) {
-        switch (element.abbreviation) {
-          case 'NLT':
-            return true;
-          case 'NIV':
-            return true;
-          case 'ESV':
-            return true;
-          default:
-            return false;
-        }
-      });
-
-      return translations;
-    } on DioError catch (e) {
-      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
-      throw Exceptions.fromDioError(e);
-    }
-  }
+  final jsonText = rootBundle.loadString(
+    'backend/${BibleRepository().translations[int.parse(translationID)].abbreviation}.json',
+  );
 
   Future<List<Book>> getBooks(String? bookID) async {
     try {
       if (!['', null].contains(bookID)) {
-        final response = await _dio.get(_rootUrl + '/books/$bookID');
+        final text = await jsonText;
 
-        final chaptersReponse = await _dio.get(_rootUrl + '/books/$bookID/chapters');
+        final map = json.decode(text) as Map<String, dynamic>;
 
-        final result = Map<String, dynamic>.from(response.data);
+        final bibleText = map['resultset']['row'] as List<dynamic>;
 
-        final chaptersResult = List<Map<String, dynamic>>.from(chaptersReponse.data);
+        final bookText = bibleText.where((element) => element['field']![1].toString() == bookID).toList();
 
-        final book = Book.fromMap(result).copyWith(
-          chapters: chaptersResult.map((chapter) => ChapterId.fromMap(chapter)).toList(
-                growable: false,
-              ),
+        final chapters = {
+          for (var item in bookText) ChapterId(id: item['field']![2]),
+        }.toList();
+
+        final book = Book(
+          id: bookText[0]['field']![1],
+          name: BibleRepository().mapOfBibleBooks[int.parse(bookID!)],
+          testament: bookText[0]['field']![1] >= 40 ? 'New' : 'Old',
+          chapters: chapters,
         );
 
         return [book];
       } else {
-        var trace = FirebasePerformance.instance.newTrace('book_chapter_bottom_sheet_open_time');
-        trace.start();
-
         final books = BibleRepository().getBooks();
-
-        trace.stop();
 
         return books;
       }
@@ -98,17 +72,25 @@ class BibleService {
 
   Future<Chapter> getChapter(String bookID, String chapterID, String translationID) async {
     try {
-      final response = await _dio.get(
-        _rootUrl + '/books/$bookID/chapters/$chapterID?translation=${translationID.replaceAll('"', '')}',
-      );
+      final text = await jsonText;
 
-      final results = List<Map<String, dynamic>>.from(response.data);
+      final books = await getBooks(bookID);
 
-      final verses = results.map((verse) => Verse.fromMap(verse)).toList(growable: false);
+      final map = json.decode(text) as Map<String, dynamic>;
+
+      final bibleText = map['resultset']['row'] as List<dynamic>;
+
+      final bookText = bibleText.where((element) => element['field']![1].toString() == bookID).toList();
+
+      final chapterText = bookText.where((element) => element['field']![2].toString() == chapterID);
+
+      final verses = {
+        for (var item in chapterText) Verse.fromList(item['field']).copyWith(book: books[0]),
+      }.toList();
 
       final chapter = Chapter(
-        id: verses[0].book.id,
-        number: verses[0].chapterId.toString(),
+        id: int.parse(chapterID),
+        number: chapterID,
         translation: translationID,
         verses: verses,
         bookmarked: false,
@@ -123,13 +105,36 @@ class BibleService {
 
   Future<List<Chapter>> getChapters(String? bookID) async {
     try {
-      final response = await _dio.get(_rootUrl + '/books/$bookID/chapters');
+      // final response = await _dio.get(_rootUrl + '/books/$bookID/chapters');
 
-      final results = List<Map<String, dynamic>>.from(
-        response.data,
-      );
+      // final results = List<Map<String, dynamic>>.from(
+      //   response.data,
+      // );
 
-      final List<Chapter> chapters = results.map((chapter) => Chapter.fromMap(chapter)).toList(growable: false);
+      // final List<Chapter> chapters = results.map((chapter) => Chapter.fromMap(chapter)).toList(growable: false);
+
+      final text = await jsonText;
+
+      final map = json.decode(text) as Map<String, dynamic>;
+
+      final bibleText = map['resultset']['row'] as List<dynamic>;
+
+      final bookText = bibleText.where((element) => element['field']![1].toString() == bookID).toList();
+
+      final verses = {
+        for (var item in bookText) Verse.fromList(item['field']),
+      }.toList();
+
+      final chapters = [
+        for (var item in bookText)
+          Chapter(
+            id: bookText[0]['field']![2],
+            number: bookText[0]['field']![2].toString(),
+            translation: translationID,
+            verses: verses.where((element) => element.chapterId == item['field']![2]).toList(),
+            bookmarked: false,
+          )
+      ];
 
       return chapters;
     } on DioError catch (e) {
@@ -140,6 +145,14 @@ class BibleService {
 
   Future<List<Verse>> getVerses(String bookID, String chapterID, String? verseID) async {
     try {
+      final text = await jsonText;
+
+      final map = json.decode(text) as Map<String, dynamic>;
+
+      final bibleText = map['resultset']['row'] as List<dynamic>;
+
+      final books = await getBooks(bookID);
+
       if (!['', null].contains(verseID)) {
         var vId = bookID;
 
@@ -153,7 +166,6 @@ class BibleService {
           default:
             vId += chapterID;
         }
-
         switch (verseID!.length) {
           case 1:
             vId += '00' + verseID;
@@ -165,20 +177,24 @@ class BibleService {
             vId += verseID;
         }
 
-        final response =
-            await _dio.get(_rootUrl + '/books/$bookID/chapters/$chapterID/$vId?translation=$translationAbb');
+        final verseElement =
+            bibleText.where((element) => element['field']![0].toString() == vId).toList()[0]['field'] as List<dynamic>;
 
-        final result = Map<String, dynamic>.from(response.data);
+        verseElement[1] = books;
 
-        final verses = [Verse.fromMap(result)];
+        final verses = [Verse.fromList(verseElement)];
 
         return verses;
       } else {
-        final response = await _dio.get(_rootUrl + '/books/$bookID/chapters/$chapterID');
+        final bookText = bibleText.where((element) => element['field']![1].toString() == bookID).toList();
 
-        final results = List<Map<String, dynamic>>.from(response.data);
+        final chapterText = bookText.where((element) => element['field']![2].toString() == chapterID);
 
-        final List<Verse> verses = results.map((verse) => Verse.fromMap(verse)).toList(growable: false);
+        final books = await getBooks(bookID);
+
+        final verses = {
+          for (var item in chapterText) Verse.fromList(item['field']).copyWith(book: books[0]),
+        }.toList();
 
         return verses;
       }

@@ -82,6 +82,17 @@ class Verse {
     );
   }
 
+  factory Verse.fromList(List<dynamic> list) {
+    return Verse(
+      id: list[0],
+      chapterId: list[2],
+      verseId: list[3],
+      text: list[4],
+      book: list[1].runtimeType == int ? Book() : list[1][0],
+      favorite: false,
+    );
+  }
+
   factory Verse.fromMapFromVOTD(Map<String, dynamic> map, int verseNum) {
     final data = map['1'] as Map<String, dynamic>;
 
