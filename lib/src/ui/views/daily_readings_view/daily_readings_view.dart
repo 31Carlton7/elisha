@@ -17,14 +17,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
-import 'package:elisha/src/ui/views/daily_readings_view/components/daily_readings_view_header.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:elisha/src/models/daily_reading.dart';
 import 'package:elisha/src/models/reading.dart';
+import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
+import 'package:elisha/src/ui/views/daily_readings_view/components/daily_readings_view_header.dart';
 
 class DailyReadingsView extends ConsumerWidget {
   const DailyReadingsView(this.dailyReading, {Key? key}) : super(key: key);
@@ -156,8 +156,8 @@ class DailyReadingsView extends ConsumerWidget {
           style: Theme.of(context).textTheme.headline5?.copyWith(
                 fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
                 fontWeight: FontWeight.w400,
-                fontSize: watch(readerSettingsRepositoryProvider).bodyTextSize,
-                height: watch(readerSettingsRepositoryProvider).bodyTextHeight,
+                fontSize: watch(readerSettingsRepositoryProvider).bodyTextSize * 1.45,
+                height: watch(readerSettingsRepositoryProvider).bodyTextHeight * 0.95,
               ),
         ),
       ],
