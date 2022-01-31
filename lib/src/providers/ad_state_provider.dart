@@ -16,8 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/services/ad_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:elisha/src/services/ad_state.dart';
 
 final adStateProvider = Provider<AdState>((ref) {
   return AdState();
