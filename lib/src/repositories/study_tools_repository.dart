@@ -18,10 +18,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
+import 'package:hive/hive.dart';
+
 import 'package:elisha/src/models/chapter.dart';
 import 'package:elisha/src/models/verse.dart';
-import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class StudyToolsRepository extends ChangeNotifier {
   var _favoritedVerses = <Verse>[];
