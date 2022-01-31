@@ -16,24 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-/*
-Elisha iOS & Android App
-Copyright (C) 2021 Elisha
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
- any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
 import 'package:intl/intl.dart';
 import 'package:universal_html/controller.dart';
 
@@ -52,18 +34,13 @@ class DailyReadingsService {
 
     final doc = controller.window?.document;
 
-    final nameNode = doc!
-        .getElementsByClassName(
-            'wr-block b-lectionary padding-top-s padding-bottom-xxs bg-white')
-        .first;
+    final nameNode =
+        doc!.getElementsByClassName('wr-block b-lectionary padding-top-s padding-bottom-xxs bg-white').first;
 
-    var lectionaryNode = doc
-        .getElementsByClassName(
-            'wr-block b-lectionary padding-top-s padding-bottom-xxs bg-white')
-        .first;
+    var lectionaryNode =
+        doc.getElementsByClassName('wr-block b-lectionary padding-top-s padding-bottom-xxs bg-white').first;
 
-    final readingNodes = doc
-        .getElementsByClassName('wr-block b-verse bg-white padding-bottom-m');
+    final readingNodes = doc.getElementsByClassName('wr-block b-verse bg-white padding-bottom-m');
 
     List<Reading> readings = [];
 
@@ -77,21 +54,13 @@ class DailyReadingsService {
       readings.add(reading);
     }
 
-    final name = nameNode.text!
-        .trim()
-        .substring(0, nameNode.text!.trim().indexOf('\n'))
-        .trim();
+    final name = nameNode.text!.trim().substring(0, nameNode.text!.trim().indexOf('\n')).trim();
     final lectionary = lectionaryNode.text!
         .trim()
         .substring(lectionaryNode.text!.trim().lastIndexOf('\n'))
         .trim()
         .substring(
-          lectionaryNode.text!
-                  .trim()
-                  .substring(lectionaryNode.text!.trim().lastIndexOf('\n'))
-                  .trim()
-                  .indexOf(' ') +
-              1,
+          lectionaryNode.text!.trim().substring(lectionaryNode.text!.trim().lastIndexOf('\n')).trim().indexOf(' ') + 1,
         );
 
     final dailyReading = DailyReading(
