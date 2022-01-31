@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+
 import 'package:elisha/src/models/chapter.dart';
 
 class BookmarkedChapterViewHeader extends StatelessWidget {
