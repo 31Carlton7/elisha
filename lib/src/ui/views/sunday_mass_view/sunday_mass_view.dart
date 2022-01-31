@@ -16,8 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:flutter/services.dart';
+
 import 'package:better_player/better_player.dart';
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/sunday_mass_service_provider.dart';
 import 'package:elisha/src/providers/youtube_fetch_channel_future_provider.dart';
@@ -25,8 +29,6 @@ import 'package:elisha/src/providers/youtube_service_provider.dart';
 import 'package:elisha/src/ui/components/error_card.dart';
 import 'package:elisha/src/ui/components/loading_card.dart';
 import 'package:elisha/src/ui/views/sunday_mass_view/components/sunday_mass_view_header.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SundayMassView extends StatelessWidget {
   const SundayMassView({Key? key}) : super(key: key);
