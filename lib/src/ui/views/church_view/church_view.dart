@@ -17,11 +17,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/ui/components/church_view_banner_ad_card.dart';
 
+import 'package:elisha/src/ui/components/church_view_banner_ad_card.dart';
+import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 import 'package:elisha/src/ui/views/church_view/components/church_view_header.dart';
 import 'package:elisha/src/ui/views/church_view/components/daily_readings_card.dart';
-import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 
 class ChurchView extends StatefulWidget {
   const ChurchView({Key? key}) : super(key: key);
