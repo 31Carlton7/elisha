@@ -17,10 +17,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:elisha/src/providers/daily_readings_future_provider.dart';
 import 'package:elisha/src/ui/components/error_card.dart';
 import 'package:elisha/src/ui/components/loading_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:elisha/src/ui/views/daily_readings_view/daily_readings_view.dart';
 
 class DailyReadingsCard extends ConsumerWidget {
