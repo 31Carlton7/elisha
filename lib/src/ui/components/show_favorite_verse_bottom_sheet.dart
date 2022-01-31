@@ -18,7 +18,7 @@ Future<void> showFavoriteVerseBottomSheet(BuildContext context, Verse verse) asy
     builder: (context) {
       return FractionallySizedBox(
         heightFactor: 0.3,
-        widthFactor: 0.75,
+        widthFactor: Responsive.isTablet(context) ? 0.75 : null,
         child: Consumer(
           builder: (context, watch, child) {
             return StatefulBuilder(
