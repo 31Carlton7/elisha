@@ -1,6 +1,6 @@
 # Elisha
 
-Pocket Bible & Church App to have study God's Word and have more engagement with it.
+Pocket Bible & Church App to study God's Word and have more engagement with it.
 
 ## About
 
