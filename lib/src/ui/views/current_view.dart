@@ -19,7 +19,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
-import 'package:elisha/src/providers/verse_of_the_day_future_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

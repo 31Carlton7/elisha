@@ -14,8 +14,8 @@ Future<void> showTranslationsBottomSheet(
     useRootNavigator: true,
     builder: (context) {
       return FractionallySizedBox(
-        heightFactor: 0.95,
-        widthFactor: 0.75,
+        heightFactor: 0.75,
+        widthFactor: Responsive.isTablet(context) ? 0.75 : null,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,

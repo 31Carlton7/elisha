@@ -23,7 +23,6 @@ import 'package:elisha/src/ui/views/bible_view/components/show_translations_bott
 import 'package:flutter/cupertino.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -55,48 +54,39 @@ class _BibleViewState extends State<BibleView> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, watch, child) {
-        final translationRepo = watch(bibleTranslationsProvider);
+        final translations = watch(bibleTranslationsProvider);
         final booksRepo = watch(bibleBooksProvider);
         final chaptersRepo = watch(bibleChaptersProvider);
 
-        return translationRepo.when(
+        translations.sort((a, b) => a.id!.compareTo(b.id!));
+
+        return booksRepo.when(
           error: (e, s) {
             if (e is Exceptions) {
-              return ErrorBody(e.message, bibleTranslationsProvider);
+              return ErrorBody(e.message, bibleBooksProvider);
             }
-            return UnexpectedError(bibleTranslationsProvider);
+            return UnexpectedError(bibleBooksProvider);
           },
           loading: () => Container(),
-          data: (translations) {
-            translations.sort((a, b) => a.id!.compareTo(b.id!));
-            return booksRepo.when(
+          data: (books) {
+            return chaptersRepo.when(
               error: (e, s) {
                 if (e is Exceptions) {
-                  return ErrorBody(e.message, bibleBooksProvider);
+                  return ErrorBody(e.message, bibleChaptersProvider);
                 }
-                return UnexpectedError(bibleBooksProvider);
+                return UnexpectedError(bibleChaptersProvider);
               },
               loading: () => Container(),
-              data: (books) {
-                return chaptersRepo.when(
-                  error: (e, s) {
-                    if (e is Exceptions) {
-                      return ErrorBody(e.message, bibleChaptersProvider);
-                    }
-                    return UnexpectedError(bibleChaptersProvider);
-                  },
-                  loading: () => Container(),
-                  data: (chapter) {
-                    _isBookmarked = _isBookmarked = context
-                        .read(studyToolsRepositoryProvider)
-                        .bookmarkedChapters
-                        .where((e) => e.id == chapter.id)
-                        .isNotEmpty;
-                    return Responsive(
-                      tablet: _buildTabletContent(context, watch, translations, books, chapter),
-                      mobile: _buildMobileContent(context, watch, translations, books, chapter),
-                    );
-                  },
+              data: (chapter) {
+                _isBookmarked = _isBookmarked = context
+                    .read(studyToolsRepositoryProvider)
+                    .bookmarkedChapters
+                    .where((e) => e.id == chapter.id)
+                    .isNotEmpty;
+
+                return Responsive(
+                  tablet: _buildTabletContent(context, watch, translations, books, chapter),
+                  mobile: _buildMobileContent(context, watch, translations, books, chapter),
                 );
               },
             );
@@ -151,7 +141,12 @@ class _BibleViewState extends State<BibleView> {
   }
 
   Widget _buildMobileHeader(
-      BuildContext context, ScopedReader watch, List<Translation> translations, List<Book> books, Chapter chapter) {
+    BuildContext context,
+    ScopedReader watch,
+    List<Translation> translations,
+    List<Book> books,
+    Chapter chapter,
+  ) {
     Widget _previousChapterButton() {
       return GestureDetector(
         onTap: () {
@@ -255,7 +250,7 @@ class _BibleViewState extends State<BibleView> {
                 color: Theme.of(context).inputDecorationTheme.fillColor,
               ),
               child: Text(
-                translations[int.parse(translationID)].abbreviation!,
+                translations[int.parse(translationID)].abbreviation!.toUpperCase(),
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
@@ -292,7 +287,12 @@ class _BibleViewState extends State<BibleView> {
   }
 
   Widget _buildTabletHeader(
-      BuildContext context, ScopedReader watch, List<Translation> translations, List<Book> books, Chapter chapter) {
+    BuildContext context,
+    ScopedReader watch,
+    List<Translation> translations,
+    List<Book> books,
+    Chapter chapter,
+  ) {
     Widget _previousChapterButton() {
       return GestureDetector(
         onTap: () {
@@ -400,7 +400,7 @@ class _BibleViewState extends State<BibleView> {
                 color: Theme.of(context).inputDecorationTheme.fillColor,
               ),
               child: Text(
-                translations[int.parse(translationID)].abbreviation!,
+                translations[int.parse(translationID)].abbreviation!.toUpperCase(),
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
@@ -453,7 +453,7 @@ class _BibleViewState extends State<BibleView> {
           builder: (context, watch, child) {
             return FractionallySizedBox(
               heightFactor: 0.6,
-              widthFactor: 0.75,
+              widthFactor: Responsive.isTablet(context) ? 0.75 : null,
               child: StatefulBuilder(
                 builder: (context, setState) {
                   Widget brightnessControls = Padding(
@@ -660,18 +660,19 @@ class _BibleViewState extends State<BibleView> {
   }
 
   Future<void> _showBookAndChapterBottomSheet() async {
-    List<Book> books = await BibleService(Dio()).getBooks('');
+    List<Book> books = await BibleService().getBooks('');
 
     Widget _bookCard(Book book) {
       Widget _chapterCard(ChapterId chapter) {
         return GestureDetector(
           onTap: () {
+            HapticFeedback.lightImpact();
             context.read(bibleRepositoryProvider).changeChapter(context, book.id!, chapter.id!);
             Navigator.of(context, rootNavigator: true).pop();
           },
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.secondary, width: 1.5),
+              border: Border.all(color: Theme.of(context).colorScheme.secondaryVariant, width: 0.7),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
@@ -716,7 +717,7 @@ class _BibleViewState extends State<BibleView> {
       builder: (context) {
         return FractionallySizedBox(
           heightFactor: 0.95,
-          widthFactor: 0.75,
+          widthFactor: Responsive.isTablet(context) ? 0.75 : null,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,

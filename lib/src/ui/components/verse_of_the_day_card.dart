@@ -1,5 +1,4 @@
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
@@ -104,46 +103,6 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
           },
         );
       },
-    );
-  }
-
-  Widget _card(BuildContext context, double elementSpacing, Color bgColor) {
-    return GestureDetector(
-      onTap: () {
-        CantonMethods.viewTransition(context, VerseOfTheDayView(verses: _verses!));
-      },
-      child: Container(
-        padding: const EdgeInsets.all(17.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          color: CantonMethods.alternateCanvasColorType3(context),
-        ),
-        child: Column(
-          children: [
-            _buildImage(context),
-            SizedBox(height: elementSpacing),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _header(context, bgColor),
-                      SizedBox(height: elementSpacing),
-                      _body(context, bgColor),
-                      SizedBox(height: elementSpacing),
-                      _bookChapterVerse(context),
-                    ],
-                  ),
-                ),
-                _favoriteButton(context, bgColor, _verses!),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 

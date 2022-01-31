@@ -17,7 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/ui/components/home_view_banner_ad_card.dart';
 import 'package:elisha/src/ui/components/daily_devotional_card.dart';
 import 'package:elisha/src/ui/components/verse_of_the_day_card.dart';

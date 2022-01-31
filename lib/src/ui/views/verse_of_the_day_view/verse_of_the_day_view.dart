@@ -191,7 +191,7 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
                         text: verse.verseId.toString() + ' ',
                         style: Theme.of(context).textTheme.bodyText1?.copyWith(
                               color: Theme.of(context).colorScheme.secondaryVariant,
-                              fontSize: watch(readerSettingsRepositoryProvider).verseNumberSize,
+                              fontSize: watch(readerSettingsRepositoryProvider).verseNumberSize * 1.5,
                               height: watch(readerSettingsRepositoryProvider).verseNumberHeight,
                               fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
                             ),
@@ -200,7 +200,7 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
                             text: (verse.text + (widget.verses.last == verse ? '' : ' ')),
                             style: Theme.of(context).textTheme.headline5!.copyWith(
                                   fontWeight: FontWeight.w400,
-                                  fontSize: watch(readerSettingsRepositoryProvider.notifier).bodyTextSize,
+                                  fontSize: watch(readerSettingsRepositoryProvider.notifier).bodyTextSize * 1.5,
                                   height: watch(readerSettingsRepositoryProvider.notifier).bodyTextHeight,
                                   fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
                                 ),

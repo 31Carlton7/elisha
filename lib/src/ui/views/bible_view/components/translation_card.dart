@@ -37,7 +37,7 @@ class TranslationCard extends StatelessWidget {
               ),
         ),
         trailing: Text(
-          translation.abbreviation!,
+          translation.abbreviation!.toUpperCase(),
           style: Theme.of(context).textTheme.bodyText1?.copyWith(
                 color: Theme.of(context).colorScheme.secondaryVariant,
                 fontSize: Responsive.isTablet(context) ? 18 : null,
