@@ -18,10 +18,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:math';
 
-import 'package:elisha/src/config/constants.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'package:elisha/src/config/constants.dart';
 import 'package:elisha/src/models/local_user.dart';
 
 class LocalUserRepository extends ChangeNotifier {
