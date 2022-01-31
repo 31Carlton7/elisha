@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/services/ad_state.dart';
 import 'package:elisha/src/ui/components/home_view_banner_ad_card.dart';
 import 'package:elisha/src/ui/components/daily_devotional_card.dart';
 import 'package:elisha/src/ui/components/verse_of_the_day_card.dart';
@@ -73,8 +74,8 @@ class _HomeViewState extends State<HomeView> {
         if (isSunday) const SizedBox(height: 17),
         const VerseOfTheDayCard(),
         const SizedBox(height: 17),
-        const HomeViewBannerAdCard(),
-        const SizedBox(height: 17),
+        if (homeViewBannerAdIsLoaded) const HomeViewBannerAdCard(),
+        if (homeViewBannerAdIsLoaded) const SizedBox(height: 17),
         const DailyDevotionalCard(),
         const SizedBox(height: 17),
       ],
