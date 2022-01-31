@@ -17,9 +17,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/streaks_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
+import 'package:elisha/src/providers/streaks_repository_provider.dart';
 
 class StreaksCard extends StatelessWidget {
   const StreaksCard({Key? key, required this.marginalPadding}) : super(key: key);
