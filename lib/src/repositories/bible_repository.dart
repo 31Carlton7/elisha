@@ -16,13 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/models/book.dart';
-import 'package:elisha/src/models/chapter.dart';
-import 'package:elisha/src/models/translation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:elisha/src/models/book.dart';
+import 'package:elisha/src/models/chapter.dart';
+import 'package:elisha/src/models/translation.dart';
 import 'package:elisha/src/providers/bible_books_provider.dart';
 import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
