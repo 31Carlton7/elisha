@@ -17,14 +17,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
-import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/config/bottom_navigation_bar.dart';
 import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
+import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
 import 'package:elisha/src/providers/streaks_repository_provider.dart';
+import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:elisha/src/ui/views/bible_view/bible_view.dart';
 import 'package:elisha/src/ui/views/church_view/church_view.dart';
 import 'package:elisha/src/ui/views/home_view/home_view.dart';
