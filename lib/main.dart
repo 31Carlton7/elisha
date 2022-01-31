@@ -65,10 +65,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CantonApp(
       title: kAppTitle,
-      primaryLightColor: const Color(0xFFB97D3C),
-      primaryLightVariantColor: const Color(0xFFB97D3C),
-      primaryDarkColor: const Color(0xFFB97D3C),
-      primaryDarkVariantColor: const Color(0xFFB97D3C),
+      primaryLightColor: const Color(0xFFDDA15E),
+      primaryLightVariantColor: const Color(0xFFDDA15E),
+      primaryDarkColor: const Color(0xFFDDA15E),
+      primaryDarkVariantColor: const Color(0xFFDDA15E),
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
       home: const LoginWrapper(),
     );
