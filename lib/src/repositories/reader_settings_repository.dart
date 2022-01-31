@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:flutter/material.dart';
+
 import 'package:hive/hive.dart';
 
 enum ReaderColors {
