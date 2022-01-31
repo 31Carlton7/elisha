@@ -17,10 +17,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/services/bible_service.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class VerseOfTheDayService {
   const VerseOfTheDayService(this._dio);
