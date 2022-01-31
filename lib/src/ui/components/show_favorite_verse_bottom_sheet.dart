@@ -16,13 +16,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:flutter/services.dart';
+
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
 import 'package:elisha/src/config/constants.dart';
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 Future<void> showFavoriteVerseBottomSheet(BuildContext context, Verse verse) async {
   return await showModalBottomSheet(
