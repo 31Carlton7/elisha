@@ -16,7 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:flutter/services.dart';
+
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
@@ -24,9 +29,6 @@ import 'package:elisha/src/providers/verse_of_the_day_future_provider.dart';
 import 'package:elisha/src/ui/components/error_card.dart';
 import 'package:elisha/src/ui/components/loading_card.dart';
 import 'package:elisha/src/ui/views/verse_of_the_day_view/verse_of_the_day_view.dart';
-import 'package:flutter/services.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class VerseOfTheDayCard extends StatefulWidget {
   const VerseOfTheDayCard({Key? key}) : super(key: key);
