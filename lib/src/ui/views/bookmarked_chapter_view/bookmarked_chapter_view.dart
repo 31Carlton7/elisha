@@ -17,12 +17,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/study_tools_repository_provider.dart';
-import 'package:elisha/src/ui/components/bible_reader.dart';
-import 'package:elisha/src/ui/views/bookmarked_chapter_view/components/bookmarked_chapter_view_header.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/chapter.dart';
+import 'package:elisha/src/providers/study_tools_repository_provider.dart';
+import 'package:elisha/src/ui/components/bible_reader.dart';
+import 'package:elisha/src/ui/views/bookmarked_chapter_view/components/bookmarked_chapter_view_header.dart';
 
 class BookmarkedChapterView extends StatefulWidget {
   const BookmarkedChapterView(this.chapter, {Key? key}) : super(key: key);
