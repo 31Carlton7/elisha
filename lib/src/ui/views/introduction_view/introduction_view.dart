@@ -18,18 +18,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:introduction_screen/introduction_screen.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
 import 'package:elisha/src/models/local_user.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:elisha/src/ui/views/introduction_view/components/birth_date_input.dart';
 import 'package:elisha/src/ui/views/introduction_view/components/first_name_input.dart';
 import 'package:elisha/src/ui/views/introduction_view/components/last_name_input.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:introduction_screen/introduction_screen.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class IntroductionView extends StatefulWidget {
   const IntroductionView({Key? key}) : super(key: key);
