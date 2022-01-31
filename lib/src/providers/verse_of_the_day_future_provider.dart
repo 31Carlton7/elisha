@@ -16,9 +16,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/providers/verse_of_the_day_service_provider.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final verseOfTheDayFutureProvider = FutureProvider.autoDispose<List<Verse>>((ref) {
   ref.maintainState = true;
