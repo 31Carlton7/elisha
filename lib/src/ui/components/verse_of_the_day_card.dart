@@ -3,15 +3,16 @@ import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
+import 'package:elisha/src/providers/verse_of_the_day_future_provider.dart';
+import 'package:elisha/src/ui/components/error_card.dart';
+import 'package:elisha/src/ui/components/loading_card.dart';
 import 'package:elisha/src/ui/views/verse_of_the_day_view/verse_of_the_day_view.dart';
 import 'package:flutter/services.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class VerseOfTheDayCard extends StatefulWidget {
-  const VerseOfTheDayCard({this.verses, Key? key}) : super(key: key);
-
-  final List<Verse>? verses;
+  const VerseOfTheDayCard({Key? key}) : super(key: key);
 
   @override
   State<VerseOfTheDayCard> createState() => _VerseOfTheDayCardState();
@@ -24,34 +25,13 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
   @override
   void initState() {
     super.initState();
-    _checkIfVerseIsNull();
     _checkIfVerseIsFavorite();
   }
 
   void _checkIfVerseIsFavorite() {
     _isFavorite = context.read(studyToolsRepositoryProvider).favoriteVerses.where((e) {
-      return widget.verses!.any((element) => e.text == element.text);
+      return _verses!.any((element) => e.text == element.text);
     }).isNotEmpty;
-  }
-
-  void _checkIfVerseIsNull() {
-    _verses = widget.verses;
-    _verses ??= [
-      Verse(
-        id: 40028020,
-        chapterId: 28,
-        verseId: 20,
-        text:
-            'teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.',
-        book: Book(
-          id: 40,
-          name: 'Matthew',
-          testament: 'New',
-          chapters: [],
-        ),
-        favorite: false,
-      )
-    ];
   }
 
   @override
@@ -66,44 +46,104 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
 
     return Consumer(
       builder: (context, watch, child) {
-        return GestureDetector(
-          onTap: () {
-            CantonMethods.viewTransition(context, VerseOfTheDayView(verses: widget.verses!));
+        final votdRepo = watch(verseOfTheDayFutureProvider);
+
+        return votdRepo.when(
+          error: (e, s) {
+            return SafeArea(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 17),
+                child: const ErrorCard(),
+              ),
+            );
           },
-          child: Container(
-            padding: const EdgeInsets.all(17.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              color: CantonMethods.alternateCanvasColorType3(context),
-            ),
-            child: Column(
-              children: [
-                _buildImage(context),
-                const SizedBox(height: elementSpacing),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          loading: () {
+            return const LoadingCard();
+          },
+          data: (verses) {
+            _verses = verses;
+            _checkIfVerseIsFavorite();
+
+            return GestureDetector(
+              onTap: () {
+                CantonMethods.viewTransition(context, VerseOfTheDayView(verses: _verses!));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(17.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: CantonMethods.alternateCanvasColorType3(context),
+                ),
+                child: Column(
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _header(context, bgColor()),
-                          const SizedBox(height: elementSpacing),
-                          _body(context, bgColor()),
-                          const SizedBox(height: elementSpacing),
-                          _bookChapterVerse(context),
-                        ],
-                      ),
+                    _buildImage(context),
+                    const SizedBox(height: elementSpacing),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _header(context, bgColor()),
+                              const SizedBox(height: elementSpacing),
+                              _body(context, bgColor()),
+                              const SizedBox(height: elementSpacing),
+                              _bookChapterVerse(context),
+                            ],
+                          ),
+                        ),
+                        _favoriteButton(context, bgColor(), _verses!),
+                      ],
                     ),
-                    _favoriteButton(context, bgColor(), widget.verses!),
                   ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
+    );
+  }
+
+  Widget _card(BuildContext context, double elementSpacing, Color bgColor) {
+    return GestureDetector(
+      onTap: () {
+        CantonMethods.viewTransition(context, VerseOfTheDayView(verses: _verses!));
+      },
+      child: Container(
+        padding: const EdgeInsets.all(17.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: CantonMethods.alternateCanvasColorType3(context),
+        ),
+        child: Column(
+          children: [
+            _buildImage(context),
+            SizedBox(height: elementSpacing),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _header(context, bgColor),
+                      SizedBox(height: elementSpacing),
+                      _body(context, bgColor),
+                      SizedBox(height: elementSpacing),
+                      _bookChapterVerse(context),
+                    ],
+                  ),
+                ),
+                _favoriteButton(context, bgColor, _verses!),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -145,7 +185,7 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
 
         Icon icon() {
           if (watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
-            return widget.verses!.any((element) => e.text == element.text);
+            return _verses!.any((element) => e.text == element.text);
           }).isNotEmpty) {
             return Icon(LineAwesomeIcons.heart_1, size: 24, color: heartColor());
           }
@@ -187,7 +227,7 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
   Widget _body(BuildContext context, Color bgColor) {
     String verseText() {
       var str = '';
-      for (Verse item in widget.verses!) {
+      for (Verse item in _verses!) {
         str += item.text + ' ';
       }
       return str.substring(0, str.length);
@@ -210,7 +250,7 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
               overflow: TextOverflow.ellipsis,
               maxLines: 5,
               style: Theme.of(context).textTheme.headline5?.copyWith(
-                    color: widget.verses == null ? Theme.of(context).colorScheme.error : null,
+                    color: _verses == null ? Theme.of(context).colorScheme.error : null,
                     fontSize: 19,
                     fontWeight: FontWeight.w500,
                   ),
@@ -223,12 +263,12 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
 
   Widget _bookChapterVerse(BuildContext context) {
     String versesString() {
-      if (widget.verses != null) {
+      if (_verses != null) {
         var str = '';
-        if (widget.verses!.length > 1) {
-          str = widget.verses!.first.verseId.toString() + ' - ' + widget.verses!.last.verseId.toString();
+        if (_verses!.length > 1) {
+          str = _verses!.first.verseId.toString() + ' - ' + _verses!.last.verseId.toString();
         } else {
-          str = widget.verses![0].verseId.toString();
+          str = _verses![0].verseId.toString();
         }
 
         return str;
@@ -237,9 +277,9 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
     }
 
     return Text(
-      widget.verses == null
+      _verses == null
           ? 'Matthew 28:20'
-          : widget.verses![0].book.name! + ' ' + widget.verses![0].chapterId.toString() + ':' + versesString(),
+          : _verses![0].book.name! + ' ' + _verses![0].chapterId.toString() + ':' + versesString(),
       style: Theme.of(context).textTheme.headline6?.copyWith(fontWeight: FontWeight.w500),
     );
   }

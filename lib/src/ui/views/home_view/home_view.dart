@@ -28,9 +28,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:elisha/src/ui/views/home_view/components/home_view_header.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({this.verses, Key? key}) : super(key: key);
-
-  final List<Verse>? verses;
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -74,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
         const SizedBox(height: 17),
         if (isSunday) const SundayMassCard(),
         if (isSunday) const SizedBox(height: 17),
-        VerseOfTheDayCard(verses: widget.verses),
+        const VerseOfTheDayCard(),
         const SizedBox(height: 17),
         const HomeViewBannerAdCard(),
         const SizedBox(height: 17),
@@ -100,7 +98,7 @@ class _HomeViewState extends State<HomeView> {
         if (isSunday) const SizedBox(height: 17),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
-          child: VerseOfTheDayCard(verses: widget.verses),
+          child: const VerseOfTheDayCard(),
         ),
         const SizedBox(height: 17),
         const HomeViewBannerAdCard(),

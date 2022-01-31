@@ -80,11 +80,11 @@ class _CurrentViewState extends State<CurrentView> {
 
   @override
   Widget build(BuildContext context) {
-    final _views = <Widget>[
-      Container(),
-      const BibleView(),
-      const ChurchView(),
-      const ProfileView(),
+    const _views = <Widget>[
+      HomeView(),
+      BibleView(),
+      ChurchView(),
+      ProfileView(),
     ];
 
     return CantonScaffold(
@@ -104,32 +104,11 @@ class _CurrentViewState extends State<CurrentView> {
                 settings: settings,
                 fullscreenDialog: true,
                 builder: (context) {
-                  return Consumer(
-                    builder: (context, watch, child) {
-                      final votdRepo = watch(verseOfTheDayFutureProvider);
-
-                      return votdRepo.when(
-                        error: (e, s) {
-                          return SafeArea(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 17),
-                              child: const HomeView(verses: null),
-                            ),
-                          );
-                        },
-                        loading: () {
-                          return Container();
-                        },
-                        data: (verses) {
-                          return SafeArea(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 17),
-                              child: HomeView(verses: verses),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                  return SafeArea(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 17),
+                      child: SafeArea(child: _views[_currentIndex]),
+                    ),
                   );
                 },
               );
