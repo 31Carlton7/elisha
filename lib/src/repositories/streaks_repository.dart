@@ -16,10 +16,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/repositories/local_user_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'package:elisha/src/repositories/local_user_repository.dart';
 
 class StreaksRepository extends ChangeNotifier {
   var _currentStreak = 1;
