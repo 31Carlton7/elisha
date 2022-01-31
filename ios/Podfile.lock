@@ -1,9 +1,4 @@
 PODS:
-  - AppAuth (1.4.0):
-    - AppAuth/Core (= 1.4.0)
-    - AppAuth/ExternalUserAgent (= 1.4.0)
-  - AppAuth/Core (1.4.0)
-  - AppAuth/ExternalUserAgent (1.4.0)
   - better_player (0.0.1):
     - Cache (~> 6.0.0)
     - Flutter
@@ -105,13 +100,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.6)
     - "GoogleUtilities/NSData+zlib (~> 7.6)"
   - Flutter (1.0.0)
-  - flutter_inappwebview (0.0.1):
-    - Flutter
-    - flutter_inappwebview/Core (= 0.0.1)
-    - OrderedSet (~> 5.0)
-  - flutter_inappwebview/Core (0.0.1):
-    - Flutter
-    - OrderedSet (~> 5.0)
   - GCDWebServer (3.5.4):
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
@@ -121,9 +109,6 @@ PODS:
   - google_mobile_ads (0.0.1):
     - Flutter
     - Google-Mobile-Ads-SDK (= 8.11.0)
-  - google_sign_in (0.0.1):
-    - Flutter
-    - GoogleSignIn (~> 5.0)
   - GoogleAppMeasurement (8.9.1):
     - GoogleAppMeasurement/AdIdSupport (= 8.9.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.6)
@@ -148,10 +133,6 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
-    - GTMAppAuth (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUserMessagingPlatform (2.0.0)
   - GoogleUtilities/AppDelegateSwizzler (7.6.0):
     - GoogleUtilities/Environment
@@ -173,10 +154,6 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.6.0):
     - GoogleUtilities/Logger
-  - GTMAppAuth (1.2.2):
-    - AppAuth/Core (~> 1.4)
-    - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.7.0)
   - HLSCachingReverseProxyServer (0.1.0):
     - GCDWebServer (~> 3.5)
     - PINCache (>= 3.0.1-beta.3)
@@ -185,7 +162,6 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
-  - OrderedSet (5.0.0)
   - path_provider_ios (0.0.1):
     - Flutter
   - PINCache (3.0.3):
@@ -198,8 +174,6 @@ PODS:
   - PINOperation (1.2.1)
   - PromisesObjC (2.0.0)
   - screen_brightness_ios (0.0.1):
-    - Flutter
-  - sign_in_with_apple (0.0.1):
     - Flutter
   - url_launcher (0.0.1):
     - Flutter
@@ -218,12 +192,9 @@ DEPENDENCIES:
   - firebase_dynamic_links (from `.symlinks/plugins/firebase_dynamic_links/ios`)
   - firebase_performance (from `.symlinks/plugins/firebase_performance/ios`)
   - Flutter (from `Flutter`)
-  - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
-  - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
   - screen_brightness_ios (from `.symlinks/plugins/screen_brightness_ios/ios`)
-  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
   - video_player (from `.symlinks/plugins/video_player/ios`)
   - wakelock (from `.symlinks/plugins/wakelock/ios`)
@@ -231,7 +202,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - AppAuth
     - Cache
     - Firebase
     - FirebaseABTesting
@@ -247,14 +217,10 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
-    - GoogleSignIn
     - GoogleUserMessagingPlatform
     - GoogleUtilities
-    - GTMAppAuth
-    - GTMSessionFetcher
     - HLSCachingReverseProxyServer
     - nanopb
-    - OrderedSet
     - PINCache
     - PINOperation
     - PromisesObjC
@@ -274,18 +240,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_performance/ios"
   Flutter:
     :path: Flutter
-  flutter_inappwebview:
-    :path: ".symlinks/plugins/flutter_inappwebview/ios"
   google_mobile_ads:
     :path: ".symlinks/plugins/google_mobile_ads/ios"
-  google_sign_in:
-    :path: ".symlinks/plugins/google_sign_in/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
   screen_brightness_ios:
     :path: ".symlinks/plugins/screen_brightness_ios/ios"
-  sign_in_with_apple:
-    :path: ".symlinks/plugins/sign_in_with_apple/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
   video_player:
@@ -296,7 +256,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
-  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   better_player: 2406bfe8175203c7a46fa15f9d778d73b12e1646
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   Firebase: 13d8d96499e2635428d5bf0ec675df21f95d9a95
@@ -315,27 +274,20 @@ SPEC CHECKSUMS:
   FirebasePerformance: 81f183c3fc593241d000a6367e54fd0f7ed402e3
   FirebaseRemoteConfig: 84d3397887d95587f0ee7a0a3989b2756dc2bbf9
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
-  flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   Google-Mobile-Ads-SDK: be2192b51b74d74a6ed70590c2e8275412f1b71e
   google_mobile_ads: a2f8b901601401bf7e691b4224d5992e9a37599a
-  google_sign_in: de494e5e993986afae63e22a32441e30c35c9823
   GoogleAppMeasurement: 837649ad3987936c232f6717c5680216f6243d24
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
-  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
-  GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   HLSCachingReverseProxyServer: 59935e1e0244ad7f3375d75b5ef46e8eb26ab181
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   path_provider_ios: 7d7ce634493af4477d156294792024ec3485acd5
   PINCache: 7a8fc1a691173d21dbddbf86cd515de6efa55086
   PINOperation: 00c935935f1e8cf0d1e2d6b542e75b88fc3e5e20
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   screen_brightness_ios: e2f4c3492ec238bb8ea1f5558f67ea22557cf997
-  sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
   video_player: ecd305f42e9044793efd34846e1ce64c31ea6fcb
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f

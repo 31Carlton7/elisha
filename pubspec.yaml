@@ -116,6 +116,13 @@ flutter:
     - assets/images/church_2.jpg
     - assets/images/church_3.jpg
 
+    # Bible Versions
+    - backend/asv.json
+    - backend/bbe.json
+    - backend/kjv.json
+    - backend/web.json
+    - backend/ylt.json
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
