@@ -78,10 +78,9 @@ class _BibleViewState extends State<BibleView> {
               },
               loading: () => Container(),
               data: (chapter) {
-                _isBookmarked = _isBookmarked = context
-                    .read(studyToolsRepositoryProvider)
+                _isBookmarked = _isBookmarked = watch(studyToolsRepositoryProvider)
                     .bookmarkedChapters
-                    .where((e) => e.id == chapter.id)
+                    .where((e) => e.id == chapter.id && e.verses![0].book.id == chapter.verses![0].book.id)
                     .isNotEmpty;
 
                 return Responsive(
