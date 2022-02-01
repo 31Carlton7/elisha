@@ -1,6 +1,14 @@
 # Elisha
 
-Pocket Bible & Church App to study God's Word and have more engagement with it.
+An Offline Pocket Bible & Church App to study God's Word and have more engagement with it.
+
+<!-- Put App Store and Google Play Store Stickers Here-->
+
+[Screenshots](#screenshots)
+
+[TestFlight & Google Play Beta](#testflight--google-play-beta)
+
+[License](https://github.com/31Carlton7/corona_spectator/blob/master/LICENSE)
 
 ## About
 
@@ -44,7 +52,35 @@ Soon
 
 ## Screenshots
 
-Soon
+<table> 
+  <tr>
+    <td> 
+      <img width="250" src="https://github.com/31Carlton7/elisha/blob/master/screenshots/promotional/iphone/iphone_1.png"> </img>
+    </td>
+    <td>
+      <img width="250" src="https://github.com/31Carlton7/elisha/blob/master/screenshots/promotional/iphone/iphone_2.png"> 
+  </img> 
+    </td>
+    <td> 
+        <img width="250" src="https://github.com/31Carlton7/elisha/blob/master/screenshots/promotional/iphone/iphone_3.png"> 
+  </img>
+    </td>
+  </tr>
+  
+  <tr>
+     <td>
+       <img width="250" src="https://github.com/31Carlton7/elisha/blob/master/screenshots/promotional/iphone/iphone_4.png"> 
+  </img>
+    </td>
+    <td>
+      <img width="250" src="https://github.com/31Carlton7/elisha/blob/master/screenshots/promotional/iphone/iphone_5.png">
+    </td>
+    <td> 
+      <img width="250" src="https://github.com/31Carlton7/elisha/blob/master/screenshots/promotional/iphone/iphone_7.png">
+    </td>
+  </tr>
+  
+</table>
 
 ## Featured In
 
