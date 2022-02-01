@@ -98,7 +98,6 @@ flutter:
     # App Icons
     - assets/app_icons/app_icon.png
     - assets/app_icons/store_icon.png
-    - assets/app_icons/google_icon.png
 
     # Nature Images
     - assets/images/nature_1.jpg
