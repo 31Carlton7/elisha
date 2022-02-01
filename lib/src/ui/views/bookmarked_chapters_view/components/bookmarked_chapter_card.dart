@@ -36,11 +36,7 @@ class BookmarkedChapterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String cardTitle() {
-      return chapter.verses![0].book.name! +
-          ' ' +
-          chapter.number!.toString() +
-          ' ' +
-          chapter.translation!.toUpperCase();
+      return chapter.verses![0].book.name! + ' ' + chapter.number!.toString();
     }
 
     return GestureDetector(
