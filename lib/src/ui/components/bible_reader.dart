@@ -66,17 +66,19 @@ class BibleReader extends ConsumerWidget {
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 if (_isFavoriteVerse)
-                  Icon(LineAwesomeIcons.heart_1,
-                      size: watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4, color: heartColor(context)),
+                  Icon(
+                    LineAwesomeIcons.heart_1,
+                    size: watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
+                    color: heartColor(context),
+                  ),
                 Text(
                   item.verseId.toString() + ' ',
                   style: Theme.of(context).textTheme.bodyText1?.copyWith(
                         color: Theme.of(context).colorScheme.secondaryVariant,
                         fontSize: watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
-                        height: watch(readerSettingsRepositoryProvider).verseNumberHeight * 1.1,
+                        height: watch(readerSettingsRepositoryProvider).verseNumberHeight * 1.4,
                         fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
                       ),
                 ),
