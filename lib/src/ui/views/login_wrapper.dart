@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
@@ -42,6 +43,13 @@ class _LoginWrapperState extends State<LoginWrapper> {
     return Consumer(
       builder: (context, watch, child) {
         final count = watch(localUserRepositoryProvider).getLoginCount;
+
+        final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: isDarkMode ? CantonColors.white : CantonColors.black, // this one for android
+          statusBarBrightness: isDarkMode ? Brightness.dark : Brightness.light, // this one for iOS
+        ));
 
         if (count > 1) {
           return const CurrentView();
