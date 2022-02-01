@@ -217,7 +217,7 @@ class _WelcomeViewState extends State<WelcomeView> {
         ),
         const SizedBox(height: 30),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             FirstNameInput(firstNameController: _firstNameController),
             LastNameInput(lastNameController: _lastNameController),
