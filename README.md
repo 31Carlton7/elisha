@@ -1,6 +1,6 @@
 # Elisha
 
-Pocket Bible & Church App to have study God's Word and have more engagement with it.
+Pocket Bible & Church App to study God's Word and have more engagement with it.
 
 ## About
 
@@ -17,25 +17,18 @@ To build the app I utilized the [Flutter SDK](https://flutter.dev) as the UI Fra
 - _Read 8 versions of the Bible_:
   - _King James Version_ (KJV)
   - _American Standard Version_ (ASV)
-  - _New Living Translation_ (NLT)
-  - _New International Version_ (NIV)
   - _World English Bible_ (WEB)
   - _Young's Literal Translation_ (YLT)
-  - _Darby's Translation_ (DARBY)
   - _Bible In Basic English_ (BBE)
 - _Verse of the day_: Receive a daily verse of God's word.
-- _Daily Readings_: Keep up with Mass everyday with daily. readings from [USCCB](uscc.org)
+- _Daily Readings_: Keep up with Mass everyday with daily. readings from [USCCB](usccb.org)
 - _Sunday Mass Videos_: Always stay in tune with Sunday Mass with Sunday Mass Videos.
-- _Prayers_: Read and create prayers to take with you always.
+- _Prayers_(SOON): Read and create prayers to take with you always.
 - _Bookmark chapters_: Never forget a chapter by saving it.
-- _Chapter Collections_: Store multiple bookmarked chapters in collections.
-- _Highlightable Text_: Highlight verses and passage for better study.
+- _Chapter Collections_(SOON): Store multiple bookmarked chapters in collections.
+- _Highlightable Text_(SOON): Highlight verses and passage for better study.
 - _Streaks_: Current Streak, Best Streak and Perfect Weeks on Elisha are stored to motivate and track progress.
 - _Daily Devotionals_: Receive daily devotionals to better study the Word.
-- _Third Party OAuth_:
-  - _Apple Sign In_
-  - _Google Sign In_
-  - _Facebook_ (SOON)
 
 ## Getting Started
 
