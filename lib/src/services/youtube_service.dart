@@ -23,6 +23,7 @@ import 'package:dio/dio.dart';
 import 'package:elisha/src/config/keys.dart';
 import 'package:elisha/src/models/youtube_channel.dart';
 import 'package:elisha/src/models/youtube_video.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class YouTubeService {
   YouTubeService(this._dio);
@@ -73,7 +74,7 @@ class YouTubeService {
     if (response.statusCode == 200) {
       var data = response.data;
 
-      _nextPageToken = data['nextPageToken'] ?? '';
+      _nextPageToken = '';
       List<dynamic> videosJson = data['items'];
 
       // Fetch first eight videos from uploads playlist
@@ -91,19 +92,12 @@ class YouTubeService {
 
   Future<String> getMP4Url(String videoId) async {
     try {
-      final response = await _dio
-          .get('https://maadhav-ytdl.herokuapp.com/video_info.php?url=https://www.youtube.com/watch?v=$videoId');
+      final extractor = YoutubeExplode();
+      final streamManifest = await extractor.videos.streamsClient.getManifest(videoId);
+      final streamInfo = streamManifest.muxed.withHighestBitrate();
+      extractor.close();
 
-      if (response.statusCode == 200) {
-        var data = response.data;
-
-        // Fetch first eight videos from uploads playlist
-        final videoUrl = data['links'][0];
-
-        return videoUrl;
-      } else {
-        throw json.decode(response.data)['error']['message'];
-      }
+      return streamInfo.url.toString();
     } catch (e) {
       rethrow;
     }

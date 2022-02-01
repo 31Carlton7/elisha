@@ -27,7 +27,6 @@ import 'package:elisha/src/providers/sunday_mass_service_provider.dart';
 import 'package:elisha/src/providers/youtube_fetch_channel_future_provider.dart';
 import 'package:elisha/src/providers/youtube_service_provider.dart';
 import 'package:elisha/src/ui/components/error_card.dart';
-import 'package:elisha/src/ui/components/loading_card.dart';
 import 'package:elisha/src/ui/views/sunday_mass_view/components/sunday_mass_view_header.dart';
 
 class SundayMassView extends StatelessWidget {
@@ -85,21 +84,18 @@ class SundayMassView extends StatelessWidget {
               }
             }
 
-            // final ytController = YoutubePlayerController(
-            //   initialVideoId: videoId(),
-            //   flags: const YoutubePlayerFlags(autoPlay: true, enableCaption: true),
-            // );
-
-            // final resp = Dio()
-            //     .get(
-            //         'https://maadhav-ytdl.herokuapp.com/video_info.php?url=https://www.youtube.com/watch?v=rLRIB6AF2Dg')
-            //     .then((value) => _val = value.data()['links'][0]);
-
             return FutureBuilder<String>(
                 future: watch(youtubeServiceProvider).getMP4Url(videoId()),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting || snapshot.data == null) {
-                    return const LoadingCard();
+                    return Column(
+                      children: [
+                        const SundayMassViewHeader(),
+                        Expanded(
+                          child: Loading(),
+                        ),
+                      ],
+                    );
                   }
 
                   if (snapshot.hasError) {
@@ -129,7 +125,6 @@ class SundayMassView extends StatelessWidget {
 
                         return GestureDetector(
                           onTap: () async {
-                            // print()
                             if (channelIds[_index] != channel.id) {
                               await context
                                   .read(localUserRepositoryProvider)
