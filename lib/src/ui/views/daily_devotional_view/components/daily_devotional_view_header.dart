@@ -17,12 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DailyDevotionalViewHeader extends StatelessWidget {
+class DailyDevotionalViewHeader extends ConsumerWidget {
   const DailyDevotionalViewHeader({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       children: const [CantonBackButton(isClear: true)],
     );
