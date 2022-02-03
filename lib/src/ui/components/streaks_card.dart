@@ -22,18 +22,18 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import 'package:elisha/src/providers/streaks_repository_provider.dart';
 
-class StreaksCard extends StatelessWidget {
+class StreaksCard extends ConsumerWidget {
   const StreaksCard({Key? key, required this.marginalPadding}) : super(key: key);
 
   final bool marginalPadding;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const divWidth = 30.0;
 
     return Consumer(
-      builder: (context, watch, child) {
-        final streaksRepo = watch(streaksRepositoryProvider);
+      builder: (context, ref, child) {
+        final streaksRepo = ref.watch(streaksRepositoryProvider);
 
         final currentStreak = streaksRepo.currentStreak.toString();
         final bestStreak = streaksRepo.bestStreak.toString();
