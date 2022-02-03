@@ -41,18 +41,14 @@ class _HomeViewState extends ConsumerState<HomeView> {
   }
 
   Widget _content(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const HomeViewHeader(),
-              _body(context),
-            ],
-          ),
-        );
-      },
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const HomeViewHeader(),
+          _body(context),
+        ],
+      ),
     );
   }
 
