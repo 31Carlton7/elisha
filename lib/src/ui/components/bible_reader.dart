@@ -35,7 +35,7 @@ class BibleReader extends ConsumerWidget {
   final Chapter chapter;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     List<Widget> children = [const SizedBox(height: 10)];
     List<InlineSpan> spans = [];
     children.add(
@@ -45,9 +45,9 @@ class BibleReader extends ConsumerWidget {
           TextSpan(children: spans),
           style: Theme.of(context).textTheme.headline5!.copyWith(
                 fontWeight: FontWeight.w400,
-                fontSize: watch(readerSettingsRepositoryProvider.notifier).bodyTextSize * 1.4,
-                height: watch(readerSettingsRepositoryProvider.notifier).bodyTextHeight * 1.1,
-                fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                fontSize: ref.watch(readerSettingsRepositoryProvider.notifier).bodyTextSize * 1.4,
+                height: ref.watch(readerSettingsRepositoryProvider.notifier).bodyTextHeight * 1.1,
+                fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
               ),
         ),
       ),
@@ -55,7 +55,7 @@ class BibleReader extends ConsumerWidget {
     for (int i = 0; i < chapter.verses!.length; i++) {
       var item = chapter.verses![i];
       var _isFavoriteVerse =
-          watch(studyToolsRepositoryProvider).favoriteVerses.where((element) => element.id == item.id).isNotEmpty;
+          ref.watch(studyToolsRepositoryProvider).favoriteVerses.where((element) => element.id == item.id).isNotEmpty;
 
       spans.add(
         WidgetSpan(
@@ -70,16 +70,16 @@ class BibleReader extends ConsumerWidget {
                 if (_isFavoriteVerse)
                   Icon(
                     LineAwesomeIcons.heart_1,
-                    size: watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
+                    size: ref.watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
                     color: heartColor(context),
                   ),
                 Text(
                   item.verseId.toString() + ' ',
                   style: Theme.of(context).textTheme.bodyText1?.copyWith(
                         color: Theme.of(context).colorScheme.secondaryVariant,
-                        fontSize: watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
-                        height: watch(readerSettingsRepositoryProvider).verseNumberHeight * 1.4,
-                        fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                        fontSize: ref.watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
+                        height: ref.watch(readerSettingsRepositoryProvider).verseNumberHeight * 1.4,
+                        fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                       ),
                 ),
               ],
