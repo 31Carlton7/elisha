@@ -23,10 +23,8 @@ import 'package:elisha/src/providers/bible_repository_provider.dart';
 
 String translationID = '';
 
-final bibleTranslationsProvider = Provider.autoDispose<List<Translation>>((ref) {
-  ref.maintainState = true;
-
-  final bibleService = ref.read(bibleRepositoryProvider);
+final bibleTranslationsProvider = Provider<List<Translation>>((ref) {
+  final bibleService = ref.watch(bibleRepositoryProvider);
   final versions = bibleService.translations;
 
   return versions;
