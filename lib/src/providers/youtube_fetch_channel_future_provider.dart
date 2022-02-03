@@ -24,6 +24,8 @@ import 'package:elisha/src/providers/youtube_service_provider.dart';
 // ignore: non_constant_identifier_names
 var YOUTUBE_CHANNEL_ID = '';
 
-final youtubeFetchChannelFutureProvider = FutureProvider<YouTubeChannel>((ref) {
-  return ref.read(youtubeServiceProvider).fetchChannel(YOUTUBE_CHANNEL_ID);
+final youtubeFetchChannelFutureProvider = FutureProvider.autoDispose<YouTubeChannel>((ref) {
+  ref.maintainState = true;
+
+  return ref.watch(youtubeServiceProvider).fetchChannel(YOUTUBE_CHANNEL_ID);
 });
