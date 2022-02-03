@@ -17,12 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SomethingWentWrong extends StatelessWidget {
+class SomethingWentWrong extends ConsumerWidget {
   const SomethingWentWrong({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +41,7 @@ class SomethingWentWrong extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             containerWidth: MediaQuery.of(context).size.width / 2 - 34,
             onPressed: () {
-              // context.read(authenticationRepositoryProvider).signOut();
+              // ref.read(authenticationRepositoryProvider).signOut();
             },
           ),
         ],
