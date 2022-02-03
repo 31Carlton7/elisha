@@ -23,14 +23,14 @@ import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:elisha/src/ui/views/favorite_verses_view/components/favorite_verse_card.dart';
 import 'package:elisha/src/ui/views/favorite_verses_view/components/favorite_verses_view_header.dart';
 
-class FavoriteVersesView extends StatefulWidget {
+class FavoriteVersesView extends ConsumerStatefulWidget {
   const FavoriteVersesView({Key? key}) : super(key: key);
 
   @override
-  State<FavoriteVersesView> createState() => _FavoriteVersesViewState();
+  ConsumerState<FavoriteVersesView> createState() => _FavoriteVersesViewState();
 }
 
-class _FavoriteVersesViewState extends State<FavoriteVersesView> {
+class _FavoriteVersesViewState extends ConsumerState<FavoriteVersesView> {
   @override
   Widget build(BuildContext context) {
     return CantonScaffold(
@@ -50,8 +50,8 @@ class _FavoriteVersesViewState extends State<FavoriteVersesView> {
 
   Widget _favoriteVerses(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final list = watch(studyToolsRepositoryProvider).favoriteVerses.reversed.toList();
+      builder: (context, ref, child) {
+        final list = ref.watch(studyToolsRepositoryProvider).favoriteVerses.reversed.toList();
 
         return Expanded(
           child: list.isNotEmpty
