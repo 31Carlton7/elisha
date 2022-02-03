@@ -63,64 +63,60 @@ class _VerseOfTheDayCardState extends ConsumerState<VerseOfTheDayCard> {
       return CantonColors.gray[300]!;
     }
 
-    return Consumer(
-      builder: (context, ref, child) {
-        final votdRepo = ref.watch(verseOfTheDayFutureProvider);
+    final votdRepo = ref.watch(verseOfTheDayFutureProvider);
 
-        return votdRepo.when(
-          error: (e, s) {
-            return SafeArea(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 17),
-                child: const ErrorCard(),
-              ),
-            );
-          },
-          loading: () {
-            return const LoadingCard();
-          },
-          data: (verses) {
-            _verses = verses;
-            _checkIfVerseIsFavorite();
+    return votdRepo.when(
+      error: (e, s) {
+        return SafeArea(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 17),
+            child: const ErrorCard(),
+          ),
+        );
+      },
+      loading: () {
+        return const LoadingCard();
+      },
+      data: (verses) {
+        _verses = verses;
+        _checkIfVerseIsFavorite();
 
-            return GestureDetector(
-              onTap: () {
-                CantonMethods.viewTransition(context, VerseOfTheDayView(verses: _verses!));
-              },
-              child: Container(
-                padding: const EdgeInsets.all(17.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: CantonMethods.alternateCanvasColorType3(context),
-                ),
-                child: Column(
+        return GestureDetector(
+          onTap: () {
+            CantonMethods.viewTransition(context, VerseOfTheDayView(verses: _verses!));
+          },
+          child: Container(
+            padding: const EdgeInsets.all(17.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              color: CantonMethods.alternateCanvasColorType3(context),
+            ),
+            child: Column(
+              children: [
+                _buildImage(context),
+                const SizedBox(height: elementSpacing),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildImage(context),
-                    const SizedBox(height: elementSpacing),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _header(context, bgColor()),
-                              const SizedBox(height: elementSpacing),
-                              _body(context, bgColor()),
-                              const SizedBox(height: elementSpacing),
-                              _bookChapterVerse(context),
-                            ],
-                          ),
-                        ),
-                        _favoriteButton(context, bgColor(), _verses!),
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _header(context, bgColor()),
+                          const SizedBox(height: elementSpacing),
+                          _body(context, bgColor()),
+                          const SizedBox(height: elementSpacing),
+                          _bookChapterVerse(context),
+                        ],
+                      ),
                     ),
+                    _favoriteButton(context, bgColor(), _verses!),
                   ],
                 ),
-              ),
-            );
-          },
+              ],
+            ),
+          ),
         );
       },
     );
@@ -153,53 +149,49 @@ class _VerseOfTheDayCardState extends ConsumerState<VerseOfTheDayCard> {
   }
 
   Widget _favoriteButton(BuildContext context, Color bgColor, List<Verse> verses) {
-    return Consumer(
-      builder: (context, ref, child) {
-        Color heartColor() {
-          if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
-            return CantonDarkColors.red[400]!;
+    Color heartColor() {
+      if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
+        return CantonDarkColors.red[400]!;
+      }
+      return CantonColors.red[400]!;
+    }
+
+    Icon icon() {
+      if (ref.watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
+        return _verses!.any((element) => e.id == element.id);
+      }).isNotEmpty) {
+        return Icon(LineAwesomeIcons.heart_1, size: 24, color: heartColor());
+      }
+      return Icon(LineAwesomeIcons.heart, size: 24, color: Theme.of(context).colorScheme.primary);
+    }
+
+    return GestureDetector(
+      onTap: () async {
+        HapticFeedback.mediumImpact();
+
+        setState(() {
+          _isFavorite = !_isFavorite;
+        });
+
+        for (Verse item in verses) {
+          if (_isFavorite) {
+            await ref.read(studyToolsRepositoryProvider).addFavoriteVerse(item);
+          } else {
+            await ref.read(studyToolsRepositoryProvider).removeFavoriteVerse(item);
           }
-          return CantonColors.red[400]!;
         }
-
-        Icon icon() {
-          if (ref.watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
-            return _verses!.any((element) => e.id == element.id);
-          }).isNotEmpty) {
-            return Icon(LineAwesomeIcons.heart_1, size: 24, color: heartColor());
-          }
-          return Icon(LineAwesomeIcons.heart, size: 24, color: Theme.of(context).colorScheme.primary);
-        }
-
-        return GestureDetector(
-          onTap: () async {
-            HapticFeedback.mediumImpact();
-
-            setState(() {
-              _isFavorite = !_isFavorite;
-            });
-
-            for (Verse item in verses) {
-              if (_isFavorite) {
-                await ref.read(studyToolsRepositoryProvider).addFavoriteVerse(item);
-              } else {
-                await ref.read(studyToolsRepositoryProvider).removeFavoriteVerse(item);
-              }
-            }
-          },
-          child: Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            child: Center(
-              child: icon(),
-            ),
-          ),
-        );
       },
+      child: Container(
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Theme.of(context).colorScheme.secondary,
+        ),
+        child: Center(
+          child: icon(),
+        ),
+      ),
     );
   }
 
