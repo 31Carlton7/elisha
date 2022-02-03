@@ -20,8 +20,9 @@ import 'package:canton_design_system/canton_design_system.dart';
 
 import 'package:elisha/src/models/chapter.dart';
 import 'package:elisha/src/ui/views/bookmarked_chapter_view/bookmarked_chapter_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BookmarkedChapterCard extends StatelessWidget {
+class BookmarkedChapterCard extends ConsumerWidget {
   const BookmarkedChapterCard({
     Key? key,
     required this.chapter,
@@ -34,7 +35,7 @@ class BookmarkedChapterCard extends StatelessWidget {
   final Future<void> Function(Chapter) showBookmarkedChapterOptionsBottomSheet;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     String cardTitle() {
       return chapter.verses![0].book.name! + ' ' + chapter.number!.toString();
     }
