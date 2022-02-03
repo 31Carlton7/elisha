@@ -32,14 +32,14 @@ class DailyReadingsView extends ConsumerWidget {
   final DailyReading dailyReading;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CantonScaffold(
       backgroundColor: CantonMethods.alternateCanvasColor(context),
-      body: _content(context, watch),
+      body: _content(context, ref),
     );
   }
 
-  Widget _content(BuildContext context, ScopedReader watch) {
+  Widget _content(BuildContext context, WidgetRef ref) {
     final _scrollController = ScrollController();
     return Scrollbar(
       controller: _scrollController,
@@ -55,7 +55,7 @@ class DailyReadingsView extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ..._body(context, watch),
+                ..._body(context, ref),
                 const SizedBox(height: 40),
               ],
             ),
@@ -65,12 +65,12 @@ class DailyReadingsView extends ConsumerWidget {
     );
   }
 
-  List<Widget> _body(BuildContext context, ScopedReader watch) {
+  List<Widget> _body(BuildContext context, WidgetRef ref) {
     List<Widget> children = [
       Text(
         dailyReading.name!,
         style: Theme.of(context).textTheme.headline4?.copyWith(
-              fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+              fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
             ),
       ),
       const SizedBox(height: 5),
@@ -78,7 +78,7 @@ class DailyReadingsView extends ConsumerWidget {
         'Lectionary: ' + dailyReading.lectionary!,
         style: Theme.of(context).textTheme.headline6?.copyWith(
               color: Theme.of(context).colorScheme.secondaryVariant,
-              fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+              fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
             ),
       ),
       const SizedBox(height: 30),
@@ -86,11 +86,7 @@ class DailyReadingsView extends ConsumerWidget {
 
     for (int i = 0; i < dailyReading.readings!.length; i++) {
       children.add(
-        _readingCard(
-          context,
-          dailyReading.readings![i],
-          watch,
-        ),
+        _readingCard(context, dailyReading.readings![i], ref),
       );
       if (i != dailyReading.readings!.length - 1) {
         children.add(const SizedBox(height: 30));
@@ -127,7 +123,7 @@ class DailyReadingsView extends ConsumerWidget {
     return children;
   }
 
-  Widget _readingCard(BuildContext context, Reading reading, ScopedReader watch) {
+  Widget _readingCard(BuildContext context, Reading reading, WidgetRef ref) {
     return Column(
       children: [
         Row(
@@ -135,7 +131,7 @@ class DailyReadingsView extends ConsumerWidget {
             Text(
               reading.name!,
               style: Theme.of(context).textTheme.headline5?.copyWith(
-                    fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                    fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                   ),
             ),
             const SizedBox(width: 10),
@@ -144,7 +140,7 @@ class DailyReadingsView extends ConsumerWidget {
                 reading.snippetAddress!,
                 style: Theme.of(context).textTheme.bodyText1?.copyWith(
                       color: Theme.of(context).colorScheme.secondaryVariant,
-                      fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                      fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                     ),
               ),
             ),
@@ -154,10 +150,10 @@ class DailyReadingsView extends ConsumerWidget {
         Text(
           reading.text!,
           style: Theme.of(context).textTheme.headline5?.copyWith(
-                fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                 fontWeight: FontWeight.w400,
-                fontSize: watch(readerSettingsRepositoryProvider).bodyTextSize * 1.45,
-                height: watch(readerSettingsRepositoryProvider).bodyTextHeight * 0.95,
+                fontSize: ref.watch(readerSettingsRepositoryProvider).bodyTextSize * 1.45,
+                height: ref.watch(readerSettingsRepositoryProvider).bodyTextHeight * 0.95,
               ),
         ),
       ],
