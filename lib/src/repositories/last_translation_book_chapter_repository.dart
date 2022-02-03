@@ -71,7 +71,7 @@ class LastTranslationBookChapterRepository extends StateNotifier<TranslationBook
     var box = Hive.box('elisha');
 
     // Removes all info
-    // box.remove('bible_chapter_translation');
+    // box.delete('bible_chapter_translation');
 
     List<String> savedBibleChapterAndTranslation =
         box.get('bible_chapter_translation', defaultValue: ['0', 'asv', '1', '1']);
