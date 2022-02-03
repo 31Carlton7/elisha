@@ -24,7 +24,7 @@ import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:elisha/src/ui/components/bible_reader.dart';
 import 'package:elisha/src/ui/views/bookmarked_chapter_view/components/bookmarked_chapter_view_header.dart';
 
-class BookmarkedChapterView extends StatefulWidget {
+class BookmarkedChapterView extends ConsumerStatefulWidget {
   const BookmarkedChapterView(this.chapter, {Key? key}) : super(key: key);
 
   final Chapter chapter;
@@ -33,7 +33,7 @@ class BookmarkedChapterView extends StatefulWidget {
   _BookmarkedChapterViewState createState() => _BookmarkedChapterViewState();
 }
 
-class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
+class _BookmarkedChapterViewState extends ConsumerState<BookmarkedChapterView> {
   @override
   Widget build(BuildContext context) {
     return CantonScaffold(
@@ -45,7 +45,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
 
   Widget _content(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         return Column(
           children: [
             BookmarkedChapterViewHeader(
@@ -117,7 +117,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
                         color: Theme.of(context).colorScheme.secondary,
                         textColor: Theme.of(context).colorScheme.error,
                         onPressed: () async {
-                          await context.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
+                          await ref.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
                           Navigator.pop(context);
                         },
                       ),
