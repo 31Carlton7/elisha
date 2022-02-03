@@ -20,29 +20,35 @@ import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/translation.dart';
-import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
 
-class TranslationCard extends StatelessWidget {
-  const TranslationCard({Key? key, required this.setState, required this.index, required this.translation})
-      : super(key: key);
+class TranslationCard extends ConsumerWidget {
+  const TranslationCard({
+    Key? key,
+    required this.setState,
+    required this.index,
+    required this.ref,
+    required this.translation,
+  }) : super(key: key);
 
   final void Function(void Function()) setState;
+  final WidgetRef ref;
   final int index;
   final Translation translation;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          context.read(localRepositoryProvider.notifier).changeBibleTranslation(
-                index - 1,
-                translation.abbreviation!,
-              );
+      onTap: () async {
+        await ref.read(localRepositoryProvider.notifier).changeBibleTranslation(
+              index - 1,
+              translation.abbreviation!.toLowerCase(),
+            );
 
-          context.refresh(bibleChaptersProvider);
-        });
+        // ref.refresh(bibleChaptersProvider);
+        // ref.refresh(bibleBooksProvider);
+
+        setState(() {});
 
         Navigator.of(context, rootNavigator: true).pop();
       },
