@@ -25,14 +25,14 @@ import 'package:elisha/src/ui/components/error_card.dart';
 import 'package:elisha/src/ui/components/loading_card.dart';
 import 'package:elisha/src/ui/views/daily_devotional_view/daily_devotional_view.dart';
 
-class DailyDevotionalCard extends StatefulWidget {
+class DailyDevotionalCard extends ConsumerStatefulWidget {
   const DailyDevotionalCard({Key? key}) : super(key: key);
 
   @override
-  State<DailyDevotionalCard> createState() => _DailyDevotionalCardState();
+  ConsumerState<DailyDevotionalCard> createState() => _DailyDevotionalCardState();
 }
 
-class _DailyDevotionalCardState extends State<DailyDevotionalCard> {
+class _DailyDevotionalCardState extends ConsumerState<DailyDevotionalCard> {
   @override
   Widget build(BuildContext context) {
     Color bgColor() {
@@ -42,79 +42,75 @@ class _DailyDevotionalCardState extends State<DailyDevotionalCard> {
       return CantonColors.gray[300]!;
     }
 
-    return Consumer(
-      builder: (context, watch, child) {
-        final devotionalRepo = watch(dailyDevotionalServiceProvider);
+    final devotionalRepo = ref.watch(dailyDevotionalServiceProvider);
 
-        return devotionalRepo.when(
-          error: (e, s) => const ErrorCard(),
-          loading: () => const LoadingCard(),
-          data: (htmlData) {
-            return GestureDetector(
-              onTap: () async {
-                await CantonMethods.viewTransition(context, DailyDevotionalView(htmlData: htmlData));
-              },
-              child: Container(
-                padding: const EdgeInsets.all(17.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: CantonMethods.alternateCanvasColorType3(context),
+    return devotionalRepo.when(
+      error: (e, s) => const ErrorCard(),
+      loading: () => const LoadingCard(),
+      data: (htmlData) {
+        return GestureDetector(
+          onTap: () async {
+            await CantonMethods.viewTransition(context, DailyDevotionalView(htmlData: htmlData));
+          },
+          child: Container(
+            padding: const EdgeInsets.all(17.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              color: CantonMethods.alternateCanvasColorType3(context),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _header(context, bgColor()),
+                      const SizedBox(height: 15),
+                      _body(context, bgColor(), htmlData),
+                    ],
+                  ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Stack(
+                  clipBehavior: Clip.none,
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _header(context, bgColor()),
-                          const SizedBox(height: 15),
-                          _body(context, bgColor(), htmlData),
-                        ],
+                    Positioned(
+                      right: 7,
+                      top: 7,
+                      child: Container(
+                        height: 130,
+                        width: 75,
+                        decoration: BoxDecoration(
+                          color: bgColor(),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
                     ),
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Positioned(
-                          right: 7,
-                          top: 7,
-                          child: Container(
-                            height: 130,
-                            width: 75,
-                            decoration: BoxDecoration(
-                              color: bgColor(),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
+                    Container(
+                      height: 130,
+                      width: 75,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [CantonColors.purple[500]!, CantonColors.purple[600]!],
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomRight,
                         ),
-                        Container(
-                          height: 130,
-                          width: 75,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [CantonColors.purple[500]!, CantonColors.purple[600]!],
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomRight,
-                            ),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              LineAwesomeIcons.praying_hands,
-                              color: CantonColors.white,
-                              size: 30,
-                            ),
-                          ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          LineAwesomeIcons.praying_hands,
+                          color: CantonColors.white,
+                          size: 30,
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            );
-          },
+              ],
+            ),
+          ),
         );
       },
     );
