@@ -17,19 +17,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FirstNameInput extends StatefulWidget {
+class FirstNameInput extends ConsumerWidget {
   const FirstNameInput({Key? key, required this.firstNameController}) : super(key: key);
 
   final TextEditingController firstNameController;
 
   @override
-  State<FirstNameInput> createState() => _FirstNameInputState();
-}
-
-class _FirstNameInputState extends State<FirstNameInput> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       margin: const EdgeInsets.all(7),
       width: MediaQuery.of(context).size.width / 2 - 44,
@@ -38,7 +34,7 @@ class _FirstNameInputState extends State<FirstNameInput> {
         labelText: 'First Name',
         isTextFormField: true,
         obscureText: false,
-        controller: widget.firstNameController,
+        controller: firstNameController,
         textInputType: TextInputType.name,
       ),
     );
