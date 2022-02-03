@@ -19,15 +19,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:canton_design_system/canton_design_system.dart';
 
 import 'package:elisha/src/models/chapter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BookmarkedChapterViewHeader extends StatelessWidget {
+class BookmarkedChapterViewHeader extends ConsumerWidget {
   const BookmarkedChapterViewHeader({required this.chapter, required this.showBottomSheet, Key? key}) : super(key: key);
 
   final void Function(Chapter) showBottomSheet;
   final Chapter chapter;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     String name() {
       return chapter.verses![0].book.name! + ' ' + chapter.number!;
     }
