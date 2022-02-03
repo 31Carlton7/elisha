@@ -22,12 +22,13 @@ import 'package:elisha/src/ui/views/settings_view/components/change_birth_date_c
 import 'package:elisha/src/ui/views/settings_view/components/change_first_name_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/change_last_name_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/settings_view_header.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends ConsumerWidget {
   const SettingsView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CantonScaffoldType2(
       backgroundColor: Theme.of(context).canvasColor,
       body: _content(context),
