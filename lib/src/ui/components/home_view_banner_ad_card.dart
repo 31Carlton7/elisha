@@ -27,8 +27,8 @@ class HomeViewBannerAdCard extends ConsumerWidget {
   const HomeViewBannerAdCard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final ad = watch(adStateProvider).homeViewBannerAd;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ad = ref.watch(adStateProvider).homeViewBannerAd;
 
     ad.load();
 
