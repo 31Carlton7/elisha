@@ -17,14 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FavoriteVersesViewHeader extends StatelessWidget {
-  const FavoriteVersesViewHeader({
-    Key? key,
-  }) : super(key: key);
+class FavoriteVersesViewHeader extends ConsumerWidget {
+  const FavoriteVersesViewHeader({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         Container(
