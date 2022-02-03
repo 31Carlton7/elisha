@@ -27,8 +27,8 @@ class ChurchViewBannerAdCard extends ConsumerWidget {
   const ChurchViewBannerAdCard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final ad = watch(adStateProvider).churchViewBannerAd;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ad = ref.watch(adStateProvider).churchViewBannerAd;
 
     ad.load();
 
