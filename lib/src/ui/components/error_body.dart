@@ -25,7 +25,7 @@ class ErrorBody extends ConsumerWidget {
 
   const ErrorBody(this.message, this.provider, {Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,7 +45,7 @@ class ErrorBody extends ConsumerWidget {
           containerWidth: MediaQuery.of(context).size.width / 2 - 90,
           containerHeight: 45,
           padding: EdgeInsets.zero,
-          onPressed: () => context.refresh(provider),
+          onPressed: () => ref.refresh(provider),
         ),
       ],
     );
