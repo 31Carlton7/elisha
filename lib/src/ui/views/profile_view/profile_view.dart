@@ -25,12 +25,13 @@ import 'package:elisha/src/ui/views/profile_view/components/favorite_verses_card
 import 'package:elisha/src/ui/views/profile_view/components/privacy_policy_card.dart';
 import 'package:elisha/src/ui/views/profile_view/components/profile_view_header.dart';
 import 'package:elisha/src/ui/views/profile_view/components/settings_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends ConsumerWidget {
   const ProfileView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return _content(context);
   }
 
