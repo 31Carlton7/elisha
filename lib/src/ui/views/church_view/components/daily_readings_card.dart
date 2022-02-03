@@ -30,8 +30,8 @@ class DailyReadingsCard extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final dailyReadingsRepo = watch(dailyReadingsFutureProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dailyReadingsRepo = ref.watch(dailyReadingsFutureProvider);
 
     return dailyReadingsRepo.when(
       error: (e, s) => const ErrorCard(),
