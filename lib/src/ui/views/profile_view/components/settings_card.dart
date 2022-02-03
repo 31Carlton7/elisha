@@ -19,14 +19,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:canton_design_system/canton_design_system.dart';
 
 import 'package:elisha/src/ui/views/settings_view/settings_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsCard extends StatelessWidget {
+class SettingsCard extends ConsumerWidget {
   const SettingsCard({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
         CantonMethods.viewTransition(context, const SettingsView());
