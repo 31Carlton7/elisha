@@ -51,45 +51,41 @@ class _BookmarkedChaptersViewState extends ConsumerState<BookmarkedChaptersView>
   }
 
   Widget _bookmarkedChapters(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        return Expanded(
-          child: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.isNotEmpty
-              ? Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 17),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 700),
-                    child: ListView.separated(
-                      itemCount: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.length,
-                      separatorBuilder: (context, index) {
-                        return const Divider();
-                      },
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            BookmarkedChapterCard(
-                              chapter: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters[index],
-                              setState: setState,
-                              showBookmarkedChapterOptionsBottomSheet: _showBookmarkedChapterOptionsBottomSheet,
-                            ),
-                            if (index == ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.length - 1)
-                              const Divider(),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                )
-              : Center(
-                  child: Text(
-                    'No Bookmarked Chapters',
-                    style: Theme.of(context).textTheme.headline5?.copyWith(
-                          color: Theme.of(context).colorScheme.secondaryVariant,
+    return Expanded(
+      child: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.isNotEmpty
+          ? Container(
+              padding: const EdgeInsets.symmetric(horizontal: 17),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 700),
+                child: ListView.separated(
+                  itemCount: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.length,
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        BookmarkedChapterCard(
+                          chapter: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters[index],
+                          setState: setState,
+                          showBookmarkedChapterOptionsBottomSheet: _showBookmarkedChapterOptionsBottomSheet,
                         ),
-                  ),
+                        if (index == ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.length - 1)
+                          const Divider(),
+                      ],
+                    );
+                  },
                 ),
-        );
-      },
+              ),
+            )
+          : Center(
+              child: Text(
+                'No Bookmarked Chapters',
+                style: Theme.of(context).textTheme.headline5?.copyWith(
+                      color: Theme.of(context).colorScheme.secondaryVariant,
+                    ),
+              ),
+            ),
     );
   }
 
