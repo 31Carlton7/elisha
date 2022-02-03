@@ -17,14 +17,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LastNameInput extends StatelessWidget {
+class LastNameInput extends ConsumerWidget {
   const LastNameInput({Key? key, required this.lastNameController}) : super(key: key);
 
   final TextEditingController lastNameController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       margin: const EdgeInsets.all(7),
       width: MediaQuery.of(context).size.width / 2 - 44,
