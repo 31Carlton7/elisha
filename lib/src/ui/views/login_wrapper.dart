@@ -40,23 +40,21 @@ class _LoginWrapperState extends ConsumerState<LoginWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        final count = ref.read(localUserRepositoryProvider).getLoginCount;
+    final count = ref.read(localUserRepositoryProvider).getLoginCount;
 
-        final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
 
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-          statusBarColor: isDarkMode ? CantonColors.white : CantonColors.black, // this one for android
-          statusBarBrightness: isDarkMode ? Brightness.dark : Brightness.light, // this one for iOS
-        ));
-
-        if (count > 1) {
-          return const CurrentView();
-        }
-
-        return const IntroductionView();
-      },
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        statusBarColor: isDarkMode ? CantonColors.white : CantonColors.black,
+        statusBarBrightness: isDarkMode ? Brightness.dark : Brightness.light,
+      ),
     );
+
+    if (count > 1) {
+      return const CurrentView();
+    }
+
+    return const IntroductionView();
   }
 }
