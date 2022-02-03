@@ -26,11 +26,11 @@ import 'package:intl/intl.dart';
 
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 
-class ChangeBirthDateCard extends StatelessWidget {
+class ChangeBirthDateCard extends ConsumerWidget {
   const ChangeBirthDateCard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var _controller = DateTime.now();
     final initialDate = DateTime.now();
     final maximumYear = DateTime.now().year;
@@ -38,7 +38,7 @@ class ChangeBirthDateCard extends StatelessWidget {
     final lastDate = DateTime.now();
     String currentBirthdayStr() {
       return 'Current Birthday: ' +
-          DateFormat('yMMMd').format((context.read(localUserRepositoryProvider).getUser.birthDate));
+          DateFormat('yMMMd').format((ref.watch(localUserRepositoryProvider).getUser.birthDate));
     }
 
     return CantonExpansionTile(
@@ -107,8 +107,8 @@ class ChangeBirthDateCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
                       final updatedUser =
-                          context.read(localUserRepositoryProvider).getUser.copyWith(birthDate: _controller);
-                      context.read(localUserRepositoryProvider).updateUser(updatedUser);
+                          ref.watch(localUserRepositoryProvider).getUser.copyWith(birthDate: _controller);
+                      ref.read(localUserRepositoryProvider).updateUser(updatedUser);
                       Navigator.of(context).pop();
                     },
                   ),
