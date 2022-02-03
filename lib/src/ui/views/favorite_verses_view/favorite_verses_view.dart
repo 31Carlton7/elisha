@@ -49,39 +49,35 @@ class _FavoriteVersesViewState extends ConsumerState<FavoriteVersesView> {
   }
 
   Widget _favoriteVerses(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        final list = ref.watch(studyToolsRepositoryProvider).favoriteVerses.reversed.toList();
+    final list = ref.watch(studyToolsRepositoryProvider).favoriteVerses.reversed.toList();
 
-        return Expanded(
-          child: list.isNotEmpty
-              ? ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 700),
-                  child: ListView.separated(
-                    itemCount: list.length,
-                    separatorBuilder: (context, index) {
-                      return const Divider();
-                    },
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          FavoriteVerseCard(verse: list[index]),
-                          if (index == list.length - 1) const Divider(),
-                        ],
-                      );
-                    },
-                  ),
-                )
-              : Center(
-                  child: Text(
-                    'No Favorite Verses',
-                    style: Theme.of(context).textTheme.headline5?.copyWith(
-                          color: Theme.of(context).colorScheme.secondaryVariant,
-                        ),
-                  ),
-                ),
-        );
-      },
+    return Expanded(
+      child: list.isNotEmpty
+          ? ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 700),
+              child: ListView.separated(
+                itemCount: list.length,
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      FavoriteVerseCard(verse: list[index]),
+                      if (index == list.length - 1) const Divider(),
+                    ],
+                  );
+                },
+              ),
+            )
+          : Center(
+              child: Text(
+                'No Favorite Verses',
+                style: Theme.of(context).textTheme.headline5?.copyWith(
+                      color: Theme.of(context).colorScheme.secondaryVariant,
+                    ),
+              ),
+            ),
     );
   }
 }
