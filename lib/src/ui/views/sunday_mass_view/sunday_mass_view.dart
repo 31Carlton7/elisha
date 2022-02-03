@@ -29,11 +29,11 @@ import 'package:elisha/src/providers/youtube_service_provider.dart';
 import 'package:elisha/src/ui/components/error_card.dart';
 import 'package:elisha/src/ui/views/sunday_mass_view/components/sunday_mass_view_header.dart';
 
-class SundayMassView extends StatelessWidget {
+class SundayMassView extends ConsumerWidget {
   const SundayMassView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CantonScaffold(
       // backgroundColor: CantonMethods.alternateCanvasColor(context),
       body: _content(context),
@@ -42,11 +42,11 @@ class SundayMassView extends StatelessWidget {
 
   Widget _content(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        YOUTUBE_CHANNEL_ID = context.read(localUserRepositoryProvider).getLastChurchYTChannel;
+      builder: (context, ref, child) {
+        YOUTUBE_CHANNEL_ID = ref.watch(localUserRepositoryProvider).getLastChurchYTChannel;
 
-        final channelIds = watch(sundayMassServiceProvider).getChurchYouTubeChannelIds;
-        final youtubeChannelRepo = watch(youtubeFetchChannelFutureProvider);
+        final channelIds = ref.watch(sundayMassServiceProvider).getChurchYouTubeChannelIds;
+        final youtubeChannelRepo = ref.watch(youtubeFetchChannelFutureProvider);
         const _uiElementCount = 5;
 
         return youtubeChannelRepo.when(
@@ -85,7 +85,7 @@ class SundayMassView extends StatelessWidget {
             }
 
             return FutureBuilder<String>(
-                future: watch(youtubeServiceProvider).getMP4Url(videoId()),
+                future: ref.watch(youtubeServiceProvider).getMP4Url(videoId()),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting || snapshot.data == null) {
                     return Column(
@@ -126,11 +126,9 @@ class SundayMassView extends StatelessWidget {
                         return GestureDetector(
                           onTap: () async {
                             if (channelIds[_index] != channel.id) {
-                              await context
-                                  .read(localUserRepositoryProvider)
-                                  .updateLastChurchYTChannel(channelIds[_index]);
+                              await ref.read(localUserRepositoryProvider).updateLastChurchYTChannel(channelIds[_index]);
                               YOUTUBE_CHANNEL_ID = channelIds[_index];
-                              context.refresh(youtubeFetchChannelFutureProvider);
+                              ref.refresh(youtubeFetchChannelFutureProvider);
                             }
                           },
                           child: Card(
