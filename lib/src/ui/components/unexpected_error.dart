@@ -19,13 +19,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UnexpectedError extends StatelessWidget {
+class UnexpectedError extends ConsumerWidget {
   const UnexpectedError(this.provider, {Key? key}) : super(key: key);
 
   final AutoDisposeFutureProvider provider;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +44,7 @@ class UnexpectedError extends StatelessWidget {
             containerWidth: MediaQuery.of(context).size.width / 2 - 90,
             containerHeight: 45,
             padding: EdgeInsets.zero,
-            onPressed: () => context.refresh(provider),
+            onPressed: () => ref.refresh(provider),
           ),
         ],
       ),
