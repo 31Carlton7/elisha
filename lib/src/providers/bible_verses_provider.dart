@@ -30,7 +30,7 @@ final bibleVersesProvider = FutureProvider.autoDispose<List<Verse>>((ref) async 
 
   bool bookIDIsEmpty = ['', null].contains(verseID);
 
-  final bibleService = ref.read(bibleServiceProvider);
+  final bibleService = ref.watch(bibleServiceProvider);
   final verses = bibleService.getVerses(bookID, chapterID, bookIDIsEmpty ? null : verseID);
 
   return verses;
