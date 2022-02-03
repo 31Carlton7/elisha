@@ -34,7 +34,7 @@ dependencies:
   shimmer: ^2.0.0
 
   # State Management
-  flutter_riverpod: ^0.14.0+3
+  flutter_riverpod: ^1.0.3
 
   # API
   dio: ^4.0.0
