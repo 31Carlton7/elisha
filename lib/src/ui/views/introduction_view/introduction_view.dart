@@ -33,14 +33,14 @@ import 'package:elisha/src/ui/views/introduction_view/components/birth_date_inpu
 import 'package:elisha/src/ui/views/introduction_view/components/first_name_input.dart';
 import 'package:elisha/src/ui/views/introduction_view/components/last_name_input.dart';
 
-class IntroductionView extends StatefulWidget {
+class IntroductionView extends ConsumerStatefulWidget {
   const IntroductionView({Key? key}) : super(key: key);
 
   @override
   _IntroductionViewState createState() => _IntroductionViewState();
 }
 
-class _IntroductionViewState extends State<IntroductionView> {
+class _IntroductionViewState extends ConsumerState<IntroductionView> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(BuildContext context) {
@@ -150,14 +150,14 @@ class _IntroductionViewState extends State<IntroductionView> {
   }
 }
 
-class WelcomeView extends StatefulWidget {
+class WelcomeView extends ConsumerStatefulWidget {
   const WelcomeView({Key? key}) : super(key: key);
 
   @override
-  State<WelcomeView> createState() => _WelcomeViewState();
+  ConsumerState<WelcomeView> createState() => _WelcomeViewState();
 }
 
-class _WelcomeViewState extends State<WelcomeView> {
+class _WelcomeViewState extends ConsumerState<WelcomeView> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
 
@@ -167,7 +167,7 @@ class _WelcomeViewState extends State<WelcomeView> {
   var _validate = false;
 
   Future<void> _onDoneBtnPressed(BuildContext context, LocalUser user) async {
-    await context.read(localUserRepositoryProvider.notifier).updateUser(user);
+    await ref.read(localUserRepositoryProvider.notifier).updateUser(user);
     await Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => const CurrentView(),
