@@ -17,12 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SundayMassViewHeader extends StatelessWidget {
+class SundayMassViewHeader extends ConsumerWidget {
   const SundayMassViewHeader({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return const ViewHeaderTwo(
       title: 'Mass',
       backButton: true,
