@@ -27,14 +27,14 @@ import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 import 'package:elisha/src/ui/components/verse_of_the_day_card.dart';
 import 'package:elisha/src/ui/views/home_view/components/home_view_header.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends ConsumerStatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     return _content(context);
@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _content(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
