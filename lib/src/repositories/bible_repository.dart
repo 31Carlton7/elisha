@@ -208,10 +208,9 @@ class BibleRepository {
     return books;
   }
 
-  bool _isLastChapterInBook(BuildContext context) {
+  bool _isLastChapterInBook(WidgetRef ref) {
     bool bookChapterBool(int book, int chapter) {
-      return (context.read(localRepositoryProvider).chapter == chapter &&
-          context.read(localRepositoryProvider).book == book);
+      return (ref.watch(localRepositoryProvider).chapter == chapter && ref.watch(localRepositoryProvider).book == book);
     }
 
     if (bookChapterBool(1, 50) ||
@@ -286,20 +285,20 @@ class BibleRepository {
     return false;
   }
 
-  Future<void> goToNextPreviousChapter(BuildContext context, bool isBackward) async {
+  Future<void> goToNextPreviousChapter(WidgetRef ref, bool isBackward) async {
     bool isFirstChapterInBook() {
-      return context.read(localRepositoryProvider).chapter == 1;
+      return ref.watch(localRepositoryProvider).chapter == 1;
     }
 
     bool isGenesisOne() {
-      if (context.read(localRepositoryProvider).book == 1 && context.read(localRepositoryProvider).chapter == 1) {
+      if (ref.watch(localRepositoryProvider).book == 1 && ref.watch(localRepositoryProvider).chapter == 1) {
         return true;
       }
       return false;
     }
 
     bool isRevelationTwentyTwo() {
-      if (context.read(localRepositoryProvider).book == 66 && context.read(localRepositoryProvider).chapter == 22) {
+      if (ref.watch(localRepositoryProvider).book == 66 && ref.watch(localRepositoryProvider).chapter == 22) {
         return true;
       }
       return false;
@@ -311,63 +310,62 @@ class BibleRepository {
     if (isBackward) {
       if (!isGenesisOne()) {
         if (isFirstChapterInBook()) {
-          newBibleBook = context.read(localRepositoryProvider).book! - 1;
+          newBibleBook = ref.watch(localRepositoryProvider).book! - 1;
           newBibleChapter = _mapOfBibleChaptersAndBooks[newBibleBook]!;
         } else {
-          newBibleBook = context.read(localRepositoryProvider).book!;
-          newBibleChapter = context.read(localRepositoryProvider).chapter! - 1;
+          newBibleBook = ref.watch(localRepositoryProvider).book!;
+          newBibleChapter = ref.watch(localRepositoryProvider).chapter! - 1;
         }
 
         bookID = newBibleBook.toString();
         chapterID = newBibleChapter.toString();
 
-        context.read(localRepositoryProvider.notifier).changeBibleBook(newBibleBook);
-        context.read(localRepositoryProvider.notifier).changeBibleChapter(newBibleChapter);
+        await ref.read(localRepositoryProvider.notifier).changeBibleBook(newBibleBook);
+        await ref.read(localRepositoryProvider.notifier).changeBibleChapter(newBibleChapter);
 
-        context.refresh(bibleChaptersProvider);
+        ref.refresh(bibleChaptersProvider);
       } else {
         DoNothingAction();
       }
     } else {
       if (!isRevelationTwentyTwo()) {
-        if (_isLastChapterInBook(context)) {
-          newBibleBook = context.read(localRepositoryProvider).book! + 1;
+        if (_isLastChapterInBook(ref)) {
+          newBibleBook = ref.watch(localRepositoryProvider).book! + 1;
           newBibleChapter = 1;
         } else {
-          newBibleBook = context.read(localRepositoryProvider).book!;
-          newBibleChapter = context.read(localRepositoryProvider).chapter! + 1;
+          newBibleBook = ref.watch(localRepositoryProvider).book!;
+          newBibleChapter = ref.watch(localRepositoryProvider).chapter! + 1;
         }
 
         bookID = newBibleBook.toString();
         chapterID = newBibleChapter.toString();
 
-        context.read(localRepositoryProvider.notifier).changeBibleBook(newBibleBook);
-        context.read(localRepositoryProvider.notifier).changeBibleChapter(newBibleChapter);
+        await ref.read(localRepositoryProvider.notifier).changeBibleBook(newBibleBook);
+        await ref.read(localRepositoryProvider.notifier).changeBibleChapter(newBibleChapter);
 
-        context.refresh(bibleChaptersProvider);
+        ref.refresh(bibleChaptersProvider);
       } else {
         DoNothingAction();
       }
     }
   }
 
-  Future<void> changeChapter(BuildContext context, int book, int chapter) async {
-    if (context.read(localRepositoryProvider).book! == book &&
-        context.read(localRepositoryProvider).chapter! == chapter) {
+  Future<void> changeChapter(WidgetRef ref, int book, int chapter) async {
+    if (ref.watch(localRepositoryProvider).book! == book && ref.watch(localRepositoryProvider).chapter! == chapter) {
       DoNothingAction();
     } else {
-      if (context.read(localRepositoryProvider).book! == book) {
+      if (ref.watch(localRepositoryProvider).book! == book) {
         chapterID = chapter.toString();
-        context.read(localRepositoryProvider.notifier).changeBibleChapter(chapter);
+        await ref.read(localRepositoryProvider.notifier).changeBibleChapter(chapter);
       } else {
         bookID = book.toString();
         chapterID = chapter.toString();
 
-        context.read(localRepositoryProvider.notifier).changeBibleBook(book);
-        context.read(localRepositoryProvider.notifier).changeBibleChapter(chapter);
+        await ref.read(localRepositoryProvider.notifier).changeBibleBook(book);
+        await ref.read(localRepositoryProvider.notifier).changeBibleChapter(chapter);
       }
 
-      context.refresh(bibleChaptersProvider);
+      ref.refresh(bibleChaptersProvider);
     }
   }
 }
