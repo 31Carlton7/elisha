@@ -58,11 +58,11 @@ void main() async {
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CantonApp(
       title: kAppTitle,
       primaryLightColor: const Color(0xFFB97D3C),
