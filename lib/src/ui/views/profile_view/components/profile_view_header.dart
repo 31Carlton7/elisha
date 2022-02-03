@@ -25,8 +25,8 @@ class ProfileViewHeader extends ConsumerWidget {
   const ProfileViewHeader({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    String? dbName = watch(localUserRepositoryProvider).getUser.firstName;
+  Widget build(BuildContext context, WidgetRef ref) {
+    String? dbName = ref.watch(localUserRepositoryProvider).getUser.firstName;
 
     String name(String source) {
       if (source.length > 18) {
