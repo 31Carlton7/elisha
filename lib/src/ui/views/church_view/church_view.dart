@@ -22,15 +22,16 @@ import 'package:elisha/src/ui/components/church_view_banner_ad_card.dart';
 import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 import 'package:elisha/src/ui/views/church_view/components/church_view_header.dart';
 import 'package:elisha/src/ui/views/church_view/components/daily_readings_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChurchView extends StatefulWidget {
+class ChurchView extends ConsumerStatefulWidget {
   const ChurchView({Key? key}) : super(key: key);
 
   @override
   _ChurchViewState createState() => _ChurchViewState();
 }
 
-class _ChurchViewState extends State<ChurchView> {
+class _ChurchViewState extends ConsumerState<ChurchView> {
   @override
   Widget build(BuildContext context) {
     return _content(context);
