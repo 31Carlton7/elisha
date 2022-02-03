@@ -20,9 +20,11 @@ import 'package:canton_design_system/canton_design_system.dart';
 
 import 'package:elisha/src/models/translation.dart';
 import 'package:elisha/src/ui/views/bible_view/components/translation_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> showTranslationsBottomSheet(
   BuildContext context,
+  WidgetRef ref,
   List<Translation> translations,
   void Function(void Function()) setState,
 ) async {
@@ -63,6 +65,7 @@ Future<void> showTranslationsBottomSheet(
                     translation: translations[index],
                     index: index + 1,
                     setState: setState,
+                    ref: ref,
                   );
                 },
               ),
