@@ -18,13 +18,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TermsAndPrivacyPolicyText extends StatelessWidget {
+class TermsAndPrivacyPolicyText extends ConsumerWidget {
   const TermsAndPrivacyPolicyText({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
