@@ -26,7 +26,7 @@ class SundayMassCard extends ConsumerWidget {
   const SundayMassCard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
         CantonMethods.viewTransition(context, const SundayMassView());
@@ -42,7 +42,7 @@ class SundayMassCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _buildImage(context, watch),
+              _buildImage(context, ref),
               const SizedBox(height: 15),
               Text(
                 'Sunday Mass',
@@ -75,8 +75,8 @@ class SundayMassCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildImage(BuildContext context, ScopedReader watch) {
-    final churchImage = watch(localUserRepositoryProvider).getChurchImage;
+  Widget _buildImage(BuildContext context, WidgetRef ref) {
+    final churchImage = ref.watch(localUserRepositoryProvider).getChurchImage;
 
     return Stack(
       alignment: Alignment.center,
