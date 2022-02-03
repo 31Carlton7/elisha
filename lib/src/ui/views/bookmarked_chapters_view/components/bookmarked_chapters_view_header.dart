@@ -17,14 +17,15 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BookmarkedChaptersViewHeader extends StatelessWidget {
+class BookmarkedChaptersViewHeader extends ConsumerWidget {
   const BookmarkedChaptersViewHeader({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.only(top: 17, left: 17, right: 17),
       child: Column(
