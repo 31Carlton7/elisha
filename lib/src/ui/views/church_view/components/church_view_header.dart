@@ -17,12 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChurchViewHeader extends StatelessWidget {
+class ChurchViewHeader extends ConsumerWidget {
   const ChurchViewHeader({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 17),
       child: Row(children: [Text('Church', style: Theme.of(context).textTheme.headline2)]),
