@@ -17,15 +17,20 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BirthDateInput extends StatelessWidget {
-  const BirthDateInput({Key? key, required this.birthDateText, required this.showBirthDatePicker}) : super(key: key);
+class BirthDateInput extends ConsumerWidget {
+  const BirthDateInput({
+    Key? key,
+    required this.birthDateText,
+    required this.showBirthDatePicker,
+  }) : super(key: key);
 
   final String birthDateText;
   final Future<void> Function() showBirthDatePicker;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () async {
         showBirthDatePicker();
