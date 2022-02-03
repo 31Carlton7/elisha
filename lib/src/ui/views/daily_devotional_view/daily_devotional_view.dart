@@ -31,26 +31,26 @@ class DailyDevotionalView extends ConsumerWidget {
   final String htmlData;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CantonScaffold(
       padding: const EdgeInsets.symmetric(horizontal: 17),
       backgroundColor: CantonMethods.alternateCanvasColor(context),
-      body: _content(context, watch),
+      body: _content(context, ref),
     );
   }
 
-  Widget _content(BuildContext context, ScopedReader watch) {
+  Widget _content(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         const DailyDevotionalViewHeader(),
-        _body(context, watch),
+        _body(context, ref),
       ],
     );
   }
 
-  Widget _body(BuildContext context, ScopedReader watch) {
+  Widget _body(BuildContext context, WidgetRef ref) {
     final _scrollController = ScrollController();
-    final font = watch(readerSettingsRepositoryProvider).typeFace;
+    final font = ref.watch(readerSettingsRepositoryProvider).typeFace;
 
     return Expanded(
       child: Scrollbar(
