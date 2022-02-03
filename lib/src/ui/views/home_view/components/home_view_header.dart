@@ -25,7 +25,7 @@ class HomeViewHeader extends ConsumerWidget {
   const HomeViewHeader({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context, WidgetRef ref) {
     String greeting() {
       var hour = DateTime.now().hour;
       if (hour < 12) {
@@ -44,7 +44,7 @@ class HomeViewHeader extends ConsumerWidget {
       return source;
     }
 
-    String? dbName = watch(localUserRepositoryProvider).getUser.firstName;
+    String? dbName = ref.watch(localUserRepositoryProvider).getUser.firstName;
 
     return GestureDetector(
       child: Container(
