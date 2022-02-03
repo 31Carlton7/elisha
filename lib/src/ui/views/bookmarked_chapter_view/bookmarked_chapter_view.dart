@@ -44,21 +44,16 @@ class _BookmarkedChapterViewState extends ConsumerState<BookmarkedChapterView> {
   }
 
   Widget _content(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        return Column(
-          children: [
-            BookmarkedChapterViewHeader(
-                chapter: widget.chapter, showBottomSheet: _showBookmarkedChapterOptionsBottomSheet),
-            const SizedBox(height: 10),
-            Expanded(
-              child: SingleChildScrollView(
-                child: BibleReader(chapter: widget.chapter),
-              ),
-            ),
-          ],
-        );
-      },
+    return Column(
+      children: [
+        BookmarkedChapterViewHeader(chapter: widget.chapter, showBottomSheet: _showBookmarkedChapterOptionsBottomSheet),
+        const SizedBox(height: 10),
+        Expanded(
+          child: SingleChildScrollView(
+            child: BibleReader(chapter: widget.chapter),
+          ),
+        ),
+      ],
     );
   }
 
