@@ -36,172 +36,168 @@ class SundayMassView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return CantonScaffold(
       // backgroundColor: CantonMethods.alternateCanvasColor(context),
-      body: _content(context),
+      body: _content(context, ref),
     );
   }
 
-  Widget _content(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        YOUTUBE_CHANNEL_ID = ref.watch(localUserRepositoryProvider).getLastChurchYTChannel;
+  Widget _content(BuildContext context, WidgetRef ref) {
+    YOUTUBE_CHANNEL_ID = ref.watch(localUserRepositoryProvider).getLastChurchYTChannel;
 
-        final channelIds = ref.watch(sundayMassServiceProvider).getChurchYouTubeChannelIds;
-        final youtubeChannelRepo = ref.watch(youtubeFetchChannelFutureProvider);
-        const _uiElementCount = 5;
+    final channelIds = ref.watch(sundayMassServiceProvider).getChurchYouTubeChannelIds;
+    final youtubeChannelRepo = ref.watch(youtubeFetchChannelFutureProvider);
+    const _uiElementCount = 5;
 
-        return youtubeChannelRepo.when(
-          error: (e, s) {
-            return Column(
-              children: [
-                const SundayMassViewHeader(),
-                Expanded(
-                  child: Text(
-                    'Cannot access Church at this time. Remember Jesus loves you!',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ),
-              ],
-            );
-          },
-          loading: () {
-            return Column(
-              children: [
-                const SundayMassViewHeader(),
-                Expanded(
-                  child: Loading(),
-                ),
-              ],
-            );
-          },
-          data: (channel) {
-            String videoId() {
-              if (channelIds[0] == channel.id) {
-                return channel.videos!.where((element) => element.title.contains('The Sunday Mass')).toList()[0].id;
-              } else if (channelIds[1] == channel.id) {
-                return channel.videos![0].id;
-              } else {
-                return '';
+    return youtubeChannelRepo.when(
+      error: (e, s) {
+        return Column(
+          children: [
+            const SundayMassViewHeader(),
+            Expanded(
+              child: Text(
+                'Cannot access Church at this time. Remember Jesus loves you!',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+          ],
+        );
+      },
+      loading: () {
+        return Column(
+          children: [
+            const SundayMassViewHeader(),
+            Expanded(
+              child: Loading(),
+            ),
+          ],
+        );
+      },
+      data: (channel) {
+        String videoId() {
+          if (channelIds[0] == channel.id) {
+            return channel.videos!.where((element) => element.title.contains('The Sunday Mass')).toList()[0].id;
+          } else if (channelIds[1] == channel.id) {
+            return channel.videos![0].id;
+          } else {
+            return '';
+          }
+        }
+
+        return FutureBuilder<String>(
+            future: ref.watch(youtubeServiceProvider).getMP4Url(videoId()),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting || snapshot.data == null) {
+                return Column(
+                  children: [
+                    const SundayMassViewHeader(),
+                    Expanded(
+                      child: Loading(),
+                    ),
+                  ],
+                );
               }
-            }
 
-            return FutureBuilder<String>(
-                future: ref.watch(youtubeServiceProvider).getMP4Url(videoId()),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting || snapshot.data == null) {
-                    return Column(
-                      children: [
-                        const SundayMassViewHeader(),
-                        Expanded(
-                          child: Loading(),
+              if (snapshot.hasError) {
+                return const ErrorCard();
+              }
+
+              return ListView.builder(
+                itemCount: channelIds.length + _uiElementCount,
+                itemBuilder: (context, index) {
+                  Widget churchYTChannelCard() {
+                    final _index = index - _uiElementCount;
+                    var nowPlaying = channelIds[_index] == channel.id;
+
+                    String channelName() {
+                      String name = '';
+                      if (channelIds[0] == channelIds[_index]) {
+                        name = 'National Shrine';
+                      } else if (channelIds[1] == channelIds[_index]) {
+                        name = 'Heart of the Nation';
+                      } else {
+                        name = '';
+                      }
+
+                      if (nowPlaying) return name + '  -  Now Playing';
+                      return name;
+                    }
+
+                    return GestureDetector(
+                      onTap: () async {
+                        if (channelIds[_index] != channel.id) {
+                          await ref.read(localUserRepositoryProvider).updateLastChurchYTChannel(channelIds[_index]);
+                          YOUTUBE_CHANNEL_ID = channelIds[_index];
+                          ref.refresh(youtubeFetchChannelFutureProvider);
+                        }
+                      },
+                      child: Card(
+                        margin: const EdgeInsets.only(top: kSmallPadding),
+                        color: Theme.of(context).colorScheme.secondary,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: kSmallPadding),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 20,
+                                width: 20,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.play_arrow,
+                                    color: Theme.of(context).colorScheme.onBackground,
+                                    size: 14,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: kSmallPadding),
+                              Text(
+                                channelName(),
+                                style: Theme.of(context).textTheme.headline6,
+                                overflow: TextOverflow.clip,
+                                maxLines: 1,
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
+                      ),
                     );
                   }
 
-                  if (snapshot.hasError) {
-                    return const ErrorCard();
+                  switch (index) {
+                    case 0:
+                      return const SundayMassViewHeader();
+
+                    case 1:
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: BetterPlayer.network(
+                          snapshot.data!,
+                          betterPlayerConfiguration: const BetterPlayerConfiguration(
+                              deviceOrientationsAfterFullScreen: [
+                                DeviceOrientation.portraitUp,
+                                DeviceOrientation.portraitDown
+                              ]),
+                        ),
+                      );
+
+                    case 2:
+                      return const SizedBox(height: kMediumPadding);
+
+                    case 3:
+                      return Text('Other Church Services', style: Theme.of(context).textTheme.headline5);
+
+                    case 4:
+                      return const SizedBox(height: kMediumPadding);
+
+                    default:
+                      return churchYTChannelCard();
                   }
-
-                  return ListView.builder(
-                    itemCount: channelIds.length + _uiElementCount,
-                    itemBuilder: (context, index) {
-                      Widget churchYTChannelCard() {
-                        final _index = index - _uiElementCount;
-                        var nowPlaying = channelIds[_index] == channel.id;
-
-                        String channelName() {
-                          String name = '';
-                          if (channelIds[0] == channelIds[_index]) {
-                            name = 'National Shrine';
-                          } else if (channelIds[1] == channelIds[_index]) {
-                            name = 'Heart of the Nation';
-                          } else {
-                            name = '';
-                          }
-
-                          if (nowPlaying) return name + '  -  Now Playing';
-                          return name;
-                        }
-
-                        return GestureDetector(
-                          onTap: () async {
-                            if (channelIds[_index] != channel.id) {
-                              await ref.read(localUserRepositoryProvider).updateLastChurchYTChannel(channelIds[_index]);
-                              YOUTUBE_CHANNEL_ID = channelIds[_index];
-                              ref.refresh(youtubeFetchChannelFutureProvider);
-                            }
-                          },
-                          child: Card(
-                            margin: const EdgeInsets.only(top: kSmallPadding),
-                            color: Theme.of(context).colorScheme.secondary,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: kSmallPadding),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 20,
-                                    width: 20,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).colorScheme.primary,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.play_arrow,
-                                        color: Theme.of(context).colorScheme.onBackground,
-                                        size: 14,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: kSmallPadding),
-                                  Text(
-                                    channelName(),
-                                    style: Theme.of(context).textTheme.headline6,
-                                    overflow: TextOverflow.clip,
-                                    maxLines: 1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-
-                      switch (index) {
-                        case 0:
-                          return const SundayMassViewHeader();
-
-                        case 1:
-                          return ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: BetterPlayer.network(
-                              snapshot.data!,
-                              betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                  deviceOrientationsAfterFullScreen: [
-                                    DeviceOrientation.portraitUp,
-                                    DeviceOrientation.portraitDown
-                                  ]),
-                            ),
-                          );
-
-                        case 2:
-                          return const SizedBox(height: kMediumPadding);
-
-                        case 3:
-                          return Text('Other Church Services', style: Theme.of(context).textTheme.headline5);
-
-                        case 4:
-                          return const SizedBox(height: kMediumPadding);
-
-                        default:
-                          return churchYTChannelCard();
-                      }
-                    },
-                  );
-                });
-          },
-        );
+                },
+              );
+            });
       },
     );
   }
