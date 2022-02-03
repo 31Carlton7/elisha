@@ -18,6 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:convert';
 
+import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:flutter/services.dart';
 
 import 'package:dio/dio.dart';
@@ -33,14 +34,12 @@ import 'package:elisha/src/repositories/bible_repository.dart';
 class BibleService {
   BibleService();
 
-  final jsonText = rootBundle.loadString(
-    'backend/${BibleRepository().translations[int.parse(translationID)].abbreviation}.json',
-  );
+  final jsonText = rootBundle.loadString('backend/$translationAbb.json');
 
   Future<List<Book>> getBooks(String? bookID) async {
     try {
       if (!['', null].contains(bookID)) {
-        final text = await jsonText;
+        final text = await rootBundle.loadString('backend/$translationAbb.json');
 
         final map = json.decode(text) as Map<String, dynamic>;
 
@@ -73,7 +72,7 @@ class BibleService {
 
   Future<Chapter> getChapter(String bookID, String chapterID, String translationID) async {
     try {
-      final text = await jsonText;
+      final text = await rootBundle.loadString('backend/$translationAbb.json');
 
       final books = await getBooks(bookID);
 
@@ -83,7 +82,7 @@ class BibleService {
 
       final bookText = bibleText.where((element) => element['field']![1].toString() == bookID).toList();
 
-      final chapterText = bookText.where((element) => element['field']![2].toString() == chapterID);
+      final chapterText = bookText.where((element) => element['field']![2].toString() == chapterID).toList();
 
       final verses = {
         for (var item in chapterText) Verse.fromList(item['field']).copyWith(book: books[0]),
@@ -106,15 +105,7 @@ class BibleService {
 
   Future<List<Chapter>> getChapters(String? bookID) async {
     try {
-      // final response = await _dio.get(_rootUrl + '/books/$bookID/chapters');
-
-      // final results = List<Map<String, dynamic>>.from(
-      //   response.data,
-      // );
-
-      // final List<Chapter> chapters = results.map((chapter) => Chapter.fromMap(chapter)).toList(growable: false);
-
-      final text = await jsonText;
+      final text = await rootBundle.loadString('backend/$translationAbb.json');
 
       final map = json.decode(text) as Map<String, dynamic>;
 
@@ -146,7 +137,7 @@ class BibleService {
 
   Future<List<Verse>> getVerses(String bookID, String chapterID, String? verseID) async {
     try {
-      final text = await jsonText;
+      final text = await rootBundle.loadString('backend/$translationAbb.json');
 
       final map = json.decode(text) as Map<String, dynamic>;
 
