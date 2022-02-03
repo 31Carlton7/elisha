@@ -27,23 +27,23 @@ import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 
-class VerseOfTheDayView extends StatefulWidget {
+class VerseOfTheDayView extends ConsumerStatefulWidget {
   const VerseOfTheDayView({Key? key, required this.verses}) : super(key: key);
 
   final List<Verse> verses;
 
   @override
-  State<VerseOfTheDayView> createState() => _VerseOfTheDayViewState();
+  ConsumerState<VerseOfTheDayView> createState() => _VerseOfTheDayViewState();
 }
 
-class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
+class _VerseOfTheDayViewState extends ConsumerState<VerseOfTheDayView> {
   var _isFavorite = false;
 
   @override
   void initState() {
     super.initState();
-    _isFavorite = context.read(studyToolsRepositoryProvider).favoriteVerses.where((e) {
-      return widget.verses.any((element) => e.text == element.text);
+    _isFavorite = ref.watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
+      return widget.verses.any((element) => e.id == element.id);
     }).isNotEmpty;
   }
 
@@ -68,7 +68,7 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
 
   Widget _header(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         Widget _favoriteButton(BuildContext context) {
           Color heartColor() {
             if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
@@ -78,8 +78,8 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
           }
 
           Icon icon() {
-            if (watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
-              return widget.verses.any((element) => e.text == element.text);
+            if (ref.watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
+              return widget.verses.any((element) => e.id == element.id);
             }).isNotEmpty) {
               return Icon(LineAwesomeIcons.heart_1, size: 24, color: heartColor());
             }
@@ -96,9 +96,9 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
 
               for (Verse item in widget.verses) {
                 if (_isFavorite) {
-                  await watch(studyToolsRepositoryProvider).addFavoriteVerse(item);
+                  await ref.read(studyToolsRepositoryProvider).addFavoriteVerse(item);
                 } else {
-                  await watch(studyToolsRepositoryProvider).removeFavoriteVerse(item);
+                  await ref.read(studyToolsRepositoryProvider).removeFavoriteVerse(item);
                 }
               }
             },
@@ -166,7 +166,7 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
 
   Widget _buildImage(BuildContext context) {
     return Image.asset(
-      context.read(localUserRepositoryProvider).getNatureImage,
+      ref.watch(localUserRepositoryProvider).getNatureImage,
       width: MediaQuery.of(context).size.width,
       fit: BoxFit.cover,
     );
@@ -174,7 +174,7 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
 
   Widget _body(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         Widget _bookChapterVerse(BuildContext context) {
           String versesString() {
             var str = '';
@@ -191,8 +191,8 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
             widget.verses[0].book.name! + ' ' + widget.verses[0].chapterId.toString() + ':' + versesString(),
             style: Theme.of(context).textTheme.headline6?.copyWith(
                   fontWeight: FontWeight.w500,
-                  height: watch(readerSettingsRepositoryProvider.notifier).bodyTextHeight,
-                  fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                  height: ref.watch(readerSettingsRepositoryProvider.notifier).bodyTextHeight,
+                  fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                 ),
           );
         }
@@ -211,18 +211,18 @@ class _VerseOfTheDayViewState extends State<VerseOfTheDayView> {
                         text: verse.verseId.toString() + ' ',
                         style: Theme.of(context).textTheme.bodyText1?.copyWith(
                               color: Theme.of(context).colorScheme.secondaryVariant,
-                              fontSize: watch(readerSettingsRepositoryProvider).verseNumberSize * 1.5,
-                              height: watch(readerSettingsRepositoryProvider).verseNumberHeight,
-                              fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                              fontSize: ref.watch(readerSettingsRepositoryProvider).verseNumberSize * 1.5,
+                              height: ref.watch(readerSettingsRepositoryProvider).verseNumberHeight,
+                              fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                             ),
                         children: [
                           TextSpan(
                             text: (verse.text + (widget.verses.last == verse ? '' : ' ')),
                             style: Theme.of(context).textTheme.headline5!.copyWith(
                                   fontWeight: FontWeight.w400,
-                                  fontSize: watch(readerSettingsRepositoryProvider.notifier).bodyTextSize * 1.5,
-                                  height: watch(readerSettingsRepositoryProvider.notifier).bodyTextHeight,
-                                  fontFamily: watch(readerSettingsRepositoryProvider).typeFace,
+                                  fontSize: ref.watch(readerSettingsRepositoryProvider.notifier).bodyTextSize * 1.5,
+                                  height: ref.watch(readerSettingsRepositoryProvider.notifier).bodyTextHeight,
+                                  fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                                 ),
                           ),
                         ],
