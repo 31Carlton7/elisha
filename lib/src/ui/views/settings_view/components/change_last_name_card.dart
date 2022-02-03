@@ -21,15 +21,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 
-class ChangeLastNameCard extends StatelessWidget {
+class ChangeLastNameCard extends ConsumerWidget {
   const ChangeLastNameCard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final _controller = TextEditingController();
 
     String currentNameStr() {
-      return 'Current Last Name: ' + context.read(localUserRepositoryProvider).getUser.lastName;
+      return 'Current Last Name: ' + ref.watch(localUserRepositoryProvider).getUser.lastName;
     }
 
     return CantonExpansionTile(
@@ -75,8 +75,8 @@ class ChangeLastNameCard extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     onPressed: () {
                       final updatedUser =
-                          context.read(localUserRepositoryProvider).getUser.copyWith(lastName: _controller.text);
-                      context.read(localUserRepositoryProvider).updateUser(updatedUser);
+                          ref.read(localUserRepositoryProvider).getUser.copyWith(lastName: _controller.text);
+                      ref.read(localUserRepositoryProvider).updateUser(updatedUser);
                       Navigator.of(context).pop();
                     },
                   ),
