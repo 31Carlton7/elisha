@@ -40,10 +40,11 @@ Future<void> showFavoriteVerseBottomSheet(BuildContext context, Verse verse) asy
         heightFactor: 0.3,
         widthFactor: Responsive.isTablet(context) ? 0.75 : null,
         child: Consumer(
-          builder: (context, watch, child) {
+          builder: (context, ref, child) {
             return StatefulBuilder(
               builder: (context, setState) {
-                var _isFavoriteVerse = watch(studyToolsRepositoryProvider)
+                var _isFavoriteVerse = ref
+                    .read(studyToolsRepositoryProvider)
                     .favoriteVerses
                     .where((element) => element.id == verse.id)
                     .isNotEmpty;
@@ -90,9 +91,9 @@ Future<void> showFavoriteVerseBottomSheet(BuildContext context, Verse verse) asy
                           });
 
                           if (_isFavoriteVerse) {
-                            await watch(studyToolsRepositoryProvider).addFavoriteVerse(verse);
+                            await ref.read(studyToolsRepositoryProvider).addFavoriteVerse(verse);
                           } else {
-                            await watch(studyToolsRepositoryProvider).removeFavoriteVerse(verse);
+                            await ref.read(studyToolsRepositoryProvider).removeFavoriteVerse(verse);
                           }
                         },
                       ),
