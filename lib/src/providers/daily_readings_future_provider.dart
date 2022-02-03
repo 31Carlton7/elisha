@@ -23,5 +23,6 @@ import 'package:elisha/src/services/daily_readings_service.dart';
 
 final dailyReadingsFutureProvider = FutureProvider.autoDispose<DailyReading>((ref) {
   ref.maintainState = true;
+
   return DailyReadingsService().getTodaysReading;
 });
