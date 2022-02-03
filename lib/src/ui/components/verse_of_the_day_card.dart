@@ -30,14 +30,14 @@ import 'package:elisha/src/ui/components/error_card.dart';
 import 'package:elisha/src/ui/components/loading_card.dart';
 import 'package:elisha/src/ui/views/verse_of_the_day_view/verse_of_the_day_view.dart';
 
-class VerseOfTheDayCard extends StatefulWidget {
+class VerseOfTheDayCard extends ConsumerStatefulWidget {
   const VerseOfTheDayCard({Key? key}) : super(key: key);
 
   @override
-  State<VerseOfTheDayCard> createState() => _VerseOfTheDayCardState();
+  _VerseOfTheDayCardState createState() => _VerseOfTheDayCardState();
 }
 
-class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
+class _VerseOfTheDayCardState extends ConsumerState<VerseOfTheDayCard> {
   var _isFavorite = false;
   List<Verse>? _verses = [];
 
@@ -48,7 +48,7 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
   }
 
   void _checkIfVerseIsFavorite() {
-    _isFavorite = context.read(studyToolsRepositoryProvider).favoriteVerses.where((e) {
+    _isFavorite = ref.read(studyToolsRepositoryProvider).favoriteVerses.where((e) {
       return _verses!.any((element) => e.text == element.text);
     }).isNotEmpty;
   }
@@ -64,8 +64,8 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
     }
 
     return Consumer(
-      builder: (context, watch, child) {
-        final votdRepo = watch(verseOfTheDayFutureProvider);
+      builder: (context, ref, child) {
+        final votdRepo = ref.watch(verseOfTheDayFutureProvider);
 
         return votdRepo.when(
           error: (e, s) {
@@ -127,7 +127,7 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
   }
 
   Widget _buildImage(BuildContext context) {
-    var imagePath = context.read(localUserRepositoryProvider).getNatureImage;
+    var imagePath = ref.watch(localUserRepositoryProvider).getNatureImage;
 
     final imageWidget = ClipRRect(
       borderRadius: BorderRadius.circular(7),
@@ -154,7 +154,7 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
 
   Widget _favoriteButton(BuildContext context, Color bgColor, List<Verse> verses) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         Color heartColor() {
           if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
             return CantonDarkColors.red[400]!;
@@ -163,8 +163,8 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
         }
 
         Icon icon() {
-          if (watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
-            return _verses!.any((element) => e.text == element.text);
+          if (ref.watch(studyToolsRepositoryProvider).favoriteVerses.where((e) {
+            return _verses!.any((element) => e.id == element.id);
           }).isNotEmpty) {
             return Icon(LineAwesomeIcons.heart_1, size: 24, color: heartColor());
           }
@@ -181,9 +181,9 @@ class _VerseOfTheDayCardState extends State<VerseOfTheDayCard> {
 
             for (Verse item in verses) {
               if (_isFavorite) {
-                await context.read(studyToolsRepositoryProvider).addFavoriteVerse(item);
+                await ref.read(studyToolsRepositoryProvider).addFavoriteVerse(item);
               } else {
-                await context.read(studyToolsRepositoryProvider).removeFavoriteVerse(item);
+                await ref.read(studyToolsRepositoryProvider).removeFavoriteVerse(item);
               }
             }
           },
