@@ -24,14 +24,14 @@ import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:elisha/src/ui/views/bookmarked_chapters_view/components/bookmarked_chapter_card.dart';
 import 'package:elisha/src/ui/views/bookmarked_chapters_view/components/bookmarked_chapters_view_header.dart';
 
-class BookmarkedChaptersView extends StatefulWidget {
+class BookmarkedChaptersView extends ConsumerStatefulWidget {
   const BookmarkedChaptersView({Key? key}) : super(key: key);
 
   @override
   _BookmarkedChaptersViewState createState() => _BookmarkedChaptersViewState();
 }
 
-class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
+class _BookmarkedChaptersViewState extends ConsumerState<BookmarkedChaptersView> {
   @override
   Widget build(BuildContext context) {
     return CantonScaffold(
@@ -52,15 +52,15 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
 
   Widget _bookmarkedChapters(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
+      builder: (context, ref, child) {
         return Expanded(
-          child: watch(studyToolsRepositoryProvider).bookmarkedChapters.isNotEmpty
+          child: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.isNotEmpty
               ? Container(
                   padding: const EdgeInsets.symmetric(horizontal: 17),
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 700),
                     child: ListView.separated(
-                      itemCount: watch(studyToolsRepositoryProvider).bookmarkedChapters.length,
+                      itemCount: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.length,
                       separatorBuilder: (context, index) {
                         return const Divider();
                       },
@@ -68,11 +68,11 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
                         return Column(
                           children: [
                             BookmarkedChapterCard(
-                              chapter: watch(studyToolsRepositoryProvider).bookmarkedChapters[index],
+                              chapter: ref.watch(studyToolsRepositoryProvider).bookmarkedChapters[index],
                               setState: setState,
                               showBookmarkedChapterOptionsBottomSheet: _showBookmarkedChapterOptionsBottomSheet,
                             ),
-                            if (index == watch(studyToolsRepositoryProvider).bookmarkedChapters.length - 1)
+                            if (index == ref.watch(studyToolsRepositoryProvider).bookmarkedChapters.length - 1)
                               const Divider(),
                           ],
                         );
@@ -128,7 +128,7 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
                         color: Theme.of(context).colorScheme.secondary,
                         textColor: Theme.of(context).colorScheme.error,
                         onPressed: () async {
-                          await context.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
+                          await ref.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
                           Navigator.pop(context);
 
                           setState(() {});
