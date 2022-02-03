@@ -35,14 +35,14 @@ final _bibleNavigatorKey = GlobalKey<NavigatorState>();
 final _churchNavigatorKey = GlobalKey<NavigatorState>();
 final _profileNavigatorKey = GlobalKey<NavigatorState>();
 
-class CurrentView extends StatefulWidget {
+class CurrentView extends ConsumerStatefulWidget {
   const CurrentView({Key? key}) : super(key: key);
 
   @override
   _CurrentViewState createState() => _CurrentViewState();
 }
 
-class _CurrentViewState extends State<CurrentView> {
+class _CurrentViewState extends ConsumerState<CurrentView> {
   int _currentIndex = 0;
 
   @override
@@ -71,10 +71,10 @@ class _CurrentViewState extends State<CurrentView> {
   }
 
   void _loadData() async {
-    await context.read(streaksRepositoryProvider).updateStreaks();
-    context.read(localRepositoryProvider.notifier).loadLastChapterAndTranslation();
-    context.read(studyToolsRepositoryProvider.notifier).loadData();
-    context.read(readerSettingsRepositoryProvider).loadData();
+    await ref.read(streaksRepositoryProvider).updateStreaks();
+    ref.read(localRepositoryProvider.notifier).loadLastChapterAndTranslation();
+    ref.read(studyToolsRepositoryProvider.notifier).loadData();
+    ref.read(readerSettingsRepositoryProvider).loadData();
   }
 
   @override
