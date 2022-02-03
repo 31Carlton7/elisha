@@ -21,6 +21,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/services/daily_devotional_service.dart';
 
-final dailyDevotionalServiceProvider = FutureProvider<String>((ref) {
+final dailyDevotionalServiceProvider = FutureProvider.autoDispose<String>((ref) {
+  ref.maintainState = true;
+
   return DailyDevotionalService(Dio()).todaysDailyDevotional;
 });
