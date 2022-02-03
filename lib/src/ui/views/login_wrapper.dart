@@ -24,25 +24,25 @@ import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:elisha/src/ui/views/introduction_view/introduction_view.dart';
 
-class LoginWrapper extends StatefulWidget {
+class LoginWrapper extends ConsumerStatefulWidget {
   const LoginWrapper({Key? key}) : super(key: key);
 
   @override
-  State<LoginWrapper> createState() => _LoginWrapperState();
+  ConsumerState<LoginWrapper> createState() => _LoginWrapperState();
 }
 
-class _LoginWrapperState extends State<LoginWrapper> {
+class _LoginWrapperState extends ConsumerState<LoginWrapper> {
   @override
   void initState() {
     super.initState();
-    context.read(localUserRepositoryProvider).loadUser();
+    ref.read(localUserRepositoryProvider).loadUser();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, watch, child) {
-        final count = watch(localUserRepositoryProvider).getLoginCount;
+      builder: (context, ref, child) {
+        final count = ref.read(localUserRepositoryProvider).getLoginCount;
 
         final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
 
