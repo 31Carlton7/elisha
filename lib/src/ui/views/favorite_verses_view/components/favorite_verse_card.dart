@@ -25,7 +25,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 
-class FavoriteVerseCard extends StatefulWidget {
+class FavoriteVerseCard extends ConsumerStatefulWidget {
   const FavoriteVerseCard({Key? key, required this.verse}) : super(key: key);
 
   final Verse verse;
@@ -34,7 +34,7 @@ class FavoriteVerseCard extends StatefulWidget {
   _FavoriteVerseCardState createState() => _FavoriteVerseCardState();
 }
 
-class _FavoriteVerseCardState extends State<FavoriteVerseCard> {
+class _FavoriteVerseCardState extends ConsumerState<FavoriteVerseCard> {
   String cardTitle() {
     final str =
         widget.verse.book.name! + ' ' + widget.verse.chapterId.toString() + ':' + widget.verse.verseId.toString();
@@ -74,9 +74,9 @@ class _FavoriteVerseCardState extends State<FavoriteVerseCard> {
         });
 
         if (_isFavorite) {
-          await context.read(studyToolsRepositoryProvider).addFavoriteVerse(verse);
+          await ref.read(studyToolsRepositoryProvider).addFavoriteVerse(verse);
         } else {
-          await context.read(studyToolsRepositoryProvider).removeFavoriteVerse(verse);
+          await ref.read(studyToolsRepositoryProvider).removeFavoriteVerse(verse);
         }
       },
       child: Container(
