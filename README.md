@@ -1,3 +1,5 @@
+<img src="https://github.com/31Carlton7/elisha/blob/master/assets/app_icons/banner.png"> </img>
+
 # Elisha
 
 An Offline Pocket Bible & Church App to study God's Word and have more engagement with it.
