@@ -48,7 +48,8 @@ flutter run
 
 ## TestFlight & Google Play Beta
 
-Soon
+TestFlight: [https://testflight.apple.com/join/7vWnoWaD](https://testflight.apple.com/join/7vWnoWaD)
+Google Play Beta: [Soon]()
 
 ## Screenshots
 
