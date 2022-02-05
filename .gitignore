@@ -46,3 +46,6 @@ app.*.map.json
 /android/app/release
 
 lib/src/config/keys.dart
+
+/android/app/upload-keystore.jks
+/android/key.properties
