@@ -1,3 +1,5 @@
+<img src="https://github.com/31Carlton7/elisha/blob/master/assets/app_icons/banner.png"> </img>
+
 # Elisha
 
 An Offline Pocket Bible & Church App to study God's Word and have more engagement with it.
@@ -48,7 +50,8 @@ flutter run
 
 ## TestFlight & Google Play Beta
 
-Soon
+TestFlight: [https://testflight.apple.com/join/7vWnoWaD](https://testflight.apple.com/join/7vWnoWaD)
+Google Play Beta: [Soon]()
 
 ## Screenshots
 
