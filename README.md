@@ -50,7 +50,10 @@ flutter run
 
 ## TestFlight & Google Play Beta
 
+If you would like to use the app via TestFlight or Google Play Beta, you can download the apps with the following links below:
+
 TestFlight: [https://testflight.apple.com/join/7vWnoWaD](https://testflight.apple.com/join/7vWnoWaD)
+
 Google Play Beta: [Soon]()
 
 ## Screenshots
