@@ -297,81 +297,84 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
     final firstDate = DateTime(1900);
     final lastDate = DateTime.now();
 
-    return showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      elevation: 0,
-      useRootNavigator: true,
-      builder: (context) {
-        return FractionallySizedBox(
-          heightFactor: 0.45,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 27),
-                child: Text(
-                  'Select Your Birthday',
-                  style: Theme.of(context).textTheme.headline5,
+    if (Platform.isIOS) {
+      return showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        elevation: 0,
+        useRootNavigator: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
+        ),
+        builder: (context) {
+          return FractionallySizedBox(
+            heightFactor: 0.45,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 27),
+                  child: Text(
+                    'Select Your Birthday',
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 200,
-                child: Platform.isIOS
-                    ? CupertinoTheme(
-                        data: CupertinoThemeData(
-                          brightness: MediaQuery.of(context).platformBrightness,
-                        ),
-                        child: CupertinoDatePicker(
-                          mode: CupertinoDatePickerMode.date,
-                          initialDateTime: initialDate,
-                          minimumDate: firstDate,
-                          minimumYear: firstDate.year,
-                          maximumDate: initialDate,
-                          maximumYear: maximumYear,
-                          onDateTimeChanged: (date) {
-                            _birthDateController = date;
-                            setState(() {
-                              birthDateText = DateFormat.yMMMd().format(date);
-                            });
-                          },
-                        ),
-                      )
-                    : DatePickerDialog(
-                        initialDate: initialDate,
-                        firstDate: firstDate,
-                        lastDate: lastDate,
-                        initialCalendarMode: DatePickerMode.day,
-                        selectableDayPredicate: (date) {
-                          _birthDateController = date;
-                          setState(() {
-                            birthDateText = DateFormat.yMMMd().format(date);
-                          });
-                          return true;
-                        },
-                      ),
-              ),
-              const SizedBox(height: 20),
-              Center(
-                child: CantonPrimaryButton(
-                  buttonText: 'Confirm',
-                  color: Theme.of(context).colorScheme.primary,
-                  textColor: Theme.of(context).colorScheme.onBackground,
-                  containerWidth: 100,
-                  containerHeight: 30,
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                SizedBox(
+                  height: 200,
+                  child: CupertinoTheme(
+                    data: CupertinoThemeData(
+                      brightness: MediaQuery.of(context).platformBrightness,
+                    ),
+                    child: CupertinoDatePicker(
+                      mode: CupertinoDatePickerMode.date,
+                      initialDateTime: initialDate,
+                      minimumDate: firstDate,
+                      minimumYear: firstDate.year,
+                      maximumDate: initialDate,
+                      maximumYear: maximumYear,
+                      onDateTimeChanged: (date) {
+                        _birthDateController = date;
+                        setState(() {
+                          birthDateText = DateFormat.yMMMd().format(date);
+                        });
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+                const SizedBox(height: 20),
+                Center(
+                  child: CantonPrimaryButton(
+                    buttonText: 'Confirm',
+                    color: Theme.of(context).colorScheme.primary,
+                    textColor: Theme.of(context).colorScheme.onBackground,
+                    containerWidth: 100,
+                    containerHeight: 30,
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    } else {
+      await showDatePicker(
+        context: context,
+        initialDate: initialDate,
+        firstDate: firstDate,
+        lastDate: lastDate,
+      ).then((date) {
+        _birthDateController = date!;
+        setState(() {
+          birthDateText = DateFormat.yMMMd().format(date);
+        });
+      });
+    }
   }
 
   Widget _doneButton() {
