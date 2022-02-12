@@ -22,5 +22,5 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final dailyDevotionalTodayProvider = FutureProvider.autoDispose<String>((ref) {
   ref.maintainState = true;
 
-  return ref.read(dailyDevotionalServiceProvider).value!.todaysDailyDevotional;
+  return ref.read(dailyDevotionalServiceProvider).todaysDailyDevotional;
 });

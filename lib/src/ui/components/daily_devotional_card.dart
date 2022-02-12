@@ -41,7 +41,7 @@ class _DailyDevotionalCardState extends ConsumerState<DailyDevotionalCard> {
 
   @override
   Widget build(BuildContext context) {
-    final link = ref.read(dailyDevotionalServiceProvider).value!.interfaceUrl;
+    final link = ref.read(dailyDevotionalServiceProvider).interfaceUrl;
 
     Color bgColor() {
       if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
@@ -135,7 +135,7 @@ class _DailyDevotionalCardState extends ConsumerState<DailyDevotionalCard> {
   }
 
   Widget _body(BuildContext context, Color bgColor) {
-    final link = ref.read(dailyDevotionalServiceProvider).value!.interfaceUrl;
+    final link = ref.read(dailyDevotionalServiceProvider).interfaceUrl;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
