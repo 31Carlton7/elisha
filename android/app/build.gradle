@@ -75,3 +75,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.android.support:multidex:1.0.3'
 }
+
+android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'
