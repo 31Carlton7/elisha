@@ -29,7 +29,7 @@ enum ReaderColors {
 }
 
 class ReaderSettingsRepository extends ChangeNotifier {
-  var _bodyTextSize = 21.0;
+  var _bodyTextSize = 17.0;
   var _bodyTextHeight = 1.97;
   var _verseNumberSize = 14.0;
   var _verseNumberHeight = 1.5;
@@ -125,7 +125,7 @@ class ReaderSettingsRepository extends ChangeNotifier {
     // box.delete('reader_settings');
 
     var settings = box.get('reader_settings', defaultValue: {
-      'bodyTextSize': 21.0,
+      'bodyTextSize': 17.0,
       'bodyTextHeight': 1.97,
       'verseNumberSize': 14.0,
       'verseNumberHeight': 1.5,
