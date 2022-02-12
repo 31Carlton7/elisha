@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/config/constants.dart';
 
 import 'package:elisha/src/ui/views/settings_view/components/change_birth_date_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/change_first_name_card.dart';
@@ -38,6 +39,7 @@ class SettingsView extends ConsumerWidget {
   Widget _content(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SettingsViewHeader(),
           const SizedBox(height: 17),
@@ -60,6 +62,13 @@ class SettingsView extends ConsumerWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 500),
             child: const ChangeBirthDateCard(),
+          ),
+          const SizedBox(height: kSmallPadding),
+          Text(
+            kVersionNumber,
+            style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
           ),
         ],
       ),

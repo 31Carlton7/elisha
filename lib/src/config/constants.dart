@@ -20,7 +20,7 @@ import 'package:canton_design_system/canton_design_system.dart';
 
 const String kAppTitle = 'Elisha';
 
-const bool isEmulator = false;
+const String kVersionNumber = 'v0.0.3 (5)';
 
 const natureImages = <String>[
   'assets/images/nature_1.jpg',
