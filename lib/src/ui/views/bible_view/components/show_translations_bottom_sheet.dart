@@ -33,6 +33,9 @@ Future<void> showTranslationsBottomSheet(
     isScrollControlled: true,
     elevation: 0,
     useRootNavigator: true,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
+    ),
     builder: (context) {
       return FractionallySizedBox(
         heightFactor: 0.75,
