@@ -448,6 +448,9 @@ class _BibleViewState extends ConsumerState<BibleView> {
       isScrollControlled: true,
       elevation: 0,
       useRootNavigator: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
+      ),
       builder: (context) {
         return FractionallySizedBox(
           heightFactor: 0.6,
@@ -706,6 +709,9 @@ class _BibleViewState extends ConsumerState<BibleView> {
       isScrollControlled: true,
       elevation: 0,
       useRootNavigator: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
+      ),
       builder: (context) {
         return FractionallySizedBox(
           heightFactor: 0.95,
@@ -752,6 +758,9 @@ class _BibleViewState extends ConsumerState<BibleView> {
       isScrollControlled: true,
       elevation: 0,
       useRootNavigator: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
+      ),
       builder: (context) {
         return FractionallySizedBox(
           heightFactor: 0.75,
