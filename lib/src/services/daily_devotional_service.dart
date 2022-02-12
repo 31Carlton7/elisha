@@ -27,6 +27,8 @@ class DailyDevotionalService {
   final _date = DateFormat('MMMd').format(DateTime.now()).toLowerCase().replaceAll(' ', '');
   final _year = DateTime.now().year.toString();
 
+  String get interfaceUrl => 'https://www.dailyscripture.net/daily-meditation/';
+
   // Make algorithm to determine date for link above.
   Future<String> get todaysDailyDevotional async {
     final resp = await _dio.get(_rootUrl + '/' + _year + '/' + _date + '.htm');

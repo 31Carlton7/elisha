@@ -21,9 +21,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import 'package:elisha/src/providers/daily_devotional_service_provider.dart';
-import 'package:elisha/src/ui/components/error_card.dart';
-import 'package:elisha/src/ui/components/loading_card.dart';
-import 'package:elisha/src/ui/views/daily_devotional_view/daily_devotional_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DailyDevotionalCard extends ConsumerStatefulWidget {
   const DailyDevotionalCard({Key? key}) : super(key: key);
@@ -33,8 +31,18 @@ class DailyDevotionalCard extends ConsumerStatefulWidget {
 }
 
 class _DailyDevotionalCardState extends ConsumerState<DailyDevotionalCard> {
+  Future<void> _onPressed(String link) async {
+    if (await canLaunch(link)) {
+      await launch(link);
+    } else {
+      throw 'Could not launch $link';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final link = ref.read(dailyDevotionalServiceProvider).value!.interfaceUrl;
+
     Color bgColor() {
       if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
         return CantonDarkColors.gray[800]!;
@@ -42,78 +50,81 @@ class _DailyDevotionalCardState extends ConsumerState<DailyDevotionalCard> {
       return CantonColors.gray[300]!;
     }
 
-    final devotionalRepo = ref.watch(dailyDevotionalServiceProvider);
+    // final devotionalRepo = ref.watch(dailyDevotionalTodayProvider);
 
-    return devotionalRepo.when(
-      error: (e, s) => const ErrorCard(),
-      loading: () => const LoadingCard(),
-      data: (htmlData) {
-        return GestureDetector(
-          onTap: () async {
-            await CantonMethods.viewTransition(context, DailyDevotionalView(htmlData: htmlData));
-          },
-          child: Container(
-            padding: const EdgeInsets.all(17.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              color: CantonMethods.alternateCanvasColorType3(context),
+    return GestureDetector(
+      onTap: () async {
+        await _onPressed(link);
+        // await CantonMethods.viewTransition(context, DailyDevotionalView(htmlData: htmlData));
+      },
+      child: Container(
+        padding: const EdgeInsets.all(17.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: CantonMethods.alternateCanvasColorType3(context),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _header(context, bgColor()),
+                  const SizedBox(height: 15),
+                  _body(context, bgColor()),
+                ],
+              ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Stack(
+              clipBehavior: Clip.none,
               children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _header(context, bgColor()),
-                      const SizedBox(height: 15),
-                      _body(context, bgColor(), htmlData),
-                    ],
+                Positioned(
+                  right: 7,
+                  top: 7,
+                  child: Container(
+                    height: 130,
+                    width: 75,
+                    decoration: BoxDecoration(
+                      color: bgColor(),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Positioned(
-                      right: 7,
-                      top: 7,
-                      child: Container(
-                        height: 130,
-                        width: 75,
-                        decoration: BoxDecoration(
-                          color: bgColor(),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                Container(
+                  height: 130,
+                  width: 75,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [CantonColors.purple[500]!, CantonColors.purple[600]!],
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomRight,
                     ),
-                    Container(
-                      height: 130,
-                      width: 75,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [CantonColors.purple[500]!, CantonColors.purple[600]!],
-                          begin: Alignment.topRight,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          LineAwesomeIcons.praying_hands,
-                          color: CantonColors.white,
-                          size: 30,
-                        ),
-                      ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      LineAwesomeIcons.praying_hands,
+                      color: CantonColors.white,
+                      size: 30,
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
+
+    // return devotionalRepo.when(
+    //   error: (e, s) => const ErrorCard(),
+    //   loading: () => const LoadingCard(),
+    //   data: (htmlData) {
+
+    //   },
+    // );
   }
 
   Widget _header(BuildContext context, Color bgColor) {
@@ -123,7 +134,9 @@ class _DailyDevotionalCardState extends ConsumerState<DailyDevotionalCard> {
     );
   }
 
-  Widget _body(BuildContext context, Color bgColor, String htmlData) {
+  Widget _body(BuildContext context, Color bgColor) {
+    final link = ref.read(dailyDevotionalServiceProvider).value!.interfaceUrl;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -150,12 +163,13 @@ class _DailyDevotionalCardState extends ConsumerState<DailyDevotionalCard> {
           padding: EdgeInsets.zero,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           buttonText: 'Read',
-          onPressed: () {
-            CantonMethods.viewTransition(
-                context,
-                DailyDevotionalView(
-                  htmlData: htmlData,
-                ));
+          onPressed: () async {
+            await _onPressed(link);
+
+            // CantonMethods.viewTransition(
+            //   context,
+            //   DailyDevotionalView(htmlData: htmlData),
+            // );
           },
         ),
       ],
