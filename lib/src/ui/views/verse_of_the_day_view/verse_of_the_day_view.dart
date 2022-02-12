@@ -16,10 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:elisha/src/providers/ad_state_provider.dart';
+import 'package:elisha/src/services/ad_state.dart';
 import 'package:flutter/services.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import 'package:elisha/src/models/verse.dart';
@@ -38,6 +41,7 @@ class VerseOfTheDayView extends ConsumerStatefulWidget {
 
 class _VerseOfTheDayViewState extends ConsumerState<VerseOfTheDayView> {
   var _isFavorite = false;
+  BannerAd? _ad;
 
   @override
   void initState() {
@@ -45,6 +49,30 @@ class _VerseOfTheDayViewState extends ConsumerState<VerseOfTheDayView> {
     _isFavorite = ref.read(studyToolsRepositoryProvider).favoriteVerses.where((e) {
       return widget.verses.any((element) => e.id == element.id);
     }).isNotEmpty;
+
+    final voAd = ref.read(adStateProvider).votdViewBannerAd;
+
+    _ad = BannerAd(
+      adUnitId: voAd.adUnitId,
+      size: voAd.size,
+      request: voAd.request,
+      listener: BannerAdListener(
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          setState(() {
+            votdViewBannerAdIsLoaded = false;
+          });
+
+          ad.dispose();
+        },
+        onAdLoaded: (Ad ad) {
+          setState(() {
+            votdViewBannerAdIsLoaded = true;
+          });
+        },
+      ),
+    );
+
+    _ad!.load();
   }
 
   @override
@@ -226,7 +254,13 @@ class _VerseOfTheDayViewState extends ConsumerState<VerseOfTheDayView> {
               ),
             const SizedBox(height: kDefaultPadding),
             _bookChapterVerse(context),
-            const SizedBox(height: kDefaultPadding),
+            const SizedBox(height: kDefaultPadding * 3),
+            Container(
+              padding: const EdgeInsets.only(bottom: 10),
+              width: _ad!.size.width.toDouble(),
+              height: _ad!.size.height.toDouble(),
+              child: AdWidget(ad: _ad!),
+            ),
           ],
         ),
       ),
