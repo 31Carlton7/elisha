@@ -19,7 +19,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 class SundayMassService {
   SundayMassService();
 
-  final _churchYouTubeChannelIds = <String>['UCubahKRKNc4cj3sZSAmc-Nw', 'UCv0TUu1tuIdVqRLFwGlos4A'];
+  final _churchYouTubeChannelIds = <String>[
+    'UCubahKRKNc4cj3sZSAmc-Nw',
+    'UCv0TUu1tuIdVqRLFwGlos4A',
+    'UCa7SbIMVl5UHycxUbHOpmow',
+    'UCi6JtCVy4XKu4BSG-AE2chg',
+  ];
 
   List<String> get getChurchYouTubeChannelIds => _churchYouTubeChannelIds;
 }
