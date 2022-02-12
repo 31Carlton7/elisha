@@ -45,7 +45,6 @@ dependencies:
   firebase_analytics: ^9.0.4
   firebase_crashlytics: ^2.4.4
   firebase_performance: ^0.8.0+3
-  firebase_dynamic_links: ^4.0.3
 
   # Ads
   google_mobile_ads: ^1.0.1
