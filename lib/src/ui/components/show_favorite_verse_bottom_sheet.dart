@@ -32,8 +32,8 @@ Future<void> showFavoriteVerseBottomSheet(BuildContext context, Verse verse) asy
     isScrollControlled: true,
     elevation: 0,
     useRootNavigator: true,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(17),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
     ),
     builder: (context) {
       return FractionallySizedBox(
