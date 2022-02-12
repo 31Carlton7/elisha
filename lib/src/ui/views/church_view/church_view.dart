@@ -17,12 +17,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/providers/ad_state_provider.dart';
+import 'package:elisha/src/services/ad_state.dart';
 
-import 'package:elisha/src/ui/components/church_view_banner_ad_card.dart';
 import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 import 'package:elisha/src/ui/views/church_view/components/church_view_header.dart';
 import 'package:elisha/src/ui/views/church_view/components/daily_readings_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class ChurchView extends ConsumerStatefulWidget {
   const ChurchView({Key? key}) : super(key: key);
@@ -32,6 +34,37 @@ class ChurchView extends ConsumerStatefulWidget {
 }
 
 class _ChurchViewState extends ConsumerState<ChurchView> {
+  BannerAd? _ad;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final chAd = ref.read(adStateProvider).churchViewBannerAd;
+
+    _ad = BannerAd(
+      adUnitId: chAd.adUnitId,
+      size: chAd.size,
+      request: chAd.request,
+      listener: BannerAdListener(
+        onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          setState(() {
+            churchViewBannerAdIsLoaded = false;
+          });
+
+          ad.dispose();
+        },
+        onAdLoaded: (Ad ad) {
+          setState(() {
+            churchViewBannerAdIsLoaded = true;
+          });
+        },
+      ),
+    );
+
+    _ad!.load();
+  }
+
   @override
   Widget build(BuildContext context) {
     return _content(context);
@@ -53,7 +86,13 @@ class _ChurchViewState extends ConsumerState<ChurchView> {
             constraints: const BoxConstraints(maxWidth: 500),
             child: const SundayMassCard(),
           ),
-          const ChurchViewBannerAdCard(),
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.only(bottom: 10),
+            width: _ad!.size.width.toDouble(),
+            height: _ad!.size.height.toDouble(),
+            child: AdWidget(ad: _ad!),
+          ),
         ],
       ),
     );
