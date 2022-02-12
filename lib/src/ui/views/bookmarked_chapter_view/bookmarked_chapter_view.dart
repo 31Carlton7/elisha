@@ -63,6 +63,9 @@ class _BookmarkedChapterViewState extends ConsumerState<BookmarkedChapterView> {
       isScrollControlled: true,
       elevation: 0,
       useRootNavigator: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(17)),
+      ),
       builder: (context) {
         return Container(
           padding: const EdgeInsets.only(top: 15),
