@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'dart:io';
+
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -44,9 +46,17 @@ class _LoginWrapperState extends ConsumerState<LoginWrapper> {
 
     final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
 
+    Color statusBarColor() {
+      if (Platform.isIOS) {
+        return isDarkMode ? CantonColors.white : CantonColors.black;
+      } else {
+        return isDarkMode ? CantonColors.black : CantonColors.white;
+      }
+    }
+
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: isDarkMode ? CantonColors.white : CantonColors.black,
+        statusBarColor: statusBarColor(),
         statusBarBrightness: isDarkMode ? Brightness.dark : Brightness.light,
       ),
     );
