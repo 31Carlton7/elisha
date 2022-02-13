@@ -17,14 +17,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'package:elisha/src/providers/ad_state_provider.dart';
 import 'package:elisha/src/services/ad_state.dart';
-
 import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 import 'package:elisha/src/ui/views/church_view/components/church_view_header.dart';
 import 'package:elisha/src/ui/views/church_view/components/daily_readings_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class ChurchView extends ConsumerStatefulWidget {
   const ChurchView({Key? key}) : super(key: key);
