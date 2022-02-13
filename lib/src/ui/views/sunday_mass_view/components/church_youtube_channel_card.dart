@@ -120,24 +120,26 @@ class ChurchYouTubeChannelCard extends ConsumerWidget {
                 ),
               ),
               const SizedBox(width: kSmallPadding),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    channelName(),
-                    style: Theme.of(context).textTheme.headline6,
-                    overflow: TextOverflow.clip,
-                    maxLines: 1,
-                  ),
-                  Text(
-                    description(),
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                          color: !nowPlaying ? Theme.of(context).colorScheme.secondaryVariant : null,
-                        ),
-                    overflow: TextOverflow.clip,
-                    maxLines: 1,
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      channelName(),
+                      style: Theme.of(context).textTheme.headline6,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    Text(
+                      description(),
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                            color: !nowPlaying ? Theme.of(context).colorScheme.secondaryVariant : null,
+                          ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
