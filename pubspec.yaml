@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.0.3+5
+version: 1.0.0+6
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -133,6 +133,30 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    #### Inter - Sans Serif typeface
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter-Bold.otf
+          weight: 800
+        - asset: fonts/Inter-BoldItalic.otf
+          weight: 800
+          style: italic
+        - asset: fonts/Inter-SemiBold.otf
+          weight: 600
+        - asset: fonts/Inter-SemiBoldItalic.otf
+          weight: 600
+          style: italic
+        - asset: fonts/Inter-Medium.otf
+          weight: 500
+        - asset: fonts/Inter-MediumItalic.otf
+          weight: 500
+          style: italic
+        - asset: fonts/Inter-Regular.otf
+          weight: 400
+        - asset: fonts/Inter-Italic.otf
+          weight: 400
+          style: italic
+    #### New York - Serif typeface
     - family: New York
       fonts:
         - asset: fonts/NewYork.ttf
