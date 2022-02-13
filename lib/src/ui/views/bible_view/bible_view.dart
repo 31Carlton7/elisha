@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -32,6 +31,7 @@ import 'package:elisha/src/providers/bible_books_provider.dart';
 import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:elisha/src/providers/bible_repository_provider.dart';
 import 'package:elisha/src/providers/bible_translations_provider.dart';
+import 'package:elisha/src/providers/last_translation_book_chapter_provider.dart';
 import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:elisha/src/services/bible_service.dart';
