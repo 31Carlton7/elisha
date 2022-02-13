@@ -71,6 +71,12 @@ class MyApp extends ConsumerWidget {
       primaryDarkVariantColor: const Color(0xFFDDA15E),
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
       home: const LoginWrapper(),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
     );
   }
 }
