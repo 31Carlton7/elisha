@@ -364,11 +364,25 @@ class _WelcomeViewState extends ConsumerState<WelcomeView> {
       );
     } else {
       await showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        firstDate: firstDate,
-        lastDate: lastDate,
-      ).then((date) {
+          context: context,
+          initialDate: initialDate,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          builder: (context, child) {
+            final isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+            return Theme(
+              data: Theme.of(context).copyWith(
+                brightness: Brightness.light,
+                colorScheme: ColorScheme.light(
+                  primary: Theme.of(context).primaryColor,
+                  onPrimary: isDarkMode ? CantonColors.black : CantonColors.white,
+                  onSurface: isDarkMode ? CantonColors.white : CantonColors.black,
+                ),
+              ),
+              child: child!,
+            );
+          }).then((date) {
         _birthDateController = date!;
         setState(() {
           birthDateText = DateFormat.yMMMd().format(date);
