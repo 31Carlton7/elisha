@@ -37,7 +37,7 @@ class ProfileView extends ConsumerWidget {
 
   Widget _content(BuildContext context) {
     return Column(
-      crossAxisAlignment: Responsive.isMobile(context) ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const ProfileViewHeader(),
         _body(context),
