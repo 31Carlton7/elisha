@@ -18,7 +18,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:convert';
 
-import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:flutter/services.dart';
 
 import 'package:dio/dio.dart';
@@ -28,6 +27,7 @@ import 'package:elisha/src/config/exceptions.dart';
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/chapter.dart';
 import 'package:elisha/src/models/verse.dart';
+import 'package:elisha/src/providers/bible_chapters_provider.dart';
 import 'package:elisha/src/providers/bible_translations_provider.dart';
 import 'package:elisha/src/repositories/bible_repository.dart';
 
