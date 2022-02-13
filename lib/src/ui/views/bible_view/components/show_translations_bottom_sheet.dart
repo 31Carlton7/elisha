@@ -17,10 +17,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/translation.dart';
 import 'package:elisha/src/ui/views/bible_view/components/translation_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<void> showTranslationsBottomSheet(
   BuildContext context,
