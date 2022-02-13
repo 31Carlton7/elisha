@@ -17,13 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/config/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:elisha/src/config/constants.dart';
 import 'package:elisha/src/ui/views/settings_view/components/change_birth_date_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/change_first_name_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/change_last_name_card.dart';
 import 'package:elisha/src/ui/views/settings_view/components/settings_view_header.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsView extends ConsumerWidget {
   const SettingsView({Key? key}) : super(key: key);
