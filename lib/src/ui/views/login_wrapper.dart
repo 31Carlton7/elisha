@@ -50,7 +50,7 @@ class _LoginWrapperState extends ConsumerState<LoginWrapper> {
       if (Platform.isIOS) {
         return isDarkMode ? CantonColors.white : CantonColors.black;
       } else {
-        return isDarkMode ? CantonColors.black : CantonColors.white;
+        return isDarkMode ? CantonColors.gray[900]! : CantonColors.white;
       }
     }
 
