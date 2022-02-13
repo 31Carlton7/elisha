@@ -16,21 +16,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'dart:io';
-
-import 'package:elisha/src/models/youtube_channel.dart';
-import 'package:elisha/src/providers/youtube_fetch_latest_church_video_future_provider.dart';
+import 'package:flutter/services.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/ui/views/sunday_mass_view/components/church_youtube_channel_card.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
+import 'package:elisha/src/models/youtube_channel.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/sunday_mass_service_provider.dart';
 import 'package:elisha/src/providers/youtube_fetch_channel_future_provider.dart';
+import 'package:elisha/src/providers/youtube_fetch_latest_church_video_future_provider.dart';
+import 'package:elisha/src/ui/views/sunday_mass_view/components/church_youtube_channel_card.dart';
 import 'package:elisha/src/ui/views/sunday_mass_view/components/sunday_mass_view_header.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class SundayMassView extends ConsumerStatefulWidget {
   const SundayMassView({Key? key}) : super(key: key);
