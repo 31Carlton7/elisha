@@ -126,6 +126,7 @@ class _BookmarkedChaptersViewState extends ConsumerState<BookmarkedChaptersView>
                         buttonText: 'Remove Bookmark',
                         color: Theme.of(context).colorScheme.secondary,
                         textColor: Theme.of(context).colorScheme.error,
+                        padding: EdgeInsets.zero,
                         onPressed: () async {
                           await ref.read(studyToolsRepositoryProvider.notifier).removeBookmarkChapter(chapter);
                           Navigator.pop(context);
