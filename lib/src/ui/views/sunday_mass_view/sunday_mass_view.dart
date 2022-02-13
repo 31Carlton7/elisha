@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'dart:io';
+
 import 'package:elisha/src/models/youtube_channel.dart';
 import 'package:elisha/src/providers/youtube_fetch_latest_church_video_future_provider.dart';
 
@@ -113,7 +115,7 @@ class _SundayMassViewState extends ConsumerState<SundayMassView> {
                 return Text('Other Church Services', style: Theme.of(context).textTheme.headline5);
 
               case 4:
-                return const SizedBox(height: kMediumPadding);
+                return const SizedBox(height: kSmallPadding);
 
               default:
                 return ChurchYouTubeChannelCard(
