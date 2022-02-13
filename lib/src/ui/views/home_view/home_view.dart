@@ -107,7 +107,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
         if (isSunday) const SundayMassCard(),
         if (isSunday) const SizedBox(height: 17),
         const VerseOfTheDayCard(),
-        homeViewBannerAdIsLoaded ? const SizedBox(height: 27) : const SizedBox(height: 17),
+        homeViewBannerAdIsLoaded ? const SizedBox(height: 17) : const SizedBox(height: 17),
         if (homeViewBannerAdIsLoaded)
           Container(
             padding: const EdgeInsets.only(bottom: 10),
