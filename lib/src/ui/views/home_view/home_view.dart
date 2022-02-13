@@ -17,16 +17,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
-import 'package:elisha/src/providers/ad_state_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import 'package:elisha/src/providers/ad_state_provider.dart';
 import 'package:elisha/src/services/ad_state.dart';
 import 'package:elisha/src/ui/components/daily_devotional_card.dart';
 import 'package:elisha/src/ui/components/streaks_card.dart';
 import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 import 'package:elisha/src/ui/components/verse_of_the_day_card.dart';
 import 'package:elisha/src/ui/views/home_view/components/home_view_header.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({Key? key}) : super(key: key);
