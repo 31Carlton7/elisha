@@ -16,8 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:elisha/src/providers/ad_state_provider.dart';
-import 'package:elisha/src/services/ad_state.dart';
 import 'package:flutter/services.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
@@ -26,9 +24,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 import 'package:elisha/src/models/verse.dart';
+import 'package:elisha/src/providers/ad_state_provider.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
 import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
+import 'package:elisha/src/services/ad_state.dart';
 
 class VerseOfTheDayView extends ConsumerStatefulWidget {
   const VerseOfTheDayView({Key? key, required this.verses}) : super(key: key);
