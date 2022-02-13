@@ -30,7 +30,7 @@ class StudyToolsRepository extends ChangeNotifier {
   var _bookmarkedChapters = <Chapter>[];
 
   List<Verse> get favoriteVerses => _favoritedVerses;
-  List<Chapter> get bookmarkedChapters => _bookmarkedChapters;
+  List<Chapter> get bookmarkedChapters => _bookmarkedChapters.reversed.toList();
 
   Future<void> addFavoriteVerse(Verse verse) async {
     _favoritedVerses.add(verse.copyWith(favorite: true));
