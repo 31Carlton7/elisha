@@ -908,9 +908,9 @@ packages:
   youtube_player_iframe:
     dependency: "direct main"
     description:
-      name: youtube_player_iframe
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "packages/youtube_player_flutter/packages/youtube_player_iframe"
+      relative: true
+    source: path
     version: "2.2.2"
 sdks:
   dart: ">=2.14.0 <3.0.0"
