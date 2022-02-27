@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
 import 'package:flutter/services.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
@@ -222,7 +223,9 @@ class _VerseOfTheDayCardState extends ConsumerState<VerseOfTheDayCard> {
               maxLines: 5,
               style: Theme.of(context).textTheme.headline5?.copyWith(
                     color: _verses == null ? Theme.of(context).colorScheme.error : null,
-                    fontSize: 19,
+                    fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
+                    fontSize: ref.watch(readerSettingsRepositoryProvider).bodyTextSize * 1.3,
+                    height: ref.watch(readerSettingsRepositoryProvider).bodyTextHeight * 0.8,
                     fontWeight: FontWeight.w500,
                   ),
             ),
