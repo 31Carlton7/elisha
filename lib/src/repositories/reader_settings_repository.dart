@@ -33,7 +33,7 @@ class ReaderSettingsRepository extends ChangeNotifier {
   var _bodyTextHeight = 1.97;
   var _verseNumberSize = 14.0;
   var _verseNumberHeight = 1.5;
-  var _typeFace = 'Inter';
+  var _typeFace = 'New York';
   var _readerColor = ReaderColors.dyn;
 
   double get bodyTextSize => _bodyTextSize;
@@ -44,49 +44,49 @@ class ReaderSettingsRepository extends ChangeNotifier {
   ReaderColors get readerColor => _readerColor;
 
   Future<void> incrementBodyTextSize() async {
-    _bodyTextSize++;
+    if (_bodyTextSize <= 23) _bodyTextSize++;
     notifyListeners();
     await _saveData();
   }
 
   Future<void> incrementBodyTextHeight() async {
-    _bodyTextHeight += 0.25;
+    if (_bodyTextHeight <= 3.2) _bodyTextHeight += 0.25;
     notifyListeners();
     await _saveData();
   }
 
   Future<void> incrementVerseNumberSize() async {
-    _verseNumberSize++;
+    if (_bodyTextSize <= 23) _verseNumberSize++;
     notifyListeners();
     await _saveData();
   }
 
   Future<void> incrementVerseNumberHeight() async {
-    _verseNumberHeight += 0.25;
+    if (_bodyTextHeight <= 3.2) _verseNumberHeight += 0.25;
     notifyListeners();
     await _saveData();
   }
 
   Future<void> decrementBodyTextSize() async {
-    _bodyTextSize--;
+    if (bodyTextSize >= 13) _bodyTextSize--;
     notifyListeners();
     await _saveData();
   }
 
   Future<void> decrementBodyTextHeight() async {
-    _bodyTextHeight -= 0.25;
+    if (_bodyTextHeight >= 1.7) _bodyTextHeight -= 0.25;
     notifyListeners();
     await _saveData();
   }
 
   Future<void> decrementVerseNumberSize() async {
-    _verseNumberSize--;
+    if (_bodyTextSize >= 13) _verseNumberSize--;
     notifyListeners();
     await _saveData();
   }
 
   Future<void> decrementVerseNumberHeight() async {
-    _verseNumberHeight -= 0.25;
+    if (_bodyTextHeight >= 1.7) _verseNumberHeight -= 0.25;
     notifyListeners();
     await _saveData();
   }
@@ -129,7 +129,7 @@ class ReaderSettingsRepository extends ChangeNotifier {
       'bodyTextHeight': 1.97,
       'verseNumberSize': 14.0,
       'verseNumberHeight': 1.5,
-      'typeFace': 'Inter',
+      'typeFace': 'New York',
       // 'readerColor': ReaderColors.dyn,
     });
 
