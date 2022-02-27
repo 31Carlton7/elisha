@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/views/settings_view/components/reader_settings_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/config/constants.dart';
@@ -62,6 +63,11 @@ class SettingsView extends ConsumerWidget {
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 500),
             child: const ChangeBirthDateCard(),
+          ),
+          const SizedBox(height: kDefaultPadding),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: const ReaderSettingsCard(),
           ),
           const SizedBox(height: kSmallPadding),
           Text(
