@@ -84,6 +84,7 @@ class ProfileView extends ConsumerWidget {
           constraints: const BoxConstraints(maxWidth: 500),
           child: const PrivacyPolicyCard(),
         ),
+        const SizedBox(height: kDefaultPadding)
       ],
     );
   }
