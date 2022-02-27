@@ -64,25 +64,35 @@ class BibleReader extends ConsumerWidget {
               HapticFeedback.mediumImpact();
               await showFavoriteVerseBottomSheet(context, item);
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                if (_isFavoriteVerse)
-                  Icon(
-                    LineAwesomeIcons.heart_1,
-                    size: ref.watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
-                    color: heartColor(context),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 4.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  if (_isFavoriteVerse)
+                    Icon(
+                      LineAwesomeIcons.heart_1,
+                      size: ref.watch(readerSettingsRepositoryProvider).verseNumberSize * 1.3,
+                      color: heartColor(context),
+                    ),
+                  Text(
+                    item.verseId.toString(),
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          color: Theme.of(context).colorScheme.secondaryVariant,
+                          fontSize: ref.watch(readerSettingsRepositoryProvider).verseNumberSize * 1.1,
+                          // height: ref.watch(readerSettingsRepositoryProvider).verseNumberHeight,
+                          fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
+                        ),
                   ),
-                Text(
-                  item.verseId.toString() + ' ',
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: Theme.of(context).colorScheme.secondaryVariant,
-                        fontSize: ref.watch(readerSettingsRepositoryProvider).verseNumberSize * 1.4,
-                        height: ref.watch(readerSettingsRepositoryProvider).verseNumberHeight * 1.4,
-                        fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
-                      ),
-                ),
-              ],
+                  if (!_isFavoriteVerse)
+                    const Icon(
+                      LineAwesomeIcons.heart_1,
+                      size: 10,
+                      color: CantonColors.transparent,
+                    ),
+                ],
+              ),
             ),
           ),
         ),
@@ -106,8 +116,10 @@ class BibleReader extends ConsumerWidget {
 
     children.add(const SizedBox(height: 40));
 
-    return Column(
-      children: [...children],
+    return SingleChildScrollView(
+      child: Column(
+        children: [...children],
+      ),
     );
   }
 }
