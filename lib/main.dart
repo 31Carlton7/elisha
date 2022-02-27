@@ -54,7 +54,7 @@ void main() async {
 
     runApp(
       DevicePreview(
-        enabled: kReleaseMode,
+        enabled: !kReleaseMode,
         tools: const [
           ...DevicePreview.defaultTools,
           DevicePreviewScreenshot(),
