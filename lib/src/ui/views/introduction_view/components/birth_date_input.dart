@@ -41,7 +41,7 @@ class BirthDateInput extends ConsumerWidget {
           Container(
             margin: const EdgeInsets.only(left: 7),
             child: Text(
-              'Birthday',
+              'Birthday (Optional)',
               style: Theme.of(context).inputDecorationTheme.labelStyle,
             ),
           ),
