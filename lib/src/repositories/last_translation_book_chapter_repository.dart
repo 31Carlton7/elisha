@@ -28,10 +28,10 @@ import 'package:elisha/src/providers/bible_translations_provider.dart';
 
 class LastTranslationBookChapterRepository extends StateNotifier<TranslationBookChapter> {
   LastTranslationBookChapterRepository()
-      : super(TranslationBookChapter(translationAbb: 'asv', translation: 0, book: 1, chapter: 1));
+      : super(TranslationBookChapter(translationAbb: 'kjv', translation: 2, book: 1, chapter: 1));
 
-  String get getCurrentTranslationAbb => state.translationAbb ?? 'asv';
-  int get getCurrentTranslationId => state.translation ?? 0;
+  String get getCurrentTranslationAbb => state.translationAbb ?? 'kjv';
+  int get getCurrentTranslationId => state.translation ?? 2;
   int get getCurrentBookId => state.book ?? 1;
   int get getCurrentChapterId => state.chapter ?? 1;
 
@@ -74,7 +74,7 @@ class LastTranslationBookChapterRepository extends StateNotifier<TranslationBook
     // box.delete('bible_chapter_translation');
 
     List<String> savedBibleChapterAndTranslation =
-        box.get('bible_chapter_translation', defaultValue: ['0', 'asv', '1', '1']);
+        box.get('bible_chapter_translation', defaultValue: ['2', 'kjv', '1', '1']);
 
     var savedList = savedBibleChapterAndTranslation.map((element) => element.toString()).toList();
 
