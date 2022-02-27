@@ -21,12 +21,12 @@ import 'dart:convert';
 class LocalUser {
   String firstName;
   String lastName;
-  DateTime birthDate;
+  DateTime? birthDate;
 
   LocalUser({
     required this.firstName,
     required this.lastName,
-    required this.birthDate,
+    this.birthDate,
   });
 
   LocalUser copyWith({
@@ -46,7 +46,7 @@ class LocalUser {
     return {
       'firstName': firstName,
       'lastName': lastName,
-      'birthDate': birthDate.millisecondsSinceEpoch,
+      'birthDate': birthDate!.millisecondsSinceEpoch,
     };
   }
 
