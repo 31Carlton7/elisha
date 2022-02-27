@@ -28,6 +28,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:device_preview_screenshot/device_preview_screenshot.dart';
 
 import 'package:elisha/src/config/constants.dart';
 import 'package:elisha/src/ui/views/login_wrapper.dart';
@@ -49,17 +50,27 @@ void main() async {
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     }
 
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-        .then((_) {
-      runApp(const ProviderScope(child: MyApp()));
-    });
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+    runApp(
+      DevicePreview(
+        enabled: kReleaseMode,
+        tools: const [
+          ...DevicePreview.defaultTools,
+          DevicePreviewScreenshot(),
+        ],
+        builder: (context) => const ProviderScope(
+          child: ElishaApp(),
+        ),
+      ),
+    );
   }, (error, stack) async {
     await FirebaseCrashlytics.instance.recordError(error, stack);
   });
 }
 
-class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+class ElishaApp extends ConsumerWidget {
+  const ElishaApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
