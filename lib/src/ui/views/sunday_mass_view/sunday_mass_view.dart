@@ -87,7 +87,11 @@ class _SundayMassViewState extends ConsumerState<SundayMassView> {
 
         final _ytController = YoutubePlayerController(
           initialVideoId: videoId,
-          params: const YoutubePlayerParams(autoPlay: true, showFullscreenButton: true),
+          params: const YoutubePlayerParams(
+            showFullscreenButton: true,
+            strictRelatedVideos: true,
+            showVideoAnnotations: false,
+          ),
         );
 
         final _ytPlayer = YoutubePlayerIFrame(controller: _ytController);
