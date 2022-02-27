@@ -69,7 +69,7 @@ class DailyReadingsView extends ConsumerWidget {
     List<Widget> children = [
       Text(
         dailyReading.name!,
-        style: Theme.of(context).textTheme.headline4?.copyWith(
+        style: Theme.of(context).textTheme.headline3?.copyWith(
               fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
             ),
       ),
@@ -130,7 +130,7 @@ class DailyReadingsView extends ConsumerWidget {
           children: [
             Text(
               reading.name!,
-              style: Theme.of(context).textTheme.headline5?.copyWith(
+              style: Theme.of(context).textTheme.headline4?.copyWith(
                     fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                   ),
             ),
@@ -138,7 +138,7 @@ class DailyReadingsView extends ConsumerWidget {
             Expanded(
               child: Text(
                 reading.snippetAddress!,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                style: Theme.of(context).textTheme.headline6?.copyWith(
                       color: Theme.of(context).colorScheme.secondaryVariant,
                       fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                     ),
@@ -152,8 +152,8 @@ class DailyReadingsView extends ConsumerWidget {
           style: Theme.of(context).textTheme.headline5?.copyWith(
                 fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                 fontWeight: FontWeight.w400,
-                fontSize: ref.watch(readerSettingsRepositoryProvider).bodyTextSize * 1.45,
-                height: ref.watch(readerSettingsRepositoryProvider).bodyTextHeight * 0.95,
+                fontSize: ref.watch(readerSettingsRepositoryProvider).bodyTextSize * 1.3,
+                height: ref.watch(readerSettingsRepositoryProvider).bodyTextHeight,
               ),
         ),
       ],
