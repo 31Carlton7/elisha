@@ -488,6 +488,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                       onTap: () async {
                         await ref.read(readerSettingsRepositoryProvider).decrementBodyTextSize();
                         await ref.read(readerSettingsRepositoryProvider).decrementVerseNumberSize();
+                        setState(() {});
                       },
                       child: Container(
                         height: 40,
@@ -513,6 +514,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                       onTap: () async {
                         await ref.read(readerSettingsRepositoryProvider).incrementBodyTextSize();
                         await ref.read(readerSettingsRepositoryProvider).incrementVerseNumberSize();
+                        setState(() {});
                       },
                       child: Container(
                         height: 40,
@@ -550,6 +552,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                       GestureDetector(
                         onTap: () async {
                           await ref.read(readerSettingsRepositoryProvider).setTypeFace('New York');
+                          setState(() {});
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -565,6 +568,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                       GestureDetector(
                         onTap: () async {
                           await ref.read(readerSettingsRepositoryProvider).setTypeFace('Inter');
+                          setState(() {});
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -592,6 +596,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                       onTap: () async {
                         await ref.read(readerSettingsRepositoryProvider).decrementBodyTextHeight();
                         await ref.read(readerSettingsRepositoryProvider).decrementVerseNumberHeight();
+                        setState(() {});
                       },
                       child: Container(
                         height: 40,
@@ -610,6 +615,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                       onTap: () async {
                         await ref.read(readerSettingsRepositoryProvider).incrementBodyTextHeight();
                         await ref.read(readerSettingsRepositoryProvider).incrementVerseNumberHeight();
+                        setState(() {});
                       },
                       child: Container(
                         height: 40,
@@ -681,7 +687,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
       }
 
       return CantonExpansionTile(
-        childrenPadding: const EdgeInsets.symmetric(horizontal: 17),
+        childrenPadding: const EdgeInsets.symmetric(horizontal: 24),
         title: Text(book.name!, style: Theme.of(context).textTheme.headline6),
         iconColor: Theme.of(context).colorScheme.primary,
         children: [
@@ -734,12 +740,28 @@ class _BibleViewState extends ConsumerState<BibleView> {
               ),
               const SizedBox(height: 7),
               Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
                   itemCount: books.length,
+                  separatorBuilder: (context, index) {
+                    return const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24),
+                      child: Divider(),
+                    );
+                  },
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
+                        if (index == 0)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24),
+                            child: Divider(),
+                          ),
                         _bookCard(books[index]),
+                        if (index == 0)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24),
+                            child: Divider(),
+                          ),
                       ],
                     );
                   },
@@ -786,7 +808,10 @@ class _BibleViewState extends ConsumerState<BibleView> {
                 child: ListView.separated(
                   itemCount: translations.length,
                   separatorBuilder: (context, index) {
-                    return Responsive.isTablet(context) ? const SizedBox(height: 10) : Container();
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Responsive.isTablet(context) ? const Divider(height: 10) : const Divider(),
+                    );
                   },
                   itemBuilder: (context, index) {
                     var translation = translations[index];
@@ -804,7 +829,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                           Navigator.of(context, rootNavigator: true).pop();
                         },
                         child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(vertical: 3, horizontal: 17),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 3, horizontal: 24),
                           title: Text(
                             translation.name!,
                             style: Theme.of(context).textTheme.headline6?.copyWith(
@@ -822,7 +847,21 @@ class _BibleViewState extends ConsumerState<BibleView> {
                       );
                     }
 
-                    return _translationCard();
+                    return Column(
+                      children: [
+                        if (index == 0)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24),
+                            child: Divider(),
+                          ),
+                        _translationCard(),
+                        if (index == translations.length - 1)
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24),
+                            child: Divider(),
+                          ),
+                      ],
+                    );
                   },
                 ),
               ),
