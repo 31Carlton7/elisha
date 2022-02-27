@@ -36,7 +36,7 @@ class ProfileViewHeader extends ConsumerWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.only(top: 17, left: 34, right: 17),
+      padding: const EdgeInsets.only(top: kSmallPadding, left: kDefaultPadding * 2, right: kDefaultPadding),
       child: Text(name(dbName), style: Theme.of(context).textTheme.headline2?.copyWith(fontWeight: FontWeight.w700)),
     );
   }
