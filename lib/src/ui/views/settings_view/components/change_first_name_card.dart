@@ -38,7 +38,7 @@ class ChangeFirstNameCard extends ConsumerWidget {
         style: Theme.of(context).textTheme.headline6,
       ),
       decoration: BoxDecoration(
-        color: CantonMethods.alternateCanvasColorType2(context),
+        color: CantonMethods.alternateCanvasColorType3(context),
         borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
       ),
       backgroundColor: CantonMethods.alternateCanvasColor(context),
