@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/views/profile_view/components/support_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/ui/components/streaks_card.dart';
@@ -36,18 +37,21 @@ class ProfileView extends ConsumerWidget {
   }
 
   Widget _content(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const ProfileViewHeader(),
-        _body(context),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _body(context),
+        ],
+      ),
     );
   }
 
   Widget _body(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const ProfileViewHeader(),
         const SizedBox(height: 17),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
@@ -71,6 +75,10 @@ class ProfileView extends ConsumerWidget {
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
           child: const AboutCard(),
+        ),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: const SupportCard(),
         ),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
