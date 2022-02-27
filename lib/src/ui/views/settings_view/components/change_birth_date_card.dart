@@ -37,8 +37,8 @@ class ChangeBirthDateCard extends ConsumerWidget {
     final firstDate = DateTime(1900);
     final lastDate = DateTime.now();
     String currentBirthdayStr() {
-      return 'Current Birthday: ' +
-          DateFormat('yMMMd').format((ref.watch(localUserRepositoryProvider).getUser.birthDate));
+      final bday = ref.watch(localUserRepositoryProvider).getUser.birthDate;
+      return 'Current Birthday: ' + (bday != null ? DateFormat('yMMMd').format(bday) : 'None');
     }
 
     return CantonExpansionTile(
@@ -47,7 +47,7 @@ class ChangeBirthDateCard extends ConsumerWidget {
         style: Theme.of(context).textTheme.headline6,
       ),
       decoration: BoxDecoration(
-        color: CantonMethods.alternateCanvasColorType2(context),
+        color: CantonMethods.alternateCanvasColorType3(context),
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(10)),
       ),
       backgroundColor: CantonMethods.alternateCanvasColor(context),
