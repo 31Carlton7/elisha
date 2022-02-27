@@ -79,9 +79,7 @@ class StreaksRepository extends ChangeNotifier {
     var startDayDate = DateTime(now.year, now.month, now.day);
     var endDayDate = startDayDate.add(const Duration(days: 1));
 
-    if (startDayDate.day == lastVisitDate.day &&
-        startDayDate.month == lastVisitDate.month &&
-        startDayDate.year == lastVisitDate.year) {
+    if (startDayDate.isBefore(lastVisitDate) && endDayDate.isAfter(lastVisitDate)) {
       DoNothingAction();
     } else if (!(startDayDate.isBefore(lastVisitDate) && endDayDate.isAfter(lastVisitDate))) {
       await LocalUserRepository().updateNatureImage();
