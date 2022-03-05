@@ -103,6 +103,6 @@ class StreaksRepository extends ChangeNotifier {
       }
     }
 
-    await box.put('visitKey', startDayDate.toString());
+    await box.put('visitKey', DateTime.now().toString());
   }
 }
