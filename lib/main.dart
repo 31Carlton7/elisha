@@ -18,8 +18,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'dart:async';
 
+import 'package:elisha/src/models/book.dart';
+import 'package:elisha/src/models/verse.dart';
+import 'package:elisha/src/ui/views/bible_view/bible_view.dart';
 import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:elisha/src/ui/views/devotional_page/devotional_page.dart';
+import 'package:elisha/src/ui/views/home_view/components/study_plans_listview.dart';
+import 'package:elisha/src/ui/views/home_view/home_view.dart';
 import 'package:elisha/src/ui/views/list_of_notes_view/list_of_notes_view.dart';
 import 'package:elisha/src/ui/views/note_view/note_view.dart';
 import 'package:elisha/src/ui/views/opened_studyplan_view/opened_studyplan_view.dart';
@@ -36,6 +41,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:elisha/src/config/constants.dart';
 import 'package:elisha/src/services/authentication_services/authentication_wrapper.dart';
+Verse newverse = new Verse(id: 1, chapterId: 3, verseId: 2, text: "The Lord said unto...", book: new Book(), favorite: true);
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -64,9 +70,11 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({Key? key}) : super(key: key);
 
   @override
+
   Widget build(BuildContext context) {
     return CantonApp(
       title: kAppTitle,
@@ -75,7 +83,7 @@ class MyApp extends StatelessWidget {
       primaryDarkColor: const Color(0xFFB97D3C),
       primaryDarkVariantColor: const Color(0xFFB97D3C),
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-      home: const DevotionalPage(),
+      home: const DevotionalPage()
     );
   }
 }

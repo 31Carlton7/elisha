@@ -7,18 +7,16 @@ class FullTopicMemoryVerseVersePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
         body: SafeArea(
           child: Column(
             children: [
               ListTile(
                 title: Text('Topic for today:',
                     style: Theme.of(context).textTheme.headline4?.copyWith(fontWeight: FontWeight.bold)),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
               ),
               SizedBox(height: 5),
               Padding(

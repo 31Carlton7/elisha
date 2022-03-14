@@ -1,4 +1,7 @@
 import 'package:canton_design_system/canton_design_system.dart';
+import 'package:elisha/src/ui/views/devotional_page/full_prayer_content.dart';
+import 'package:elisha/src/ui/views/devotional_page/full_thougthofday_content.dart';
+import 'package:elisha/src/ui/views/devotional_page/full_topic_memoryverse_page.dart';
 import 'package:elisha/src/ui/views/devotional_page/full_word_content.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
@@ -159,7 +162,12 @@ class _DevotionalPageState extends State<DevotionalPage> {
                   onSelectedItem: (index) {
                     switch (index) {
                       case 0:
-                        print(index);
+                        Navigator.of(context).push(PageTransition(
+                            child: FullTopicMemoryVerseVersePage(),
+                            type: PageTransitionType.scale,
+                            alignment: Alignment.center,
+                            duration: Duration(milliseconds: 600)
+                        ));
                         break;
                       case 1:
                         Navigator.of(context).push(PageTransition(
@@ -170,10 +178,20 @@ class _DevotionalPageState extends State<DevotionalPage> {
                         ));
                         break;
                       case 2:
-                        print(index);
+                        Navigator.of(context).push(PageTransition(
+                            child: FullPrayerPage(),
+                            type: PageTransitionType.scale,
+                            alignment: Alignment.center,
+                            duration: Duration(milliseconds: 600)
+                        ));
                         break;
                       case 3:
-                        print(index);
+                        Navigator.of(context).push(PageTransition(
+                            child: FullThoughtOfTheDayPage(),
+                            type: PageTransitionType.scale,
+                            alignment: Alignment.center,
+                            duration: Duration(milliseconds: 600)
+                        ));
                         break;
                     }
                   },

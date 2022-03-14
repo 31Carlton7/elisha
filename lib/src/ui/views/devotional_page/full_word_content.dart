@@ -14,7 +14,7 @@ class FullWordContentPage extends StatelessWidget {
                 title: Text('Word',
                     style: Theme.of(context)
                         .textTheme
-                        .headline5
+                        .headline4
                         ?.copyWith(fontWeight: FontWeight.bold)),
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back, color: Colors.black),
