@@ -75,20 +75,14 @@ class StreaksRepository extends ChangeNotifier {
 
     final now = DateTime.now();
 
-    var lastVisitDate = DateTime.parse(box.get('visitKey', defaultValue: DateTime.now().toString()));
+    var lastVisitDate = DateTime.parse(box.get('visitKey', defaultValue: now.toString()));
     var startDayDate = DateTime(now.year, now.month, now.day);
-    var endDayDate = startDayDate.add(const Duration(days: 1));
 
     if (startDayDate.day == lastVisitDate.day &&
         startDayDate.month == lastVisitDate.month &&
         startDayDate.year == lastVisitDate.year) {
       DoNothingAction();
-    } else if (!(startDayDate.isBefore(lastVisitDate) && endDayDate.isAfter(lastVisitDate))) {
-      await LocalUserRepository().updateNatureImage();
-      await LocalUserRepository().updateChurchImage();
-
-      await _resetCurrentStreak();
-    } else {
+    } else if (lastVisitDate.day == startDayDate.day - 1) {
       await LocalUserRepository().updateNatureImage();
       await LocalUserRepository().updateChurchImage();
 
@@ -101,6 +95,11 @@ class StreaksRepository extends ChangeNotifier {
       if (_currentStreak % 7 == 0) {
         await _incrementPerfectWeeks();
       }
+    } else {
+      await LocalUserRepository().updateNatureImage();
+      await LocalUserRepository().updateChurchImage();
+
+      await _resetCurrentStreak();
     }
 
     await box.put('visitKey', DateTime.now().toString());
