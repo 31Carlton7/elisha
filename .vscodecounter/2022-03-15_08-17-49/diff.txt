@@ -1,0 +1,45 @@
+Date : 2022-03-15 08:17:49
+Directory : /Users/carltonaikins/Desktop/Home/Programming/projects/elisha
+Total : 12 files,  -165 codes, 1 comments, 0 blanks, all -164 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| JSON     |          2 |          0 |          0 |          0 |          0 |
+| YAML     |          1 |          0 |          1 |          0 |          1 |
+| Dart     |          1 |         -1 |          0 |          0 |         -1 |
+| Markdown |          8 |       -164 |          0 |          0 |       -164 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                             | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                |         12 |       -165 |          1 |          0 |       -164 |
+| .vscodecounter                                                                                                   |         10 |       -164 |          0 |          0 |       -164 |
+| .vscodecounter/2022-01-31_01-22-21                                                                               |          5 |       -495 |          0 |        -26 |       -521 |
+| .vscodecounter/2022-03-13_22-51-33                                                                               |          5 |        331 |          0 |         26 |        357 |
+| lib                                                                                                              |          1 |         -1 |          0 |          0 |         -1 |
+| lib/src                                                                                                          |          1 |         -1 |          0 |          0 |         -1 |
+| lib/src/repositories                                                                                             |          1 |         -1 |          0 |          0 |         -1 |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                         | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-01-31_01-22-21/details.md      | Markdown |       -159 |          0 |         -6 |       -165 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-01-31_01-22-21/diff-details.md | Markdown |       -159 |          0 |         -6 |       -165 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-01-31_01-22-21/diff.md         | Markdown |        -88 |          0 |         -7 |        -95 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-01-31_01-22-21/results.json    | JSON     |         -1 |          0 |          0 |         -1 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-01-31_01-22-21/results.md      | Markdown |        -88 |          0 |         -7 |        -95 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-03-13_22-51-33/details.md      | Markdown |        194 |          0 |          6 |        200 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-03-13_22-51-33/diff-details.md | Markdown |         17 |          0 |          6 |         23 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-03-13_22-51-33/diff.md         | Markdown |         22 |          0 |          7 |         29 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-03-13_22-51-33/results.json    | JSON     |          1 |          0 |          0 |          1 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/.vscodecounter/2022-03-13_22-51-33/results.md      | Markdown |         97 |          0 |          7 |        104 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/lib/src/repositories/streaks_repository.dart       | Dart     |         -1 |          0 |          0 |         -1 |
+| /Users/carltonaikins/Desktop/Home/Programming/projects/elisha/pubspec.yaml                                       | YAML     |          0 |          1 |          0 |          1 |
+| Total                                                                                                            |          |       -165 |          1 |          0 |       -164 |
++------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
