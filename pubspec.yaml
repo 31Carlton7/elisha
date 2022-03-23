@@ -23,11 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  platform: ^3.1.0
   # UI
   canton_design_system:
     git:
-      url: git://github.com/31Carlton7/canton_design_system.git
+      url: https://github.com/5ran6/design_system.git
       ref: master
   font_awesome_flutter: ^9.2.0
   line_awesome_flutter: ^2.0.0
