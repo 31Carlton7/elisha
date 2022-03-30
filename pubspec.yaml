@@ -24,6 +24,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_screenutil: ^5.0.0+2
+  simple_animations: ^3.0.0
+  shared_preferences: ^2.0.6
+
   # UI
   canton_design_system:
     git:

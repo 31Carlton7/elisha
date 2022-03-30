@@ -20,6 +20,7 @@ import 'dart:async';
 
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/verse.dart';
+import 'package:elisha/src/ui/views/bibestudy_series_view/biblestudy_series_view.dart';
 import 'package:elisha/src/ui/views/bible_view/bible_view.dart';
 import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:elisha/src/ui/views/devotional_page/devotional_page.dart';
@@ -83,7 +84,7 @@ class MyApp extends StatelessWidget {
       primaryDarkColor: const Color(0xFFB97D3C),
       primaryDarkVariantColor: const Color(0xFFB97D3C),
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-      home: const DevotionalPage()
+      home: const BibleStudySeriesPage()
     );
   }
 }
