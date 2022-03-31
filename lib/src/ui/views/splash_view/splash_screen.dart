@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     super.initState();
     _controller =
-    AnimationController(vsync: this, duration: Duration(seconds: 1))
+    AnimationController(vsync: this, duration: Duration(seconds: 5))
       ..repeat(reverse: true);
     _animation = CurvedAnimation(parent: _controller!, curve: Curves.easeIn);
     check();
@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       opacity: _animation!,
                       child: Center(
                         child: Image.asset(
-                          'assets/whitelogo.png',
+                          'assets/images/heart.jpeg',
                           width: 120.0,
                           fit: BoxFit.fitWidth,
                         ),
