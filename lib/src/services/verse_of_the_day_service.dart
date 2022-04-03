@@ -17,7 +17,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/verse.dart';
@@ -48,8 +47,7 @@ class VerseOfTheDayService {
       }
 
       return verses;
-    } on DioError catch (e) {
-      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
+    } catch (e) {
       return [
         Verse(
           id: 40028020,
