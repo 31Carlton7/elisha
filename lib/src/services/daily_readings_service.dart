@@ -30,6 +30,7 @@ class DailyReadingsService {
     final controller = WindowController();
     final date = DateFormat('MMddyy').format(DateTime.now());
     final uri = Uri.parse(_rootUrl + '/' + date + '.cfm');
+
     await controller.openHttp(uri: uri);
 
     final doc = controller.window?.document;
@@ -37,8 +38,7 @@ class DailyReadingsService {
     final nameNode =
         doc!.getElementsByClassName('wr-block b-lectionary padding-top-s padding-bottom-xxs bg-white').first;
 
-    var lectionaryNode =
-        doc.getElementsByClassName('wr-block b-lectionary padding-top-s padding-bottom-xxs bg-white').first;
+    final lectionaryNode = nameNode;
 
     final readingNodes = doc.getElementsByClassName('wr-block b-verse bg-white padding-bottom-m');
 
