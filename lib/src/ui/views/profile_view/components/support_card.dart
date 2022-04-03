@@ -34,7 +34,7 @@ class SupportCard extends ConsumerWidget {
         if (await canLaunch(link)) {
           await launch(link);
         } else {
-          throw 'Could not launch $link';
+          DoNothingAction();
         }
       },
       child: Card(
