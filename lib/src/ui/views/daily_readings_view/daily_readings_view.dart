@@ -110,7 +110,7 @@ class DailyReadingsView extends ConsumerWidget {
             }
           },
           text:
-              'Daily Readings is courtesy of the United States Conference of Catholic Bishops © 2022. Their Website is located at https://bible.usccb.org',
+              'Daily Readings is courtesy of the United States Conference of Catholic Bishops © 2022. Their Website is located at https://bible.usccb.org/bible/readings',
           style: Theme.of(context).textTheme.headline6,
           linkStyle: Theme.of(context).textTheme.headline6?.copyWith(
                 color: Theme.of(context).colorScheme.onPrimary,
