@@ -29,6 +29,7 @@ import 'package:elisha/src/ui/views/home_view/home_view.dart';
 import 'package:elisha/src/ui/views/list_of_notes_view/list_of_notes_view.dart';
 import 'package:elisha/src/ui/views/note_view/note_view.dart';
 import 'package:elisha/src/ui/views/opened_studyplan_view/opened_studyplan_view.dart';
+import 'package:elisha/src/ui/views/splash_view/splash_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -84,7 +85,7 @@ class MyApp extends StatelessWidget {
       primaryDarkColor: const Color(0xFFB97D3C),
       primaryDarkVariantColor: const Color(0xFFB97D3C),
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-      home: const BibleStudySeriesPage()
+      home: const SplashScreen()
     );
   }
 }
