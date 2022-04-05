@@ -9,7 +9,20 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  late TimeOfDay time;
+
   bool value = true;
+
+  String getText() {
+    if (time == null) {
+      return 'Select Time';
+    } else {
+      final hours = time.hour.toString().padLeft(2, '0');
+      final minutes = time.minute.toString().padLeft(2, '0');
+
+      return '$hours:$minutes';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +51,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     Text('Remind me for devotion at: ', style: Theme.of(context).textTheme.bodyText1,),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        pickTime(context);
+                      },
                       child: Container(
                         width: 50,
                         child: TextField(
                           decoration: InputDecoration(
-                            hintText: 'Select Time',
+                            hintText: getText(),
                             hintStyle: Theme.of(context).textTheme.headline4,
                           ),
                         ),
@@ -59,7 +74,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     CantonPrimaryButton(
                       buttonText: 'SWITCH',
                       textColor: Colors.black,
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                     ),
                   ],
                 ),
@@ -71,6 +88,19 @@ class _SettingsPageState extends State<SettingsPage> {
 
     );
   }
+
+  Future pickTime(BuildContext context) async {
+    final initialTime = TimeOfDay(hour: 9, minute: 0);
+    final newTime = await showTimePicker(
+      context: context,
+      initialTime: time ?? initialTime,
+    );
+
+    if (newTime == null) return;
+
+    setState(() => time = newTime);
+  }
+
   Widget buildSwitch() => Transform.scale(
     scale: 2,
     child: Switch.adaptive(
