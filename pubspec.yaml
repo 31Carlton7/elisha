@@ -29,6 +29,7 @@ dependencies:
   introduction_screen: ^3.0.1
 
 
+
   platform: ^3.1.0
   # UI
   canton_design_system:
@@ -73,7 +74,7 @@ dependencies:
   flutter_linkify: ^5.0.2
   flutter_launcher_icons: ^0.9.1
   flutter_phoenix: ^1.0.0
-  page_transition: ^2.0.4
+  page_transition: ^2.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

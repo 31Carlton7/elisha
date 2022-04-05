@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:elisha/src/theme/apptheme.dart';
 import 'package:elisha/src/ui/views/note_view/note_view.dart';
-import 'package:elisha/src/ui/views/onboarding_view/onboardingscreen.dart';
+import 'package:elisha/src/ui/views/onboarding_view/onboardingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
