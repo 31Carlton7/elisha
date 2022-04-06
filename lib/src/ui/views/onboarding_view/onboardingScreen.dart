@@ -5,6 +5,8 @@ import 'package:elisha/src/ui/views/onboarding_view/widgets/onboardingItem.dart'
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import  'package:page_transition/page_transition.dart';
+import 'package:elisha/utils/constants.dart';
+
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -37,11 +39,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final int _numberOfPages = 2;
   final _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -32,6 +32,7 @@ import 'package:elisha/src/ui/views/opened_studyplan_view/opened_studyplan_view.
 import 'package:elisha/src/ui/views/splash_view/splash_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -78,14 +79,45 @@ class MyApp extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-    return CantonApp(
-      title: kAppTitle,
-      primaryLightColor: const Color(0xFFB97D3C),
-      primaryLightVariantColor: const Color(0xFFB97D3C),
-      primaryDarkColor: const Color(0xFFB97D3C),
-      primaryDarkVariantColor: const Color(0xFFB97D3C),
-      navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-      home: const SplashScreen()
+
+    // return ScreenUtilInit(
+    //   designSize: Size(360, 690),
+    //   minTextAdapt: true,
+    //   splitScreenMode: true,
+    //   builder: () => MaterialApp(
+    //     //... other code
+    //     builder: (context, widget) {
+    //       //add this line
+    //       ScreenUtil.setContext(context);
+    //       return MediaQuery(
+    //         //Setting font does not change with system font size
+    //         data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+    //         child: widget!,
+    //       );
+    //     },
+    //     theme: ThemeData(
+    //       textTheme: TextTheme(
+    //           //To support the following, you need to use the first initialization method
+    //           button: TextStyle(fontSize: 45.sp)),
+    //     ),
+    //   ),
+    // );
+
+
+
+
+    return ScreenUtilInit(
+      designSize: Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: () => CantonApp(
+          title: kAppTitle,
+          primaryLightColor: const Color(0xFFB97D3C),
+          primaryLightVariantColor: const Color(0xFFB97D3C),
+          primaryDarkColor: const Color(0xFFB97D3C),
+          primaryDarkVariantColor: const Color(0xFFB97D3C),
+          navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
+          home: const SplashScreen()),
     );
   }
 }
