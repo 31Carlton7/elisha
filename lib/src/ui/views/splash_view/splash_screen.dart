@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:elisha/src/theme/apptheme.dart';
+import 'package:elisha/src/ui/views/current_view.dart';
+import 'package:elisha/src/ui/views/home_view/home_view.dart';
 import 'package:elisha/src/ui/views/note_view/note_view.dart';
 import 'package:elisha/src/ui/views/onboarding_view/onboardingScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               PageTransition(
                   duration: Duration(milliseconds: 600),
                   type: PageTransitionType.fade,
-                  child: DevotionalNotePage()));
+                  child: CurrentView()));
         }));
   }
 
