@@ -21,6 +21,7 @@ import 'dart:async';
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/verse.dart';
 import 'package:elisha/src/ui/views/bibestudy_series_view/biblestudy_series_view.dart';
+import 'package:elisha/src/ui/views/account_view/account_view.dart';
 import 'package:elisha/src/ui/views/bible_view/bible_view.dart';
 import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:elisha/src/ui/views/devotional_page/devotional_page.dart';
@@ -29,6 +30,7 @@ import 'package:elisha/src/ui/views/home_view/home_view.dart';
 import 'package:elisha/src/ui/views/list_of_notes_view/list_of_notes_view.dart';
 import 'package:elisha/src/ui/views/note_view/note_view.dart';
 import 'package:elisha/src/ui/views/opened_studyplan_view/opened_studyplan_view.dart';
+import 'package:elisha/src/ui/views/settings_view/settings_view.dart';
 import 'package:elisha/src/ui/views/splash_view/splash_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -117,7 +119,7 @@ class MyApp extends StatelessWidget {
           primaryDarkColor: const Color(0xFFB97D3C),
           primaryDarkVariantColor: const Color(0xFFB97D3C),
           navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-          home: const SplashScreen()),
+          home: const SettingsPage()),
     );
   }
 }
