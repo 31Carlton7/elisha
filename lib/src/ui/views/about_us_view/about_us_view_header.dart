@@ -6,8 +6,8 @@ class AboutUsHeaderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25),
-      child: Row(children: [Text('About Us', style: Theme.of(context).textTheme.headline2)]),
+      padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+      child: Row(children: [Text('About Us', style: Theme.of(context).textTheme.headline3)]),
     );
   }
 }

@@ -20,9 +20,12 @@ import 'dart:async';
 
 import 'package:elisha/src/models/book.dart';
 import 'package:elisha/src/models/verse.dart';
+import 'package:elisha/src/ui/views/about_us_view/about_us_page.dart';
 import 'package:elisha/src/ui/views/bibestudy_series_view/biblestudy_series_view.dart';
 import 'package:elisha/src/ui/views/account_view/account_view.dart';
 import 'package:elisha/src/ui/views/bible_view/bible_view.dart';
+import 'package:elisha/src/ui/views/bookmarked_chapter_view/bookmarked_chapter_view.dart';
+import 'package:elisha/src/ui/views/bookmarked_chapters_view/bookmarked_chapters_view.dart';
 import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:elisha/src/ui/views/devotional_page/devotional_page.dart';
 import 'package:elisha/src/ui/views/home_view/components/study_plans_listview.dart';
@@ -30,6 +33,7 @@ import 'package:elisha/src/ui/views/home_view/home_view.dart';
 import 'package:elisha/src/ui/views/list_of_notes_view/list_of_notes_view.dart';
 import 'package:elisha/src/ui/views/note_view/note_view.dart';
 import 'package:elisha/src/ui/views/opened_studyplan_view/opened_studyplan_view.dart';
+import 'package:elisha/src/ui/views/profile_view/profile_view.dart';
 import 'package:elisha/src/ui/views/settings_view/settings_view.dart';
 import 'package:elisha/src/ui/views/splash_view/splash_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -109,7 +113,7 @@ class MyApp extends StatelessWidget {
 
 
     return ScreenUtilInit(
-      designSize: Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: () => CantonApp(
@@ -119,7 +123,7 @@ class MyApp extends StatelessWidget {
           primaryDarkColor: const Color(0xFFB97D3C),
           primaryDarkVariantColor: const Color(0xFFB97D3C),
           navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-          home: const SettingsPage()),
+          home: DevotionalNotePage()),
     );
   }
 }

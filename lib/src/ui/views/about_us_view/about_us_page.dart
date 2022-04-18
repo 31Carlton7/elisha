@@ -6,32 +6,35 @@ class AboutUsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AboutUsHeaderView(),
-        SizedBox(height: 5),
-        Card(
-          color: CantonMethods.alternateCanvasColorType2(context),
-          shape: CantonSmoothBorder.defaultBorder(),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 22),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'CPAI is a project-based learning initiative to equip the CACAF with the relevant skills and exposure necessary to thrive in our ever-changing digital age.',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Secret Place attempts to create a virtual digital private environment for young people to have their morning devotions undisturbed and thus build a vibrant relationship with God',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        children: [
+          const AboutUsHeaderView(),
+          const SizedBox(height: 10),
+          Card(
+            color: CantonMethods.alternateCanvasColorType2(context),
+            shape: CantonSmoothBorder.defaultBorder(),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 22),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'CPAI is a project-based learning initiative to equip the CACAF with the relevant skills and exposure necessary to thrive in our ever-changing digital age.',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Secret Place attempts to create a virtual digital private environment for young people to have their morning devotions undisturbed and thus build a vibrant relationship with God',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ],
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

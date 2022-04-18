@@ -18,6 +18,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
+import 'package:elisha/src/ui/views/about_us_view/about_us_page.dart';
+import 'package:elisha/src/ui/views/settings_view/settings_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/ui/views/account_view/account_view.dart';
@@ -39,11 +41,14 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget _header(BuildContext context) {
-    return ViewHeaderTwo(
-      title: 'Profile',
-      textColor: Theme.of(context).colorScheme.primary,
-      backButton: false,
-      buttonOne: const CantonHeaderButton(),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0,30,0,0),
+      child: ViewHeaderTwo(
+        title: 'Profile',
+        textColor: Theme.of(context).colorScheme.primary,
+        backButton: false,
+        buttonOne: const CantonHeaderButton(),
+      ),
     );
   }
 
@@ -129,14 +134,8 @@ class ProfileView extends StatelessWidget {
         ),
       ),
       GestureDetector(
-        onTap: () async {
-          const link = 'https://31carlton7.github.io/elisha';
-
-          if (await canLaunch(link)) {
-            await launch(link);
-          } else {
-            throw 'Could not launch $link';
-          }
+        onTap: () {
+          CantonMethods.viewTransition(context, const SettingsPage());
         },
         child: Card(
           margin: EdgeInsets.zero,
@@ -154,7 +153,33 @@ class ProfileView extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             alignment: Alignment.centerLeft,
             child: Text(
-              'About',
+              'Settings',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+        ),
+      ),
+      GestureDetector(
+        onTap: () {
+          CantonMethods.viewTransition(context, const AboutUsPage());
+        },
+        child: Card(
+          margin: EdgeInsets.zero,
+          shape: Border(
+            left: BorderSide(
+              width: 1.5,
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+            right: BorderSide(
+              width: 1.5,
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(15),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'About us',
               style: Theme.of(context).textTheme.headline6,
             ),
           ),

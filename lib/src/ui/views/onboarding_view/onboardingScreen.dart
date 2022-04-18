@@ -1,5 +1,6 @@
 import 'package:canton_design_system/canton_design_system.dart';
 import 'package:elisha/src/theme/apptheme.dart';
+import 'package:elisha/src/ui/views/current_view.dart';
 import 'package:elisha/src/ui/views/devotional_page/devotional_page.dart';
 import 'package:elisha/src/ui/views/onboarding_view/widgets/onboardingItem.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,7 +74,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               height: ScreenUtil().setHeight(490),
               color: AppTheme.kWhiteColor,
               child: PageView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 controller: _pageController,
                 onPageChanged: (int value) {
                   setState(() {
@@ -103,7 +104,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         AnimatedContainer(
-                          duration: Duration(milliseconds: 250),
+                          duration: const Duration(milliseconds: 250),
                           decoration: BoxDecoration(
                             color: AppTheme.kPrimaryColor,
                             borderRadius: BorderRadius.circular(kDefaultButtonRadius),
@@ -160,7 +161,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   moveToNextItem() {
     _pageController.nextPage(
-        duration: Duration(milliseconds: 750), curve: Curves.ease);
+        duration: const Duration(milliseconds: 750), curve: Curves.ease);
   }
 
   getStarted() async {
@@ -170,8 +171,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         .then((value) => Navigator.pushReplacement(
         context,
         PageTransition(
-            duration: Duration(milliseconds: 600),
+            duration: const Duration(milliseconds: 600),
             type: PageTransitionType.fade,
-            child: DevotionalPage())));
+            child: const CurrentView())));
   }
 }
