@@ -80,7 +80,7 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
           : Text(
         'No Bookmarked Chapters',
         style: Theme.of(context).textTheme.headline5?.copyWith(
-          color: Theme.of(context).colorScheme.secondaryVariant,
+          color: Theme.of(context).colorScheme.secondaryContainer,
         ),
       ),
     );
@@ -150,7 +150,7 @@ class _BookmarkedChaptersViewState extends State<BookmarkedChaptersView> {
                         child: Text(
                           'Cancel',
                           style: Theme.of(context).textTheme.headline6?.copyWith(
-                            color: Theme.of(context).colorScheme.secondaryVariant,
+                            color: Theme.of(context).colorScheme.secondaryContainer,
                           ),
                         ),
                       ),

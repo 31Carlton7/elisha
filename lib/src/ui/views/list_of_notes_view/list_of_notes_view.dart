@@ -26,7 +26,7 @@ class _ListOfNotesPageState extends State<ListOfNotesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
               children: [
-                ListofNotesHeaderView(),
+                const ListofNotesHeaderView(),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   margin:

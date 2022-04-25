@@ -66,7 +66,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
         TextSpan(
           text: item.verseId.toString() + ' ',
           style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                color: Theme.of(context).colorScheme.secondaryVariant,
+                color: Theme.of(context).colorScheme.secondaryContainer,
               ),
         ),
       );
@@ -122,7 +122,7 @@ class _BookmarkedChapterViewState extends State<BookmarkedChapterView> {
                         child: Text(
                           'Cancel',
                           style: Theme.of(context).textTheme.headline6?.copyWith(
-                                color: Theme.of(context).colorScheme.secondaryVariant,
+                                color: Theme.of(context).colorScheme.secondaryContainer,
                               ),
                         ),
                       ),

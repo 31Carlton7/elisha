@@ -96,7 +96,7 @@ class ProfileView extends StatelessWidget {
                 ),
                 Icon(
                   Iconsax.arrow_right_3,
-                  color: Theme.of(context).colorScheme.secondaryVariant,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                 ),
               ],
             ),

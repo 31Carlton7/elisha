@@ -50,7 +50,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:elisha/src/config/constants.dart';
 import 'package:elisha/src/services/authentication_services/authentication_wrapper.dart';
-Verse newverse = new Verse(id: 1, chapterId: 3, verseId: 2, text: "The Lord said unto...", book: new Book(), favorite: true);
+Verse newverse = Verse(id: 1, chapterId: 3, verseId: 2, text: "The Lord said unto...", book: Book(), favorite: true);
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -123,7 +123,7 @@ class MyApp extends StatelessWidget {
           primaryDarkColor: const Color(0xFFB97D3C),
           primaryDarkVariantColor: const Color(0xFFB97D3C),
           navigatorObservers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
-          home: DevotionalNotePage()),
+          home: const DevotionalNotePage()),
     );
   }
 }

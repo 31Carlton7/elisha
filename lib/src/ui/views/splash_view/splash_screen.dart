@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               ? Navigator.pushReplacement(
               context,
               PageTransition(
-                  duration: Duration(milliseconds: 600),
+                  duration: Duration(milliseconds: 6000),
                   type: PageTransitionType.fade,
                   child: OnBoardingScreen()))
               : Navigator.pushReplacement(
@@ -77,25 +77,23 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       color: AppTheme.kPrimaryColor,
       child: Stack(
         children: [
-          SafeArea(
-            child: Scaffold(
-              backgroundColor: AppTheme.kPrimaryColor,
-              body: Column(
-                children: [
-                  Expanded(
-                    child: FadeTransition(
-                      opacity: _animation!,
-                      child: Center(
-                        child: Image.asset(
-                          'assets/images/heart.jpeg',
-                          width: 120.0,
-                          fit: BoxFit.fitWidth,
-                        ),
+          Scaffold(
+            backgroundColor: Color.fromRGBO(3, 3, 70, 1),
+            body: Column(
+              children: [
+                Expanded(
+                  child: FadeTransition(
+                    opacity: _animation!,
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/app_icon.png',
+                        width: 300.0,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

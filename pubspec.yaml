@@ -27,6 +27,7 @@ dependencies:
   shared_preferences: ^2.0.6
   simple_animations: ^3.0.0
   introduction_screen: ^3.0.1
+  speech_to_text: ^5.4.3
 
 
 
