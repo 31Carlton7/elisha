@@ -27,7 +27,7 @@ dependencies:
   # UI
   canton_design_system:
     git:
-      url: https://github.com/31Carlton7/canton_design_system.git
+      url: https://github.com/31Carlton7/canton_ui.git
       ref: master
   youtube_player_iframe:
     path: ./packages/youtube_player_flutter/packages/youtube_player_iframe
