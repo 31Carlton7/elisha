@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
@@ -35,7 +35,7 @@ class ChangeFirstNameCard extends ConsumerWidget {
     return CantonExpansionTile(
       title: Text(
         'Change First Name',
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       decoration: BoxDecoration(
         color: CantonMethods.alternateCanvasColorType3(context),
@@ -51,7 +51,7 @@ class ChangeFirstNameCard extends ConsumerWidget {
             children: [
               Text(
                 currentNameStr(),
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 10),
               CantonTextInput(

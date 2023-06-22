@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
@@ -232,7 +232,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
               ),
               child: Text(
                 bookChapterTitle,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -251,7 +251,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
               ),
               child: Text(
                 translations[int.parse(translationID)].abbreviation!.toUpperCase(),
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -378,7 +378,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
               ),
               child: Text(
                 bookChapterTitle,
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                       height: 1.3,
@@ -401,7 +401,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
               ),
               child: Text(
                 translations[int.parse(translationID)].abbreviation!.toUpperCase(),
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
                       height: 1.3,
@@ -482,7 +482,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Text Size', style: Theme.of(context).textTheme.headline5),
+                    Text('Text Size', style: Theme.of(context).textTheme.headlineSmall),
                     const Spacer(),
                     GestureDetector(
                       onTap: () async {
@@ -501,7 +501,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                         child: Text(
                           'A',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline6?.copyWith(
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                 fontSize: 16,
                                 height: 1.25,
                                 color: Theme.of(context).colorScheme.onBackground,
@@ -527,7 +527,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                         child: Text(
                           'A',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline6?.copyWith(
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                 fontSize: 24,
                                 height: 1.25,
                                 color: Theme.of(context).colorScheme.onBackground,
@@ -544,7 +544,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                 iconColor: Theme.of(context).colorScheme.primary,
                 title: Text(
                   ref.watch(readerSettingsRepositoryProvider).typeFace,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 children: [
                   Column(
@@ -558,7 +558,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
                             'New York',
-                            style: Theme.of(context).textTheme.headline4?.copyWith(
+                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                                   fontFamily: 'New York',
                                 ),
                           ),
@@ -574,7 +574,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                           padding: const EdgeInsets.symmetric(vertical: 8.0),
                           child: Text(
                             'Inter',
-                            style: Theme.of(context).textTheme.headline4?.copyWith(
+                            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                                   fontFamily: 'Inter',
                                 ),
                           ),
@@ -590,7 +590,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Line Spacing', style: Theme.of(context).textTheme.headline5),
+                    Text('Line Spacing', style: Theme.of(context).textTheme.headlineSmall),
                     const Spacer(),
                     GestureDetector(
                       onTap: () async {
@@ -673,13 +673,13 @@ class _BibleViewState extends ConsumerState<BibleView> {
           },
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.secondaryVariant, width: 0.7),
+              border: Border.all(color: Theme.of(context).colorScheme.secondaryContainer, width: 0.7),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Text(
                 chapter.id.toString(),
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
             ),
           ),
@@ -688,7 +688,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
 
       return CantonExpansionTile(
         childrenPadding: const EdgeInsets.symmetric(horizontal: 24),
-        title: Text(book.name!, style: Theme.of(context).textTheme.headline6),
+        title: Text(book.name!, style: Theme.of(context).textTheme.titleLarge),
         iconColor: Theme.of(context).colorScheme.primary,
         children: [
           Container(
@@ -733,7 +733,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                   children: [
                     Text(
                       'Books',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ],
                 ),
@@ -798,7 +798,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                   children: [
                     Text(
                       'Versions',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ],
                 ),
@@ -832,14 +832,14 @@ class _BibleViewState extends ConsumerState<BibleView> {
                           contentPadding: const EdgeInsets.symmetric(vertical: 3, horizontal: 24),
                           title: Text(
                             translation.name!,
-                            style: Theme.of(context).textTheme.headline6?.copyWith(
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                   fontSize: Responsive.isTablet(context) ? 21 : null,
                                 ),
                           ),
                           trailing: Text(
                             translation.abbreviation!.toUpperCase(),
-                            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                                  color: Theme.of(context).colorScheme.secondaryVariant,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  color: Theme.of(context).colorScheme.secondaryContainer,
                                   fontSize: Responsive.isTablet(context) ? 18 : null,
                                 ),
                           ),

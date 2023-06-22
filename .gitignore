@@ -49,3 +49,9 @@ lib/src/config/keys.dart
 
 /android/app/upload-keystore.jks
 /android/key.properties
+
+#firebase
+lib/firebase_options.dart
+.firebaserc
+firebase.json
+ios/firebase_app_id_file.json

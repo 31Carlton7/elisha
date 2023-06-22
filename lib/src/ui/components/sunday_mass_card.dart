@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/providers/local_user_repository_provider.dart';
@@ -46,12 +46,12 @@ class SundayMassCard extends ConsumerWidget {
               const SizedBox(height: 15),
               Text(
                 'Sunday Mass',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 7),
               Text(
                 'ONLINE CHURCH SERVICE',
-                style: Theme.of(context).textTheme.overline?.copyWith(
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       letterSpacing: 2,
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).primaryColor,
@@ -63,7 +63,7 @@ class SundayMassCard extends ConsumerWidget {
                   Expanded(
                     child: Text(
                       'Join in on Sunday Mass today by watching today\'s service online.',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
                 ],

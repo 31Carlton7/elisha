@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/services.dart';
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -62,7 +62,7 @@ class _FavoriteVerseCardState extends ConsumerState<FavoriteVerseCard> {
       if (verse.favorite) {
         return Icon(LineAwesomeIcons.heart_1, size: 20, color: heartColor());
       }
-      return Icon(LineAwesomeIcons.heart, size: 20, color: Theme.of(context).colorScheme.secondaryVariant);
+      return Icon(LineAwesomeIcons.heart, size: 20, color: Theme.of(context).colorScheme.secondaryContainer);
     }
 
     return GestureDetector(
@@ -106,12 +106,12 @@ class _FavoriteVerseCardState extends ConsumerState<FavoriteVerseCard> {
               children: [
                 Text(
                   cardTitle(),
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 7),
                 Text(
                   widget.verse.text,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ],
             ),

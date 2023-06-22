@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/models/chapter.dart';
@@ -81,8 +81,8 @@ class _BookmarkedChaptersViewState extends ConsumerState<BookmarkedChaptersView>
           : Center(
               child: Text(
                 'No Bookmarked Chapters',
-                style: Theme.of(context).textTheme.headline5?.copyWith(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                     ),
               ),
             ),
@@ -112,7 +112,7 @@ class _BookmarkedChaptersViewState extends ConsumerState<BookmarkedChaptersView>
                     children: [
                       Text(
                         'Options',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
                   ),

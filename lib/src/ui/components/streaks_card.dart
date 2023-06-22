@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -56,12 +56,12 @@ class StreaksCard extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(currentStreak, style: Theme.of(context).textTheme.headline2),
+                        Text(currentStreak, style: Theme.of(context).textTheme.displayMedium),
                         Icon(LineAwesomeIcons.fire, size: 27, color: Theme.of(context).primaryColor),
                       ],
                     ),
                   ),
-                  FittedBox(child: Text('Streak', style: Theme.of(context).textTheme.bodyText1)),
+                  FittedBox(child: Text('Streak', style: Theme.of(context).textTheme.bodyLarge)),
                 ],
               ),
             ),
@@ -73,12 +73,12 @@ class StreaksCard extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(bestStreak, style: Theme.of(context).textTheme.headline2),
+                        Text(bestStreak, style: Theme.of(context).textTheme.displayMedium),
                         Icon(LineAwesomeIcons.star, size: 27, color: Theme.of(context).primaryColor),
                       ],
                     ),
                   ),
-                  FittedBox(child: Text('Best Streak', style: Theme.of(context).textTheme.bodyText1)),
+                  FittedBox(child: Text('Best Streak', style: Theme.of(context).textTheme.bodyLarge)),
                 ],
               ),
             ),
@@ -90,12 +90,12 @@ class StreaksCard extends ConsumerWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(perfectWeeks, style: Theme.of(context).textTheme.headline2),
+                        Text(perfectWeeks, style: Theme.of(context).textTheme.displayMedium),
                         Icon(LineAwesomeIcons.calendar, size: 27, color: Theme.of(context).primaryColor),
                       ],
                     ),
                   ),
-                  FittedBox(child: Text('Perfect Weeks', style: Theme.of(context).textTheme.bodyText1)),
+                  FittedBox(child: Text('Perfect Weeks', style: Theme.of(context).textTheme.bodyLarge)),
                 ],
               ),
             ),

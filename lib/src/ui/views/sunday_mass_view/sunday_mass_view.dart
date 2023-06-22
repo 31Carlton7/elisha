@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/services.dart';
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -62,7 +62,7 @@ class _SundayMassViewState extends ConsumerState<SundayMassView> {
               Expanded(
                 child: Text(
                   'Cannot access Church at this time. Remember Jesus loves you!',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
             ],
@@ -114,7 +114,7 @@ class _SundayMassViewState extends ConsumerState<SundayMassView> {
                 return const SizedBox(height: kMediumPadding);
 
               case 3:
-                return Text('Other Church Services', style: Theme.of(context).textTheme.headline5);
+                return Text('Other Church Services', style: Theme.of(context).textTheme.headlineSmall);
 
               case 4:
                 return const SizedBox(height: kSmallPadding);

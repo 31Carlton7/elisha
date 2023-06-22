@@ -38,7 +38,7 @@ class YouTubeService {
     final Map<String, String> parameters = {
       'part': 'snippet, contentDetails, statistics',
       'id': channelId,
-      'key': YOUTUBE_API_KEY,
+      'key': youtubeApiKey,
     };
 
     Uri uri = Uri.https(_baseUrl, '/youtube/v3/channels', parameters);
@@ -64,7 +64,7 @@ class YouTubeService {
       'playlistId': playlistId,
       'maxResults': '8',
       'pageToken': _nextPageToken,
-      'key': YOUTUBE_API_KEY,
+      'key': youtubeApiKey,
     };
 
     final uri = Uri.https(_baseUrl, '/youtube/v3/playlistItems', parameters);
