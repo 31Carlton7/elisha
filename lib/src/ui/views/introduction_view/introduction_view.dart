@@ -20,7 +20,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -66,7 +66,7 @@ class _IntroductionViewState extends ConsumerState<IntroductionView> {
     return PageDecoration(
       titleTextStyle: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
       bodyTextStyle: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
-      descriptionPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+      // descriptionPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: CantonMethods.alternateCanvasColorType2(context),
       imagePadding: EdgeInsets.zero,
     );
@@ -79,10 +79,10 @@ class _IntroductionViewState extends ConsumerState<IntroductionView> {
       child: IntroductionScreen(
         key: introKey,
         globalBackgroundColor: CantonMethods.alternateCanvasColorType2(context),
-        skipColor: CantonColors.transparent,
-        nextColor: CantonColors.transparent,
-        isTopSafeArea: true,
-        isBottomSafeArea: true,
+        // skipColor: CantonColors.transparent,
+        // nextColor: CantonColors.transparent,
+        // isTopSafeArea: true,
+        // isBottomSafeArea: true,
         showDoneButton: true,
         showNextButton: true,
         onSkip: () => _onIntroEnd(context),

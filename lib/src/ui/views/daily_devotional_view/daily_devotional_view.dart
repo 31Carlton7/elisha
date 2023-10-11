@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_html/flutter_html.dart' as htm;
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -64,15 +64,15 @@ class DailyDevotionalView extends ConsumerWidget {
                 constraints: const BoxConstraints(maxWidth: 700),
                 child: htm.Html(
                   style: {
-                    'h1': htm.Style(fontSize: const htm.FontSize(32), fontFamily: font),
-                    'center': htm.Style(fontSize: const htm.FontSize(20), fontFamily: font),
+                    'h1': htm.Style(fontSize: htm.FontSize(32), fontFamily: font),
+                    'center': htm.Style(fontSize: htm.FontSize(20), fontFamily: font),
                     'b': htm.Style(
-                      fontSize: const htm.FontSize(18),
+                      fontSize: htm.FontSize(18),
                       lineHeight: const htm.LineHeight(1.5),
                       fontFamily: font,
                     ),
                     'p': htm.Style(
-                      fontSize: const htm.FontSize(18),
+                      fontSize: htm.FontSize(18),
                       lineHeight: const htm.LineHeight(1.85),
                       fontFamily: font,
                     ),

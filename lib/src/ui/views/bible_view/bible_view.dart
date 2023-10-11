@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
@@ -673,7 +673,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
           },
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).colorScheme.secondaryVariant, width: 0.7),
+              border: Border.all(color: Theme.of(context).colorScheme.secondaryContainer, width: 0.7),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
@@ -839,7 +839,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
                           trailing: Text(
                             translation.abbreviation!.toUpperCase(),
                             style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                                  color: Theme.of(context).colorScheme.secondaryVariant,
+                                  color: Theme.of(context).colorScheme.secondaryContainer,
                                   fontSize: Responsive.isTablet(context) ? 18 : null,
                                 ),
                           ),
