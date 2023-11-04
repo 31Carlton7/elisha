@@ -368,4 +368,25 @@ class BibleRepository {
       ref.refresh(bibleChaptersProvider);
     }
   }
+
+  int getBookId(String chapterTitle) {
+    String bookName = formatChapterTitle(chapterTitle);
+    return _mapOfBibleBooks.keys.firstWhere(
+          (k) => _mapOfBibleBooks[k] == bookName,
+      orElse: () => 0,
+    );
+  }
+
+  String formatChapterTitle(String chapterTitle) {
+    // Split the chapter title by whitespace
+    List<String> parts = chapterTitle.split(' ');
+
+    // Remove the last part (trailing number)
+    parts.removeLast();
+
+    // Join the remaining parts to form the formatted title
+    String formattedTitle = parts.join(' ');
+
+    return formattedTitle;
+  }
 }

@@ -22,6 +22,7 @@ import 'package:flutter/services.dart';
 import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:screen_brightness/screen_brightness.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:elisha/src/config/exceptions.dart';
 import 'package:elisha/src/models/book.dart';
@@ -38,6 +39,7 @@ import 'package:elisha/src/services/bible_service.dart';
 import 'package:elisha/src/ui/components/bible_reader.dart';
 import 'package:elisha/src/ui/components/error_body.dart';
 import 'package:elisha/src/ui/components/unexpected_error.dart';
+import 'package:elisha/src/repositories/bible_repository.dart';
 
 class BibleView extends ConsumerStatefulWidget {
   const BibleView({Key? key}) : super(key: key);
@@ -49,6 +51,7 @@ class BibleView extends ConsumerStatefulWidget {
 class _BibleViewState extends ConsumerState<BibleView> {
   var _isBookmarked = false;
   final _scrollController = ScrollController();
+  final _autoScrollController = AutoScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +226,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
             onTap: () async {
               HapticFeedback.lightImpact();
 
-              await _showBookAndChapterBottomSheet();
+              await _showBookAndChapterBottomSheet(BibleRepository().getBookId(bookChapterTitle));
             },
             child: Container(
               padding: const EdgeInsets.all(8.0),
@@ -370,7 +373,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
             onTap: () async {
               HapticFeedback.lightImpact();
 
-              await _showBookAndChapterBottomSheet();
+              await _showBookAndChapterBottomSheet(BibleRepository().getBookId(bookChapterTitle));
             },
             child: Container(
               padding: const EdgeInsets.all(18.0),
@@ -662,7 +665,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
     );
   }
 
-  Future<void> _showBookAndChapterBottomSheet() async {
+  Future<void> _showBookAndChapterBottomSheet(int bookId) async {
     List<Book> books = await BibleService().getBooks('');
 
     Widget _bookCard(Book book) {
@@ -712,6 +715,10 @@ class _BibleViewState extends ConsumerState<BibleView> {
       );
     }
 
+    _autoScrollController.scrollToIndex(bookId-1,
+        duration: const Duration(milliseconds: 10),
+        preferPosition: AutoScrollPosition.begin);
+
     return await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -744,6 +751,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
               Expanded(
                 child: ListView.separated(
                   itemCount: books.length,
+                  controller: _autoScrollController,
                   separatorBuilder: (context, index) {
                     return const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24),
@@ -751,20 +759,25 @@ class _BibleViewState extends ConsumerState<BibleView> {
                     );
                   },
                   itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        if (index == 0)
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            child: Divider(),
-                          ),
-                        _bookCard(books[index]),
-                        if (index == 0)
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 24),
-                            child: Divider(),
-                          ),
-                      ],
+                    return AutoScrollTag(
+                      controller: _autoScrollController,
+                      index: index,
+                      key: ValueKey(index),
+                      child: Column(
+                        children: [
+                          if (index == 0)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              child: Divider(),
+                            ),
+                          _bookCard(books[index]),
+                          if (index == 0)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 24),
+                              child: Divider(),
+                            ),
+                        ],
+                      ),
                     );
                   },
                 ),
