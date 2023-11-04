@@ -105,7 +105,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
   ) {
     Widget reader() {
       return SliverToBoxAdapter(
-        child: BibleReader(chapter: chapter),
+        child: BibleReader(chapter: chapter, scrollController: _scrollController),
       );
     }
 
@@ -127,7 +127,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
   ) {
     Widget reader() {
       return SliverToBoxAdapter(
-        child: BibleReader(chapter: chapter),
+        child: BibleReader(chapter: chapter, scrollController: _scrollController),
       );
     }
 
@@ -153,6 +153,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
           HapticFeedback.lightImpact();
 
           await ref.read(bibleRepositoryProvider).goToNextPreviousChapter(ref, true);
+          _scrollController.jumpTo(0.0);
         },
         child: Icon(
           FeatherIcons.chevronLeft,
@@ -299,6 +300,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
           HapticFeedback.lightImpact();
 
           await ref.read(bibleRepositoryProvider).goToNextPreviousChapter(ref, true);
+          _scrollController.jumpTo(0.0);
         },
         child: Icon(
           FeatherIcons.chevronLeft,

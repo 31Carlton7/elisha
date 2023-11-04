@@ -20,7 +20,6 @@ import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 
-import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
@@ -29,11 +28,14 @@ import 'package:elisha/src/models/chapter.dart';
 import 'package:elisha/src/providers/reader_settings_repository_provider.dart';
 import 'package:elisha/src/providers/study_tools_repository_provider.dart';
 import 'package:elisha/src/ui/components/show_favorite_verse_bottom_sheet.dart';
+import '../../providers/bible_repository_provider.dart';
+
 
 class BibleReader extends ConsumerWidget {
-  const BibleReader({Key? key, required this.chapter}) : super(key: key);
+  const BibleReader({Key? key, required this.chapter, required this.scrollController}) : super(key: key);
 
   final Chapter chapter;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -117,7 +119,22 @@ class BibleReader extends ConsumerWidget {
 
     children.add(const SizedBox(height: 40));
 
-    return SingleChildScrollView(
+    return GestureDetector(
+      onHorizontalDragEnd: (details) async {
+        if (details.velocity.pixelsPerSecond.dx > 0) {
+          // Swiped from left to right (previous chapter)
+          await ref
+              .read(bibleRepositoryProvider)
+              .goToNextPreviousChapter(ref, true);
+          scrollController.jumpTo(0.0);
+        } else if (details.velocity.pixelsPerSecond.dx < 0) {
+          // Swiped from right to left (next chapter)
+          await ref
+              .read(bibleRepositoryProvider)
+              .goToNextPreviousChapter(ref, false);
+          scrollController.jumpTo(0.0);
+        }
+      },
       child: Column(
         children: [...children],
       ),

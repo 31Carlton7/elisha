@@ -44,13 +44,14 @@ class _BookmarkedChapterViewState extends ConsumerState<BookmarkedChapterView> {
   }
 
   Widget _content(BuildContext context) {
+    var scrollController = ScrollController();
     return Column(
       children: [
         BookmarkedChapterViewHeader(chapter: widget.chapter, showBottomSheet: _showBookmarkedChapterOptionsBottomSheet),
         const SizedBox(height: 10),
         Expanded(
           child: SingleChildScrollView(
-            child: BibleReader(chapter: widget.chapter),
+            child: BibleReader(chapter: widget.chapter, scrollController: scrollController),
           ),
         ),
       ],
