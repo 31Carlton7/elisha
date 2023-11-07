@@ -16,12 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'package:elisha/src/providers/ad_state_provider.dart';
-import 'package:elisha/src/services/ad_state.dart';
 import 'package:elisha/src/ui/components/sunday_mass_card.dart';
 import 'package:elisha/src/ui/views/church_view/components/church_view_header.dart';
 import 'package:elisha/src/ui/views/church_view/components/daily_readings_card.dart';
@@ -34,35 +31,10 @@ class ChurchView extends ConsumerStatefulWidget {
 }
 
 class _ChurchViewState extends ConsumerState<ChurchView> {
-  BannerAd? _ad;
 
   @override
   void initState() {
     super.initState();
-
-    final chAd = ref.read(adStateProvider).churchViewBannerAd;
-
-    _ad = BannerAd(
-      adUnitId: chAd.adUnitId,
-      size: chAd.size,
-      request: chAd.request,
-      listener: BannerAdListener(
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          setState(() {
-            churchViewBannerAdIsLoaded = false;
-          });
-
-          ad.dispose();
-        },
-        onAdLoaded: (Ad ad) {
-          setState(() {
-            churchViewBannerAdIsLoaded = true;
-          });
-        },
-      ),
-    );
-
-    _ad!.load();
   }
 
   @override
@@ -88,10 +60,7 @@ class _ChurchViewState extends ConsumerState<ChurchView> {
           ),
           const SizedBox(height: 20),
           Container(
-            padding: const EdgeInsets.only(bottom: 10),
-            width: _ad!.size.width.toDouble(),
-            height: _ad!.size.height.toDouble(),
-            child: AdWidget(ad: _ad!),
+            padding: const EdgeInsets.only(bottom: 10)
           ),
         ],
       ),

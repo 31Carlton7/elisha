@@ -21,7 +21,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:elisha/src/config/exceptions.dart';
 import 'package:elisha/src/models/book.dart';
@@ -65,7 +64,6 @@ class BibleService {
         return books;
       }
     } on DioError catch (e) {
-      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
@@ -98,7 +96,6 @@ class BibleService {
 
       return chapter;
     } on DioError catch (e) {
-      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
@@ -130,7 +127,6 @@ class BibleService {
 
       return chapters;
     } on DioError catch (e) {
-      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }
@@ -191,7 +187,6 @@ class BibleService {
         return verses;
       }
     } on DioError catch (e) {
-      await FirebaseCrashlytics.instance.recordError(e, e.stackTrace);
       throw Exceptions.fromDioError(e);
     }
   }

@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/services.dart';
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -86,7 +86,7 @@ class _SundayMassViewState extends ConsumerState<SundayMassView> {
         final channel = videoInfo[1] as YouTubeChannel;
 
         final _ytController = YoutubePlayerController(
-          initialVideoId: videoId,
+          // initialVideoId: videoId,
           params: const YoutubePlayerParams(
             showFullscreenButton: true,
             strictRelatedVideos: true,
@@ -94,14 +94,12 @@ class _SundayMassViewState extends ConsumerState<SundayMassView> {
           ),
         );
 
-        final _ytPlayer = YoutubePlayerIFrame(controller: _ytController);
+
+        final _ytPlayer = YoutubePlayer(controller: _ytController);
 
         return ListView.builder(
           itemCount: channelIds.length + _uiElementCount,
           itemBuilder: (context, index) {
-            if (_ytController.value.isFullScreen) {
-              SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-            }
 
             switch (index) {
               case 0:

@@ -16,12 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'package:elisha/src/providers/ad_state_provider.dart';
-import 'package:elisha/src/services/ad_state.dart';
 import 'package:elisha/src/ui/components/daily_devotional_card.dart';
 import 'package:elisha/src/ui/components/streaks_card.dart';
 import 'package:elisha/src/ui/components/sunday_mass_card.dart';
@@ -36,40 +33,14 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
-  BannerAd? _ad;
 
   @override
   void initState() {
     super.initState();
-
-    final hvAd = ref.read(adStateProvider).votdViewBannerAd;
-
-    _ad = BannerAd(
-      adUnitId: hvAd.adUnitId,
-      size: AdSize.banner,
-      request: hvAd.request,
-      listener: BannerAdListener(
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          setState(() {
-            homeViewBannerAdIsLoaded = false;
-          });
-
-          ad.dispose();
-        },
-        onAdLoaded: (Ad ad) {
-          setState(() {
-            homeViewBannerAdIsLoaded = true;
-          });
-        },
-      ),
-    );
-
-    _ad!.load();
   }
 
   @override
   void dispose() {
-    _ad!.dispose();
     super.dispose();
   }
 
@@ -107,15 +78,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
         if (isSunday) const SundayMassCard(),
         if (isSunday) const SizedBox(height: 17),
         const VerseOfTheDayCard(),
-        homeViewBannerAdIsLoaded ? const SizedBox(height: 17) : const SizedBox(height: 17),
-        if (homeViewBannerAdIsLoaded)
-          Container(
-            padding: const EdgeInsets.only(bottom: 10),
-            width: _ad!.size.width.toDouble(),
-            height: _ad!.size.height.toDouble(),
-            child: AdWidget(ad: _ad!),
-          ),
-        if (homeViewBannerAdIsLoaded) const SizedBox(height: 17),
         const DailyDevotionalCard(),
         const SizedBox(height: 17),
       ],
@@ -140,15 +102,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
           constraints: const BoxConstraints(maxWidth: 500),
           child: const VerseOfTheDayCard(),
         ),
-        homeViewBannerAdIsLoaded ? const SizedBox(height: 27) : const SizedBox(height: 17),
-        if (homeViewBannerAdIsLoaded)
-          Container(
-            padding: const EdgeInsets.only(bottom: 10),
-            width: _ad!.size.width.toDouble(),
-            height: _ad!.size.height.toDouble(),
-            child: AdWidget(ad: _ad!),
-          ),
-        if (homeViewBannerAdIsLoaded) const SizedBox(height: 17),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 500),
           child: const DailyDevotionalCard(),

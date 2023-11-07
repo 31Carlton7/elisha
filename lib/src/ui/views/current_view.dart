@@ -16,8 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:elisha/src/config/bottom_navigation_bar.dart';
@@ -97,7 +96,6 @@ class _CurrentViewState extends ConsumerState<CurrentView> {
         children: [
           Navigator(
             key: _homeNavigatorKey,
-            observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 settings: settings,
@@ -115,7 +113,6 @@ class _CurrentViewState extends ConsumerState<CurrentView> {
           ),
           Navigator(
             key: _bibleNavigatorKey,
-            observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 settings: settings,
@@ -126,7 +123,6 @@ class _CurrentViewState extends ConsumerState<CurrentView> {
           ),
           Navigator(
             key: _churchNavigatorKey,
-            observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 settings: settings,
@@ -142,7 +138,6 @@ class _CurrentViewState extends ConsumerState<CurrentView> {
           ),
           Navigator(
             key: _profileNavigatorKey,
-            observers: [FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance)],
             onGenerateRoute: (settings) {
               return MaterialPageRoute(
                 settings: settings,

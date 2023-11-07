@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import 'package:canton_design_system/canton_design_system.dart';
+import 'package:canton_ui/canton_ui.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -77,7 +77,7 @@ class DailyReadingsView extends ConsumerWidget {
       Text(
         'Lectionary: ' + dailyReading.lectionary!,
         style: Theme.of(context).textTheme.headline6?.copyWith(
-              color: Theme.of(context).colorScheme.secondaryVariant,
+              color: Theme.of(context).colorScheme.secondaryContainer,
               fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
             ),
       ),
@@ -139,7 +139,7 @@ class DailyReadingsView extends ConsumerWidget {
               child: Text(
                 reading.snippetAddress!,
                 style: Theme.of(context).textTheme.headline6?.copyWith(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       fontFamily: ref.watch(readerSettingsRepositoryProvider).typeFace,
                     ),
               ),
