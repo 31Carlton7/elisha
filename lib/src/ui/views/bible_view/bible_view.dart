@@ -172,6 +172,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
           HapticFeedback.lightImpact();
 
           await ref.read(bibleRepositoryProvider).goToNextPreviousChapter(ref, false);
+          _scrollController.jumpTo(0.0);
         },
         child: Icon(
           FeatherIcons.chevronRight,
@@ -319,6 +320,7 @@ class _BibleViewState extends ConsumerState<BibleView> {
           HapticFeedback.lightImpact();
 
           await ref.read(bibleRepositoryProvider).goToNextPreviousChapter(ref, false);
+          _scrollController.jumpTo(0.0);
         },
         child: Icon(
           FeatherIcons.chevronRight,
